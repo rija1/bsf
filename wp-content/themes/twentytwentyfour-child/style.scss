@@ -1,0 +1,263 @@
+/*
+Theme Name:   Twenty Twenty Four Child Theme
+Description:  A Twenty Twenty-Four child theme
+Author:       Rija
+Template:     twentytwentyfour
+Version:      1.0.0
+Text Domain:  twentytwentyfour
+*/
+
+// Site colors
+
+$colour_darkblue: #194b57;
+$colour_blue: #558d9b;
+$colour_red: #D8613C;
+$colour_yellow: #f8bd3b; 
+
+// Poppins
+
+/* Poppins Thin */
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  /* Poppins Thin Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  /* Poppins ExtraLight */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  /* Poppins ExtraLight Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  /* Poppins Light */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  /* Poppins Light Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  /* Poppins Regular */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Poppins Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  /* Poppins Medium */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  /* Poppins Medium Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  /* Poppins SemiBold */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  /* Poppins SemiBold Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  /* Poppins Bold */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* Poppins Bold Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  /* Poppins ExtraBold */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  /* Poppins ExtraBold Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  /* Poppins Black */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  /* Poppins Black Italic */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins/Poppins-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+  }
+  
+
+/* Title Font Import */
+
+@font-face {
+    font-family: "DM-Serif";
+    src: url("fonts/DMSerifText-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Geologica";
+    src: url("fonts/Geologica.ttf");
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("fonts/Raleway-400.ttf");
+}
+
+@font-face {
+    font-family: "FontAwesome";
+    src:
+        // url("fonts/fontawesome-webfont-webfont.woff2") format("woff2"),
+        // url("fonts/fontawesome-webfont-webfont.woff") format("woff"),
+        url("fonts/fa-solid-900.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Body  */
+
+body {
+    // background-color: #fff;
+    color: #2c3333;
+    font-family: Raleway;
+}
+
+a {
+    transition:
+        color 0.1s ease-in-out,
+        border-bottom-color 0.2s ease-in-out;
+}
+
+/* Titles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #395b64;
+    font-family: Raleway;
+}
+
+/* Site Title  */
+
+.wp-block-site-title { 
+    font: 31px "Geologica",sans-serif;
+    // font: 31px "Poppins",sans-serif;
+    font-weight: 600;
+    color:#c7c454;
+    width: 160px;
+}
+
+// Header Hero Group
+
+.header_hero_group {
+    display: grid;
+    grid-template-rows: auto 1fr; 
+    height: 100vh;
+}
+
+/* Header */
+
+// Hero
+
+.hero_text {
+    padding:0 100px ;
+    p {
+        font-size: 32px;
+        font-family: Geologica;
+        text-align: center;
+    }
+}
+
+// Navigation
+
+header nav {
+    padding:10px 15px 10px 15px;
+    background-color: $colour_blue;
+    border-radius: 4px;
+    a {
+        font-family: "Geologica";
+    }
+}
+
+// Homepage
+
+
+// CTA
+
+// Quote
