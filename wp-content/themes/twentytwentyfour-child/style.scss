@@ -11,155 +11,154 @@ Text Domain:  twentytwentyfour
 
 $colour_darkblue: #194b57;
 $colour_blue: #558d9b;
-$colour_red: #D8613C;
-$colour_yellow: #f8bd3b; 
+$colour_red: #d8613c;
+$colour_yellow: #f8bd3b;
 
 // Poppins
 
 /* Poppins Thin */
 @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Thin.ttf') format('truetype');
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Thin.ttf") format("truetype");
     font-weight: 100;
     font-style: normal;
-  }
-  
-  /* Poppins Thin Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-ThinItalic.ttf') format('truetype');
+}
+
+/* Poppins Thin Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-ThinItalic.ttf") format("truetype");
     font-weight: 100;
     font-style: italic;
-  }
-  
-  /* Poppins ExtraLight */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-ExtraLight.ttf') format('truetype');
+}
+
+/* Poppins ExtraLight */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-ExtraLight.ttf") format("truetype");
     font-weight: 200;
     font-style: normal;
-  }
-  
-  /* Poppins ExtraLight Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-ExtraLightItalic.ttf') format('truetype');
+}
+
+/* Poppins ExtraLight Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-ExtraLightItalic.ttf") format("truetype");
     font-weight: 200;
     font-style: italic;
-  }
-  
-  /* Poppins Light */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Light.ttf') format('truetype');
+}
+
+/* Poppins Light */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Light.ttf") format("truetype");
     font-weight: 300;
     font-style: normal;
-  }
-  
-  /* Poppins Light Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-LightItalic.ttf') format('truetype');
+}
+
+/* Poppins Light Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-LightItalic.ttf") format("truetype");
     font-weight: 300;
     font-style: italic;
-  }
-  
-  /* Poppins Regular */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+/* Poppins Regular */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
-  }
-  
-  /* Poppins Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Italic.ttf') format('truetype');
+}
+
+/* Poppins Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Italic.ttf") format("truetype");
     font-weight: normal;
     font-style: italic;
-  }
-  
-  /* Poppins Medium */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+}
+
+/* Poppins Medium */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Medium.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
-  }
-  
-  /* Poppins Medium Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-MediumItalic.ttf') format('truetype');
+}
+
+/* Poppins Medium Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-MediumItalic.ttf") format("truetype");
     font-weight: 500;
     font-style: italic;
-  }
-  
-  /* Poppins SemiBold */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+}
+
+/* Poppins SemiBold */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
-  }
-  
-  /* Poppins SemiBold Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-SemiBoldItalic.ttf') format('truetype');
+}
+
+/* Poppins SemiBold Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-SemiBoldItalic.ttf") format("truetype");
     font-weight: 600;
     font-style: italic;
-  }
-  
-  /* Poppins Bold */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+}
+
+/* Poppins Bold */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
-  }
-  
-  /* Poppins Bold Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-BoldItalic.ttf') format('truetype');
+}
+
+/* Poppins Bold Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-BoldItalic.ttf") format("truetype");
     font-weight: bold;
     font-style: italic;
-  }
-  
-  /* Poppins ExtraBold */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
+}
+
+/* Poppins ExtraBold */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-ExtraBold.ttf") format("truetype");
     font-weight: 800;
     font-style: normal;
-  }
-  
-  /* Poppins ExtraBold Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-ExtraBoldItalic.ttf') format('truetype');
+}
+
+/* Poppins ExtraBold Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-ExtraBoldItalic.ttf") format("truetype");
     font-weight: 800;
     font-style: italic;
-  }
-  
-  /* Poppins Black */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-Black.ttf') format('truetype');
+}
+
+/* Poppins Black */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-Black.ttf") format("truetype");
     font-weight: 900;
     font-style: normal;
-  }
-  
-  /* Poppins Black Italic */
-  @font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins/Poppins-BlackItalic.ttf') format('truetype');
+}
+
+/* Poppins Black Italic */
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins/Poppins-BlackItalic.ttf") format("truetype");
     font-weight: 900;
     font-style: italic;
-  }
-  
+}
 
 /* Title Font Import */
 
@@ -194,6 +193,7 @@ body {
     // background-color: #fff;
     color: #2c3333;
     font-family: Raleway;
+    position: relative;
 }
 
 a {
@@ -213,33 +213,87 @@ h6 {
     font-family: Raleway;
 }
 
-/* Site Title  */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Reem+Kufi+Fun:wght@400..700&display=swap");
 
-.wp-block-site-title { 
-    font: 31px "Geologica",sans-serif;
-    // font: 31px "Poppins",sans-serif;
-    font-weight: 600;
-    color:#c7c454;
-    width: 160px;
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap');
+
+// Diagonal Div
+
+.home_hero_img img {
+    // border-top-left-radius: 24% 62%;
+    // border-bottom-left-radius: 26% 42%;
 }
 
-// Header Hero Group
+.home_cover {
+    // top: 150px;
+    align-items: normal;
+     padding:20% 0;
+     h2 {
+        width: fit-content;
+        padding: 10px;
+        background-color: $colour_red;
+     }
+     .home_cover_button {
+        margin-left: 24vw;
+     }
+}
 
-.header_hero_group {
-    display: grid;
-    grid-template-rows: auto 1fr; 
-    height: 100vh;
+/* Site Title  */
+
+.wp-block-site-title {
+    width: 150px;
+    a {
+        font-size: 24px;
+        font-family: "Geologica", sans-serif;
+        font-family: "Reem Kufi Fun", sans-serif;
+
+        // font: 31px "Poppins",sans-serif;
+        font-weight: 600;
+        color: #c7c454;
+        color: $colour_red;
+        width: 160px;
+    }
 }
 
 /* Header */
 
+header {
+    position: absolute;
+    width: 100%;
+    height: 210px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    background-size: cover;
+    // background-image: url(http://buddhist-support-fund.local/wp-content/themes/twentytwentyfour-child/bg4.svg);
+    // background-image: url(http://buddhist-support-fund.local/wp-content/themes/twentytwentyfour-child/bg4.svg);
+}
+
+.st_reveal {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px); /* Adjust distance as needed */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 // Hero
 
 .hero_text {
-    padding:0 100px ;
+    // padding: 0 100px;
     p {
-        font-size: 32px;
+        font-size: 24px;
         font-family: Geologica;
+        font-family: "Reem Kufi Fun";
         text-align: center;
     }
 }
@@ -247,7 +301,7 @@ h6 {
 // Navigation
 
 header nav {
-    padding:10px 15px 10px 15px;
+    padding: 10px 15px 10px 15px;
     background-color: $colour_red;
     border-radius: 4px;
     a {
@@ -256,7 +310,6 @@ header nav {
 }
 
 // Homepage
-
 
 // CTA
 
