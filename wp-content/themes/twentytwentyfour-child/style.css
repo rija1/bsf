@@ -132,6 +132,7 @@ header nav {
 }
 
 header nav a {
+  font-weight: bolder;
   font-family: "Julius";
 }
 /*# sourceMappingURL=style.css.map */
