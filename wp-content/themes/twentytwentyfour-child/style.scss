@@ -9,7 +9,7 @@ Text Domain:  twentytwentyfour
 
 // Site colors
 
-$colour_darkblue: #194b57   ;
+$colour_darkblue: #194b57;
 $colour_blue: #6c97b4;
 $colour_red: #d8613c;
 $colour_gold: #b5933f;
@@ -18,18 +18,23 @@ $colour_yellow: #f8bd3b;
 /* Title Font Import */
 
 @font-face {
-    font-family: "DM-Serif";
-    src: url("fonts/DMSerifText-Regular.ttf");
-}
-
-@font-face {
     font-family: "Geologica";
     src: url("fonts/Geologica.ttf");
 }
 
 @font-face {
+    font-family: "Julius";
+    src: url("fonts/JuliusSansOne-Regular.ttf");
+}
+
+@font-face {
     font-family: "Raleway";
     src: url("fonts/Raleway-400.ttf");
+}
+
+@font-face {
+    font-family: "ReemKufi";
+    src: url("fonts/ReemKufiFun-VariableFont_wght.ttf");
 }
 
 @font-face {
@@ -47,7 +52,7 @@ $colour_yellow: #f8bd3b;
 body {
     // background-color: #fff;
     color: #2c3333;
-    font-family: Raleway;
+    font-family: Julius;
     position: relative;
 }
 
@@ -65,56 +70,53 @@ h4,
 h5,
 h6 {
     color: $colour_darkblue;
-    font-family: Raleway;
+    font-family: Julius;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Reem+Kufi+Fun:wght@400..700&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap");
 
 // Diagonal Div
 
-.home_hero_img img {
-    // border-top-left-radius: 24% 62%;
-    // border-bottom-left-radius: 26% 42%;
-}
+// Home Cover
 
-.home_cover {
-    // top: 150px;
-    align-items: normal;
-     padding:20% 0;
-     h2 {
-        width: fit-content;
-        padding: 10px;
-        background-color: $colour_red;
-     }
-     .home_cover_button {
-        margin-left: 24vw;
-     }
-}
+// .home_cover {
+//     // top: 150px;
+//     align-items: normal;
+//      padding:20% 0;
+//      h2 {
+//         width: fit-content;
+//         padding: 10px;
+//         background-color: $colour_red;
+//      }
+//      .home_cover_button {
+//         margin-left: 24vw;
+//      }
+// }
 
-// .icon-logo:before {
-//     font-family: "BSF";
-//     content: "\e900";
-//   }
+.home_cover_cta {
+    width: auto;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
 
 /* Site Title  */
 
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Zen+Antique+Soft&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Zen+Antique+Soft&display=swap");
 
 .wp-block-site-title {
-     width: 150px;
+    width: 150px;
     a {
         font-size: 24px;
         // font-family: "Geologica", sans-serif;
-        font-family: "Reem Kufi Fun", sans-serif;
+        font-family: "ReemKufi", sans-serif;
         // font-family: "Hind Siliguri", sans-serif;
         // font-family: "Helvetica", sans-serif;
 
         // font: 31px "Poppins",sans-serif;
-        font-weight: 400;
+        font-weight: 500;
         // color: #c7c454;
         // color: $colour_red;
         width: 160px;
@@ -152,18 +154,6 @@ header {
     }
 }
 
-// Hero
-
-.hero_text {
-    // padding: 0 100px;
-    p {
-        font-size: 24px;
-        font-family: Geologica;
-        font-family: "Reem Kufi Fun";
-        text-align: center;
-    }
-}
-
 // Navigation
 
 header nav {
@@ -171,7 +161,15 @@ header nav {
     background-color: $colour_red;
     border-radius: 4px;
     a {
-        font-family: "Geologica";
+        // font-family: "Geologica";
+        // font-family: "Ysabeau";
+        // font-family: "Tenali";
+        font-family: "Julius";
+        // font-family: "Poppins";
+        // font-family: "DM-Serif";
+        // font-family: "Encode";
+        // font-family: "Catamaran";
+        // font-family: "Raleway";
     }
 }
 

@@ -7,23 +7,26 @@ Version:      1.0.0
 Text Domain:  twentytwentyfour
 */
 /* Title Font Import */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Reem+Kufi+Fun:wght@400..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Zen+Antique+Soft&display=swap");
-@font-face {
-  font-family: "DM-Serif";
-  src: url("fonts/DMSerifText-Regular.ttf");
-}
-
 @font-face {
   font-family: "Geologica";
   src: url("fonts/Geologica.ttf");
 }
 
 @font-face {
+  font-family: "Julius";
+  src: url("fonts/JuliusSansOne-Regular.ttf");
+}
+
+@font-face {
   font-family: "Raleway";
   src: url("fonts/Raleway-400.ttf");
+}
+
+@font-face {
+  font-family: "ReemKufi";
+  src: url("fonts/ReemKufiFun-VariableFont_wght.ttf");
 }
 
 @font-face {
@@ -36,7 +39,7 @@ Text Domain:  twentytwentyfour
 /* Body  */
 body {
   color: #2c3333;
-  font-family: Raleway;
+  font-family: Julius;
   position: relative;
 }
 
@@ -53,26 +56,16 @@ h4,
 h5,
 h6 {
   color: #194b57;
-  font-family: Raleway;
+  font-family: Julius;
 }
 
-.home_cover {
-  -webkit-box-align: normal;
-      -ms-flex-align: normal;
-          align-items: normal;
-  padding: 20% 0;
-}
-
-.home_cover h2 {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 10px;
-  background-color: #d8613c;
-}
-
-.home_cover .home_cover_button {
-  margin-left: 24vw;
+.home_cover_cta {
+  width: auto;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 /* Site Title  */
@@ -82,8 +75,8 @@ h6 {
 
 .wp-block-site-title a {
   font-size: 24px;
-  font-family: "Reem Kufi Fun", sans-serif;
-  font-weight: 400;
+  font-family: "ReemKufi", sans-serif;
+  font-weight: 500;
   width: 160px;
 }
 
@@ -132,13 +125,6 @@ header {
   }
 }
 
-.hero_text p {
-  font-size: 24px;
-  font-family: Geologica;
-  font-family: "Reem Kufi Fun";
-  text-align: center;
-}
-
 header nav {
   padding: 10px 15px 10px 15px;
   background-color: #d8613c;
@@ -146,6 +132,6 @@ header nav {
 }
 
 header nav a {
-  font-family: "Geologica";
+  font-family: "Julius";
 }
 /*# sourceMappingURL=style.css.map */
