@@ -6,40 +6,10 @@ Template:     twentytwentyfour
 Version:      1.0.0
 Text Domain:  twentytwentyfour
 */
-/* Title Font Import */
-@import url("https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Zen+Antique+Soft&display=swap");
-@font-face {
-  font-family: "Geologica";
-  src: url("fonts/Geologica.ttf");
-}
-
-@font-face {
-  font-family: "Julius";
-  src: url("fonts/JuliusSansOne-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Raleway";
-  src: url("fonts/Raleway-400.ttf");
-}
-
-@font-face {
-  font-family: "ReemKufi";
-  src: url("fonts/ReemKufiFun-VariableFont_wght.ttf");
-}
-
-@font-face {
-  font-family: "FontAwesome";
-  src: url("fonts/fa-solid-900.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* Body  */
 body {
   color: #2c3333;
-  font-family: Julius;
+  font-family: "Quicksand";
   position: relative;
 }
 
@@ -48,19 +18,18 @@ a {
   transition: color 0.1s ease-in-out, border-bottom-color 0.2s ease-in-out;
 }
 
-/* Titles */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #194b57;
-  font-family: Julius;
+.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-top-left
+.wp-block-cover__inner-container {
+  width: 100%;
+}
+
+.wp-block-cover,
+.wp-block-cover-image {
+  padding: 0;
 }
 
 .home_cover_cta {
-  width: auto;
+  width: 550px;
   position: absolute;
   bottom: 50px;
   left: 0;
@@ -68,71 +37,80 @@ h6 {
   margin: 0 auto;
 }
 
-/* Site Title  */
-.wp-block-site-title {
-  width: 150px;
-}
-
-.wp-block-site-title a {
-  font-size: 24px;
-  font-family: "ReemKufi", sans-serif;
-  font-weight: 500;
-  width: 160px;
-}
-
 /* Header */
-header {
-  position: absolute;
-  width: 100%;
-  height: 210px;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  background-size: cover;
-}
-
-.st_reveal {
-  opacity: 0;
-  -webkit-animation: fadeIn 1s ease-out forwards;
-          animation: fadeIn 1s ease-out forwards;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translateX(-50px);
-            transform: translateX(-50px);
-    /* Adjust distance as needed */
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translateX(-50px);
-            transform: translateX(-50px);
-    /* Adjust distance as needed */
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
+.home header {
+  background: none;
 }
 
 header nav {
-  padding: 10px 15px 10px 15px;
-  background-color: #d8613c;
+  padding: 0px 5px 0px 5px;
   border-radius: 4px;
 }
 
-header nav a {
-  font-weight: bolder;
-  font-family: "Julius";
+header nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item__content {
+  font-weight: 900;
+  padding: 5px;
+  display: block;
+  color: #194b57;
+  background-color: #fff;
+}
+
+header nav .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item__content.wp-block-navigation-item__content {
+  display: block;
+  margin-top: 5px;
+  font-weight: 900;
+  color: #6c97b4;
+}
+
+.wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
+  background-color: #d8613c;
+}
+
+.wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open {
+  padding: 6px;
+}
+
+.bsf_logo_title_block {
+  max-width: 305px;
+}
+
+.page_featured_img_title_group {
+  position: relative;
+}
+
+.page_title {
+  position: absolute;
+  top: 240px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+@media (min-width: 600px) {
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+    display: none;
+  }
+}
+
+@media (min-width: 1250px) {
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: none;
+  }
+  .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+    display: block;
+  }
+}
+
+.bsf_logo img {
+  max-width: 150px;
+  min-width: 100px;
+  width: 16vw;
+  height: auto;
 }
 /*# sourceMappingURL=style.css.map */
