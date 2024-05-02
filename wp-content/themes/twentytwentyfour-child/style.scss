@@ -8,8 +8,8 @@ Text Domain:  twentytwentyfour
 */
 
 // Site colors
-
-$colour_darkblue: #194b57;
+// fffef3
+$colour_darkblue: #137088;
 $colour_blue: #6c97b4;
 $colour_red: #d8613c;
 $colour_gold: #b5933f;
@@ -131,6 +131,12 @@ header {
 }
 
 // Pages hero image position
+
+// Donation and payment process
+
+.wc-donation-platform .button {
+    border-radius: 4px;
+}
 
 // Donation page
 .page-id-61 .page_featured_img_title_group img {

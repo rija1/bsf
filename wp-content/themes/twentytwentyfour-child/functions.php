@@ -37,7 +37,7 @@ woocommerce_form_field('gift_aid_checkbox', array(
 
 ) ,
 
-'label' => __('Yes, I want WWF UK to claim Gift Aid on this donation and any donations I make in the future or have made in the past 4 years.*') ,
+'label' => __('I can confirm that I am a UK tax payer and I want to Gift Aid this donation and any donations I make in the future or have made in the past 4 years to International Justice Mission UK. I understand that if I pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on my donations in that tax year it is my responsibility to pay any difference. I agree to notify International Justice Mission UK if I want to cancel this declaration, change my name or home address or no longer pay sufficient tax on my income and/or capital gains.') ,
 
 'description' => __('*This is my own money, I am a UK taxpayer and understand that if I pay less income tax in the current tax year than the amount of Gift Aid claimed on my donations it is my responsibility to pay any difference. Gift Aid is claimed by WWF-UK from the tax you pay for the current tax year. The money that we claim back from HMRC as part of the Gift Aid scheme will be treated as unrestricted funds and used to support our general work, even if your original donation was made towards a specific project.') ,
 

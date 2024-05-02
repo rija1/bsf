@@ -63,7 +63,7 @@ header nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-nav
   font-weight: 900;
   padding: 5px;
   display: block;
-  color: #194b57;
+  color: #137088;
   background-color: #fff;
 }
 
@@ -84,6 +84,10 @@ header nav .wp-block-navigation .wp-block-navigation__submenu-container .wp-bloc
 
 .bsf_logo_title_block {
   max-width: 305px;
+}
+
+.wc-donation-platform .button {
+  border-radius: 4px;
 }
 
 .page-id-61 .page_featured_img_title_group img {
