@@ -51,10 +51,7 @@ echo '</div>';
 
 // TODO - REMOVE ON LIVE
 function no_index_cpt()
-{   $taxonomy = get_queried_object()->term_id;
-    if ($taxonomy  === 'post-tag') {
-        print '<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">';
-    }
+{  
+    print '<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">';
 }
-
 add_action('wp_head', 'no_index_cpt');
