@@ -29,12 +29,24 @@ a {
 }
 
 .home_cover_cta {
-  width: 550px;
+  max-width: 550px;
   position: absolute;
   bottom: 50px;
   left: 0;
   right: 0;
   margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .home_cover_cta {
+    border-radius: 0;
+  }
+}
+
+h1.has-background {
+  bottom: 0px;
+  border-top-right-radius: 13px;
+  border-top-left-radius: 13px;
 }
 
 /* Header */
@@ -72,6 +84,19 @@ header nav .wp-block-navigation .wp-block-navigation__submenu-container .wp-bloc
 
 .bsf_logo_title_block {
   max-width: 305px;
+}
+
+.page-id-61 .page_featured_img_title_group img {
+  -o-object-position: 0% 44%;
+     object-position: 0% 44%;
+}
+
+@media (min-width: 600px) {
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .page_featured_img_title_group {
