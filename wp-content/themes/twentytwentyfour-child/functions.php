@@ -24,7 +24,7 @@ function custom_checkout_field($checkout)
 
 {
 
-echo '<div id="custom_checkout_field"><h3>' . __('Boost your donation at no extra cost for you') . '</h3>';
+echo '<div id="custom_checkout_field"><h3>' . __('Increase your donation by 25% at no extra cost for you') . '</h3>';
 
 woocommerce_form_field('gift_aid_checkbox', array(
 
@@ -37,9 +37,9 @@ woocommerce_form_field('gift_aid_checkbox', array(
 
 ) ,
 
-'label' => __('I can confirm that I am a UK tax payer and I want to Gift Aid this donation and any donations I make in the future or have made in the past 4 years to International Justice Mission UK. I understand that if I pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on my donations in that tax year it is my responsibility to pay any difference. I agree to notify International Justice Mission UK if I want to cancel this declaration, change my name or home address or no longer pay sufficient tax on my income and/or capital gains.') ,
+'label' => __("I am a taxpayer in the UK and I wish for the Buddhist Support Fund to reclaim tax on any donations I've made in the past four years, as well as on any future donations, until I advise otherwise. I acknowledge that if my Income Tax and/or Capital Gains Tax payments are less than the total Gift Aid claimed on all my donations in a tax year, it is my responsibility to cover the shortfall. Please be aware that Gift Aid applies only to personal donations and cannot be applied to donations collected from others or made on behalf of a company.") ,
 
-'description' => __('*This is my own money, I am a UK taxpayer and understand that if I pay less income tax in the current tax year than the amount of Gift Aid claimed on my donations it is my responsibility to pay any difference. Gift Aid is claimed by WWF-UK from the tax you pay for the current tax year. The money that we claim back from HMRC as part of the Gift Aid scheme will be treated as unrestricted funds and used to support our general work, even if your original donation was made towards a specific project.') ,
+'description' => __('') ,
 
 ) 			   ,
 
