@@ -18,6 +18,9 @@ add_action( 'wp_enqueue_scripts', 'my_theme_scripts' );
 // Remove Add Coupon Block
 remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 ); 
 
+// Remove order/donation notes field in checkout
+add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
+
 // TODO - REMOVE ON LIVE
 function no_index_cpt()
 {  
