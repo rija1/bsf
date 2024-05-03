@@ -18,8 +18,17 @@ add_action( 'wp_enqueue_scripts', 'my_theme_scripts' );
 // Remove Add Coupon Block
 remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 ); 
 
-// Remove order/donation notes field in checkout
+/**
+* Snippet Name:     Remove the Order Notes field section from the WooCommerce checkout.
+*/
+
 add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
+add_filter( 'woocommerce_checkout_fields' , 'remove_order_notes' );
+
+function remove_order_notes( $fields ) {
+unset($fields['order']['order_comments']);
+return $fields;
+}
 
 // TODO - REMOVE ON LIVE
 function no_index_cpt()
