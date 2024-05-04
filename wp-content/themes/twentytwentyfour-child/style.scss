@@ -169,6 +169,14 @@ header {
     max-width: 900px;
     // border-bottom: 4px solid $colour_yellow;
 }
+
+// CONTACT US PAGE
+
+// Confirmation message style
+.wpforms-confirmation-container-full {
+    background-color: #fff5dc !important;
+    border: solid 1px #f8bd3b !important;
+}
  
 @media (min-width: 600px) {
     .wp-block-navigation__responsive-container-open:not(.always-shown) {
@@ -196,12 +204,4 @@ header {
     height: auto;
 }
 @media (max-width: 600px) {
-}
-
-
-// WPFORMS CSS
-
-.wpforms-confirmation-container-full {
-    background-color: #6c97b4;
-    border: solid 1px #137088;
 }

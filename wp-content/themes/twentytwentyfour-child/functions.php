@@ -30,6 +30,12 @@ unset($fields['order']['order_comments']);
 return $fields;
 }
 
+// Increase donation step to 1
+add_filter('wcdp_donation_amount_decimals', function() {
+	return 1; //return increment here (e.g. 0.01, 0.1, 1, 2, 5 etc.)
+});
+
+
 // TODO - REMOVE ON LIVE
 function no_index_cpt()
 {  
