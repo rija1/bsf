@@ -54,8 +54,10 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 if ( $additional_content ) {
 	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
 }
-
+?>
 /*
  * @hooked WC_Emails::email_footer() Output the email footer
  */
+
+<p>BUDDHIST SUPPORT FUND is a charity registered in Scotland, reg. number SC051818</p>
 // do_action( 'woocommerce_email_footer', $email );
