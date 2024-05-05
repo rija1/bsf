@@ -178,6 +178,12 @@ header {
     border: solid 1px #f8bd3b !important;
 }
  
+// Background position of pages featured img
+// Thank you page
+.page-id-283 {
+    object-position: 0 63%;
+}
+
 @media (min-width: 600px) {
     .wp-block-navigation__responsive-container-open:not(.always-shown) {
         display: flex;
