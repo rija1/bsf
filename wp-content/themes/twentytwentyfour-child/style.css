@@ -94,6 +94,10 @@ footer .footer_block {
   background-color: #d8613c;
 }
 
+.wp-block-navigation__container {
+  gap: 15px;
+}
+
 .wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open {
   padding: 6px;
 }

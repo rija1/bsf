@@ -201,6 +201,9 @@ footer .footer_block {
 .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
     background-color: $colour_red;
 }
+.wp-block-navigation__container {
+    gap: 15px;
+}
 
 .st_reveal {
     // opacity: 0;
