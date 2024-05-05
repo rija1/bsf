@@ -59,7 +59,9 @@ header nav {
   border-radius: 4px;
 }
 
-header nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item__content {
+header nav .wp-block-navigation__responsive-container.is-menu-open
+.wp-block-navigation__responsive-container-content
+.wp-block-navigation-item__content {
   font-weight: 900;
   padding: 5px;
   display: block;
@@ -67,11 +69,25 @@ header nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-nav
   background-color: #fff;
 }
 
-header nav .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item__content.wp-block-navigation-item__content {
+header nav .wp-block-navigation
+.wp-block-navigation__submenu-container
+.wp-block-navigation-item__content.wp-block-navigation-item__content {
   display: block;
   margin-top: 5px;
   font-weight: 900;
   color: #6c97b4;
+}
+
+body.page header {
+  background: linear-gradient(45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0), linear-gradient(-45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(-45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0) #fafafa;
+  background-size: 12vw 12vw;
+  background-position: 0 0, 6vw 6vw;
+}
+
+footer .footer_block {
+  background: linear-gradient(45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0), linear-gradient(-45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(-45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0) #fafafa;
+  background-size: 12vw 12vw;
+  background-position: 0 0, 6vw 6vw;
 }
 
 .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
@@ -88,6 +104,11 @@ header nav .wp-block-navigation .wp-block-navigation__submenu-container .wp-bloc
 
 .wc-donation-platform .button {
   border-radius: 4px;
+}
+
+.wpforms-confirmation-container-full {
+  background-color: #fff5dc !important;
+  border: solid 1px #f8bd3b !important;
 }
 
 .page-id-61 .page_featured_img_title_group img {
