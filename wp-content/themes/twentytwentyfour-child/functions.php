@@ -56,6 +56,10 @@ function change_woocommerce_strings($translated, $untranslated, $domain)
             case 'We have finished processing your order.':
                 $translated = 'Your donation to Buddhist Support Fund has now been processed.';
                 break;
+
+            case 'Footer text':
+                $translated = '';
+                break;
         }
     }
 

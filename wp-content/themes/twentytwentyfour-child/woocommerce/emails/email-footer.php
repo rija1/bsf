@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 											<td valign="top">
 												<table border="0" cellpadding="10" cellspacing="0" width="100%">
 													<tr>
-														<td colspan="2" valign="middle" id="credit">Buddhist Support Fund</td>
+														<td colspan="2" valign="middle">BUDDHIST SUPPORT FUND is a charity registered in Scotland, reg. number SC051818</td>
 													</tr>
 												</table>
 											</td>
