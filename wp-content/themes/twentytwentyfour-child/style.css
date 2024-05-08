@@ -50,10 +50,6 @@ h1.has-background {
 }
 
 /* Header */
-.home header {
-  background: none;
-}
-
 header .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
   background-color: #d8613c;
 }
@@ -88,7 +84,7 @@ header nav .wp-block-navigation
   color: #6c97b4;
 }
 
-body.page header {
+header {
   background: linear-gradient(45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0), linear-gradient(-45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(-45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0) #fafafa;
   background-size: 12vw 12vw;
   background-position: 0 0, 6vw 6vw;

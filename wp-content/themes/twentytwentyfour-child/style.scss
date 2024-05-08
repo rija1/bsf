@@ -10,6 +10,7 @@ Text Domain:  twentytwentyfour
 // Site colors
 // fffef3
 // old darkblue 066aab
+// new test #2e3a75
 $colour_darkblue: #137088;
 $colour_blue: #6c97b4;
 $colour_red: #d8613c;
@@ -69,7 +70,7 @@ h1.has-background {
 /* Header */
 
 .home header {
-    background: none;
+    // background: none;
 }
 
 header {
@@ -114,7 +115,7 @@ header {
 }
 
 // Header pattern background
-body.page header {
+header {
     background:
         linear-gradient(
             45deg,
