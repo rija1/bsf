@@ -54,6 +54,16 @@ h1.has-background {
   background: none;
 }
 
+header .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
+  background-color: #d8613c;
+}
+
+header .wp-block-navigation__responsive-container.is-menu-open
+.wp-block-navigation__responsive-container-content
+.wp-block-navigation__container {
+  gap: 15px;
+}
+
 header nav {
   padding: 0px 5px 0px 5px;
   border-radius: 4px;
@@ -90,12 +100,8 @@ footer .footer_block {
   background-position: 0 0, 6vw 6vw;
 }
 
-.wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
-  background-color: #d8613c;
-}
-
-.wp-block-navigation__container {
-  gap: 15px;
+.page div.wpforms-container-full button[type="submit"]:not(:hover):not(:active).contact_form_submit {
+  background: #137088;
 }
 
 .wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open {
@@ -139,11 +145,6 @@ footer .footer_block {
   right: 0;
   margin: 0 auto;
   max-width: 900px;
-}
-
-.wpforms-confirmation-container-full {
-  background-color: #fff5dc !important;
-  border: solid 1px #f8bd3b !important;
 }
 
 .page-id-283 {

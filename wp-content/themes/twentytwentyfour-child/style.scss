@@ -9,6 +9,7 @@ Text Domain:  twentytwentyfour
 
 // Site colors
 // fffef3
+// old darkblue 066aab
 $colour_darkblue: #137088;
 $colour_blue: #6c97b4;
 $colour_red: #d8613c;
@@ -25,7 +26,7 @@ body {
     position: relative;
 }
 
-// Links 
+// Links
 a {
     transition:
         color 0.1s ease-in-out,
@@ -72,7 +73,14 @@ h1.has-background {
 }
 
 header {
-    // background-color: $colour_lightyellow;
+    .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
+        background-color: $colour_red;
+    }
+    .wp-block-navigation__responsive-container.is-menu-open
+        .wp-block-navigation__responsive-container-content
+        .wp-block-navigation__container {
+        gap: 15px;
+    }
 
     // Navigation
 
@@ -195,14 +203,11 @@ footer .footer_block {
     background-position:
         0 0,
         6vw 6vw;
-    
-    }
-
-.wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
-    background-color: $colour_red;
 }
-.wp-block-navigation__container {
-    gap: 15px;
+
+// WPForms Submit button
+.page div.wpforms-container-full button[type="submit"]:not(:hover):not(:active).contact_form_submit {
+    background: $colour_darkblue;
 }
 
 .st_reveal {
@@ -240,8 +245,9 @@ footer .footer_block {
     border-radius: 4px;
 }
 
-// Contact us
-// Confirmation message box
+// CONTACT US PAGE
+
+// Confirmation message style
 .wpforms-confirmation-container-full {
     background-color: #fff5dc !important;
     border: solid 1px #f8bd3b !important;
@@ -275,14 +281,6 @@ footer .footer_block {
     margin: 0 auto;
     max-width: 900px;
     // border-bottom: 4px solid $colour_yellow;
-}
-
-// CONTACT US PAGE
-
-// Confirmation message style
-.wpforms-confirmation-container-full {
-    background-color: #fff5dc !important;
-    border: solid 1px #f8bd3b !important;
 }
 
 // Background position of pages featured img
