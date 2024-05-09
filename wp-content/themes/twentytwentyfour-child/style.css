@@ -65,6 +65,10 @@ header nav {
   border-radius: 4px;
 }
 
+header nav .wp-block-navigation-item__content.wp-block-navigation-item__content {
+  word-spacing: 4px;
+}
+
 header nav .wp-block-navigation__responsive-container.is-menu-open
 .wp-block-navigation__responsive-container-content
 .wp-block-navigation-item__content {

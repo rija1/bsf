@@ -89,6 +89,10 @@ header {
         padding: 0px 5px 0px 5px;
         border-radius: 4px;
 
+        .wp-block-navigation-item__content.wp-block-navigation-item__content {
+            word-spacing: 4px;
+        }
+
         // Mobile Overlay Menu
 
         //  menus
