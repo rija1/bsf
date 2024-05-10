@@ -34,7 +34,7 @@
         cardCvc: '#stripe-cvv'
     }
 
-    CC.prototype.handleActionMethod = 'handleCardAction';
+    CC.prototype.handleActionMethod = 'confirmCardPayment';
     CC.prototype.setupActionMethod = 'confirmCardSetup';
 
     /**
@@ -275,11 +275,7 @@
                                 } else {
                                     this.on_token_received(result.paymentMethod);
                                 }
-                            }.bind(this)).catch(function (error) {
-                                return this.submit_card_error(error);
                             }.bind(this))
-                        }.bind(this)).catch(function (error) {
-                            return this.submit_card_error(error);
                         }.bind(this));
                     }
                 }
@@ -595,7 +591,7 @@
 
     CC.prototype.get_element_options = function () {
         if (this.is_payment_element_enabled()) {
-            var params = this.params.elementOptions.mode === 'payment' ? this.get_payment_element_params() : {};
+            var params = ['payment', 'subscription'].indexOf(this.params.elementOptions.mode) > -1 ? this.get_payment_element_params() : {currency: this.params.currency.toLowerCase()};
             return $.extend({}, this.params.elementOptions, params);
         }
         return this.params.elementOptions;

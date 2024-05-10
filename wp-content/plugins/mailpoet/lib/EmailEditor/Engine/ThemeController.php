@@ -5,6 +5,7 @@ namespace MailPoet\EmailEditor\Engine;
 if (!defined('ABSPATH')) exit;
 
 
+use MailPoet\EmailEditor\Engine\Renderer\Renderer;
 use WP_Theme_JSON;
 use WP_Theme_JSON_Resolver;
 
@@ -13,19 +14,42 @@ use WP_Theme_JSON_Resolver;
  * This class is responsible for accessing data defined by the theme.json.
  */
 class ThemeController {
-  private WP_Theme_JSON $themeJson;
+  private WP_Theme_JSON $coreTheme;
+  private WP_Theme_JSON $baseTheme;
+
+  public function __construct() {
+    $this->coreTheme = WP_Theme_JSON_Resolver::get_core_data();
+    $this->baseTheme = new WP_Theme_JSON((array)json_decode((string)file_get_contents(dirname(__FILE__) . '/theme.json'), true), 'default');
+  }
 
   public function getTheme(): WP_Theme_JSON {
-    if (isset($this->themeJson)) {
-      return $this->themeJson;
+    $theme = new WP_Theme_JSON();
+    $theme->merge($this->coreTheme);
+    $theme->merge($this->baseTheme);
+
+    if (Renderer::getTheme() !== null) {
+      $theme->merge(Renderer::getTheme());
     }
-    $coreThemeData = WP_Theme_JSON_Resolver::get_core_data();
-    $themeJson = (string)file_get_contents(dirname(__FILE__) . '/theme.json');
-    $themeJson = json_decode($themeJson, true);
-    /** @var array $themeJson */
-    $coreThemeData->merge(new WP_Theme_JSON($themeJson, 'default'));
-    $this->themeJson = apply_filters('mailpoet_email_editor_theme_json', $coreThemeData);
-    return $this->themeJson;
+
+    return apply_filters('mailpoet_email_editor_theme_json', $theme);
+  }
+
+  /**
+   * @return array{
+   *   spacing: array{
+   *     blockGap: string,
+   *     padding: array{bottom: string, left: string, right: string, top: string}
+   *   },
+   *   color: array{
+   *     background: string
+   *   },
+   *   typography: array{
+   *     fontFamily: string
+   *   }
+   * }
+   */
+  public function getStyles(): array {
+    return $this->getTheme()->get_data()['styles'];
   }
 
   public function getSettings(): array {
@@ -38,7 +62,7 @@ class ThemeController {
     return $emailEditorThemeSettings;
   }
 
-  public function getStylesheetForRendering(): string {
+  public function getStylesheetForRendering($post = null): string {
     $emailThemeSettings = $this->getSettings();
 
     $cssPresets = '';
@@ -67,11 +91,34 @@ class ThemeController {
 
     // Element specific styles
     // Because the section styles is not a part of the output the `get_styles_block_nodes` method, we need to get it separately
-    $elementsStyles = $this->getTheme()->get_raw_data()['styles']['elements'] ?? [];
+    if ($post) {
+      $postTheme = (array)get_post_meta($post->ID, 'mailpoet_email_theme', true);
+      $postStyles = (array)($postTheme['styles'] ?? []);
+      $postElements = $postStyles['elements'] ?? [];
+    } else {
+      $postElements = [];
+    }
+    $jsonElements = $this->getTheme()->get_raw_data()['styles']['elements'] ?? [];
+    $elementsStyles = array_merge_recursive((array)$jsonElements, (array)$postElements);
+
     $cssElements = '';
     foreach ($elementsStyles as $key => $elementsStyle) {
-      $styles = wp_style_engine_get_styles($elementsStyle);
-      $cssElements .= "{$key} {{$styles['css']}} \n";
+      $selector = $key;
+
+      if ($key === 'heading') {
+        $selector = 'h1, h2, h3, h4, h5, h6';
+      }
+
+      if ($key === 'link') {
+        // Target direct decendants of blocks to avoid styling buttons. :not() is not supported by the inliner.
+        $selector = 'p > a, div > a, li > a';
+      }
+
+      if ($key === 'button') {
+        $selector = '.wp-block-button';
+      }
+
+      $cssElements .= wp_style_engine_get_styles($elementsStyle, ['selector' => $selector])['css'];
     }
 
     $result = $cssPresets . $cssBlocks . $cssElements;

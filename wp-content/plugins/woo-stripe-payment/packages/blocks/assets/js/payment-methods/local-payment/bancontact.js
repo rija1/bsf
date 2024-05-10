@@ -16,13 +16,8 @@ if (getData()) {
         ariaLabel: 'Bancontact',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            confirmationMethod={'confirmBancontactPayment'}
-            getData={getData}/>,
-        edit: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            getData={getData}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
+        edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: false,
             showSaveOption: false,

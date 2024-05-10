@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit();
  */
 class WC_Payment_Token_Stripe_Local extends WC_Payment_Token_Stripe {
 
-	use WC_Payment_Token_Source_Trait;
+	use WC_Payment_Token_Payment_Method_Trait;
 
 	protected $type = 'Stripe_Local';
 
@@ -39,7 +39,11 @@ class WC_Payment_Token_Stripe_Local extends WC_Payment_Token_Stripe {
 	}
 
 	public function get_html_classes() {
-		return $this->get_gateway_id();
+		if ( is_string( $this->get_brand() ) ) {
+			return sprintf( '%1$s %2$s', $this->get_gateway_id(), strtolower( str_replace( ' ', '_', $this->get_brand() ) ) );
+		}
+
+		return sprintf( '%1$s', $this->get_gateway_id() );
 	}
 
 }

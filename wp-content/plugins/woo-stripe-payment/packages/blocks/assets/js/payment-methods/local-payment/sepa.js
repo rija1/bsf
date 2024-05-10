@@ -6,18 +6,6 @@ import {IbanElement} from "@stripe/react-stripe-js";
 
 const getData = getSettings('stripe_sepa_data');
 
-const LocalPaymentMethod = (PaymentMethod) => (props) => {
-    return (
-        <>
-            <PaymentMethod {...props}/>
-            <div className={'wc-stripe-blocks-mandate sepa-mandate'}
-                 dangerouslySetInnerHTML={{__html: props.getData('mandate')}}/>
-        </>
-    )
-}
-
-const SepaPaymentMethod = LocalPaymentMethod(PaymentMethod);
-
 if (getData()) {
     registerPaymentMethod({
         name: getData('name'),
@@ -28,11 +16,7 @@ if (getData()) {
         ariaLabel: 'SEPA',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <SepaPaymentMethod
-            content={LocalPaymentIntentContent}
-            getData={getData}
-            confirmationMethod={'confirmSepaDebitPayment'}
-            component={IbanElement}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: true,

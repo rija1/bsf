@@ -52,7 +52,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 
 	public function __construct() {
 		$this->local_payment_type = 'klarna';
-		$this->currencies         = array( 'AUD', 'CAD', 'CHF', 'DKK', 'EUR', 'GBP', 'NOK', 'NZD', 'PLN', 'SEK', 'DKK', 'USD' );
+		$this->currencies         = array( 'AUD', 'CAD', 'CHF', 'CZK', 'DKK', 'EUR', 'GBP', 'NOK', 'NZD', 'PLN', 'SEK', 'DKK', 'USD' );
 		$this->countries          = $this->limited_countries = array( 'AT', 'AU', 'BE', 'CA', 'CH', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'GR', 'IE', 'IT', 'NL', 'NO', 'NZ', 'PL', 'PT', 'SE', 'US' );
 		$this->id                 = 'stripe_klarna';
 		$this->tab_title          = __( 'Klarna', 'woo-stripe-payment' );
@@ -84,7 +84,8 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 			'GBP' => array( 'GB' ),
 			'PLN' => array( 'PL' ),
 			'CHF' => array( 'CH' ),
-			'NZD' => array( 'NZ' )
+			'NZD' => array( 'NZ' ),
+			'CZK' => array( 'CZ' )
 		), $this );
 	}
 
@@ -105,7 +106,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 		return false;
 	}
 
-	public function add_stripe_order_args( &$args, $order ) {
+	public function add_stripe_order_args( &$args, $order, $intent = null ) {
 		$args['payment_method_options'] = array(
 			'klarna' => array(
 				'preferred_locale' => $this->get_formatted_locale_from_order( $order )
@@ -240,18 +241,18 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 
 	public function enqueue_checkout_scripts( $scripts ) {
 		parent::enqueue_checkout_scripts( $scripts );
-		$scripts->assets_api->register_script( 'wc-stripe-klarna-checkout', 'assets/build/klarna-message.js' );
+		$scripts->assets_api->register_script( 'wc-stripe-klarna-checkout', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors' ) );
 		wp_enqueue_script( 'wc-stripe-klarna-checkout' );
 	}
 
 	public function enqueue_product_scripts( $scripts ) {
-		$scripts->assets_api->register_script( 'wc-stripe-klarna-product', 'assets/build/klarna-message.js' );
+		$scripts->assets_api->register_script( 'wc-stripe-klarna-product', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors' ) );
 		wp_enqueue_script( 'wc-stripe-klarna-product' );
 		$scripts->localize_script( 'wc-stripe-klarna-product', $this->get_localized_params() );
 	}
 
 	public function enqueue_cart_scripts( $scripts ) {
-		$scripts->assets_api->register_script( 'wc-stripe-klarna-cart', 'assets/build/klarna-message.js' );
+		$scripts->assets_api->register_script( 'wc-stripe-klarna-cart', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors' ) );
 		wp_enqueue_script( 'wc-stripe-klarna-cart' );
 		$this->enqueue_payment_method_styles();
 		$scripts->localize_script( 'wc-stripe-klarna-cart', $this->get_localized_params() );
@@ -264,7 +265,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 	 * @return void
 	 */
 	public function enqueue_category_scripts( $assets_api, $asset_data ) {
-		$assets_api->register_script( 'wc-stripe-klarna-category', 'assets/build/klarna-message.js' );
+		$assets_api->register_script( 'wc-stripe-klarna-category', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors' ) );
 		$asset_data->add( $this->id, array(
 			'messageOptions' => array(
 				'countryCode'        => stripe_wc()->account_settings->get_account_country(),
@@ -278,14 +279,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 		return array_merge( parent::get_localized_params(), array(
 			'messageOptions' => array(
 				'countryCode'        => stripe_wc()->account_settings->get_account_country(),
-				'paymentMethodTypes' => array( 'klarna' ),
-				'appearance'         => array(
-					'rules' => array(
-						'.p-MessagingPartnerLogo' => array(
-							'height' => '1.9em'
-						)
-					)
-				)
+				'paymentMethodTypes' => array( 'klarna' )
 			)
 		) );
 	}

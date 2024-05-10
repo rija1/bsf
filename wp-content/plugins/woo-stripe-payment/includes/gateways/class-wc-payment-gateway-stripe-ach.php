@@ -41,6 +41,12 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'add_fees_for_checkout' ) );
 	}
 
+	public function hooks() {
+		parent::hooks();
+		remove_filter( 'wc_stripe_settings_nav_tabs', array( $this, 'admin_nav_tab' ) );
+		add_filter( 'wc_stripe_local_gateways_tab', array( $this, 'admin_nav_tab' ) );
+	}
+
 	public function get_confirmation_method( $order = null ) {
 		return 'automatic';
 	}
@@ -89,7 +95,7 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 			array(
 				$scripts->get_handle( 'external' ),
 				$scripts->get_handle( 'wc-stripe' ),
-				'wp-polyfill'
+				'wc-stripe-vendors'
 			)
 		);
 		$scripts->localize_script( 'ach-connections', $this->get_localized_params() );
@@ -189,7 +195,7 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 		return wp_script_is( $scripts->get_handle( 'ach-connections' ) );
 	}
 
-	public function add_stripe_order_args( &$args, $order ) {
+	public function add_stripe_order_args( &$args, $order, $intent = null ) {
 		$args['payment_method_options'] = array(
 			'us_bank_account' => array(
 				'verification_method'   => 'instant',
@@ -220,35 +226,6 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 				);
 			}
 		}
-	}
-
-	/**
-	 * @param           $intent
-	 * @param \WC_Order $order
-	 *
-	 * @return \array[][]
-	 */
-	public function get_payment_intent_confirmation_args( $intent, $order ) {
-		$ip_address = $order->get_customer_ip_address();
-		$user_agent = $order->get_customer_user_agent();
-		if ( ! $ip_address ) {
-			$ip_address = WC_Geolocation::get_external_ip_address();
-		}
-		if ( ! $user_agent ) {
-			$user_agent = 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' );
-		}
-
-		return array(
-			'mandate_data' => array(
-				'customer_acceptance' => array(
-					'type'   => 'online',
-					'online' => array(
-						'ip_address' => $ip_address,
-						'user_agent' => $user_agent
-					)
-				)
-			)
-		);
 	}
 
 	public function get_mandate_text() {

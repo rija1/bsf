@@ -96,7 +96,8 @@
                 if (this.is_change_payment_method()) {
                     this.process_setup_intent({
                         order_id: this.params.order_id,
-                        order_key: this.params.order_key
+                        order_key: this.params.order_key,
+                        context: this.get_page()
                     });
                 } else {
                     this.createSource();
@@ -241,14 +242,13 @@
                     this.payment_token_received = false;
                     return this.submit_error(this.get_error_from_result(result));
                 }
-                var redirect = decodeURI(obj.order_received_url);
-                if (result.paymentIntent.status === 'processing') {
-                    redirect += '&' + $.param({
-                        '_stripe_local_payment': this.gateway_id,
-                        payment_intent: result.paymentIntent.id,
-                        payment_intent_client_secret: result.paymentIntent.client_secret
-                    });
-                } else if (result.paymentIntent.status === 'requires_action' || result.paymentIntent.status === 'requires_payment_method') {
+                var redirect = decodeURI(obj.return_url);
+                redirect += '&' + $.param({
+                    '_stripe_payment_method': this.gateway_id,
+                    payment_intent: result.paymentIntent.id,
+                    payment_intent_client_secret: result.paymentIntent.client_secret
+                });
+                if (result.paymentIntent.status === 'requires_action' || result.paymentIntent.status === 'requires_payment_method') {
                     if (['stripe_promptpay', 'stripe_swish'].indexOf(this.gateway_id) > -1) {
                         this.get_form().unblock().removeClass('processing');
                         return;
@@ -340,6 +340,7 @@
     function IDEAL(params) {
         this.elementType = 'idealBank';
         this.confirmation_method = 'confirmIdealPayment';
+        this.setupActionMethod = 'confirmIdealSetup';
         LocalPayment.call(this, params);
         window.addEventListener('hashchange', this.hashChange.bind(this));
     }
@@ -422,6 +423,7 @@
 
     function Bancontact(params) {
         this.confirmation_method = 'confirmBancontactPayment';
+        this.setupActionMethod = 'confirmBancontactSetup';
         LocalPayment.call(this, params);
         window.addEventListener('hashchange', this.hashChange.bind(this));
     }
@@ -480,6 +482,12 @@
 
     function Swish(params) {
         this.confirmation_method = 'confirmSwishPayment';
+        LocalPayment.call(this, params);
+        window.addEventListener('hashchange', this.hashChange.bind(this));
+    }
+
+    function Multibanco(params) {
+        this.confirmation_method = 'confirmMultibancoPayment';
         LocalPayment.call(this, params);
         window.addEventListener('hashchange', this.hashChange.bind(this));
     }
@@ -613,12 +621,20 @@
                     return this.submit_error(result.error);
                 }
                 if (result.paymentIntent.status === 'requires_action') {
+                    $('form.checkout').removeClass('processing');
                     return this.unblock();
                 } else if (result.paymentIntent.status === 'requires_payment_method') {
+                    $('form.checkout').removeClass('processing');
                     this.unblock();
                     return this.submit_error({code: result.paymentIntent.last_payment_error.code});
                 }
-                window.location.href = decodeURI(obj.order_received_url);
+                var redirect = decodeURI(obj.return_url);
+                redirect += '&' + $.param({
+                    '_stripe_payment_method': this.gateway_id,
+                    payment_intent: result.paymentIntent.id,
+                    payment_intent_client_secret: result.paymentIntent.client_secret
+                });
+                window.location.href = redirect;
             }.bind(this))
         } else {
             LocalPayment.prototype.processConfirmation.apply(this, arguments);
@@ -669,6 +685,8 @@
 
     Swish.prototype = $.extend({}, LocalPayment.prototype, Swish.prototype);
 
+    Multibanco.prototype = $.extend({}, LocalPayment.prototype, Multibanco.prototype);
+
     /**
      * Local payment types that require JS integration
      * @type {Object}
@@ -695,7 +713,8 @@
         'konbini': Konbini,
         'paynow': PayNow,
         'promptpay': PromptPay,
-        'swish': Swish
+        'swish': Swish,
+        'multibanco': Multibanco
     }
 
     for (var i in wc_stripe_local_payment_params.gateways) {

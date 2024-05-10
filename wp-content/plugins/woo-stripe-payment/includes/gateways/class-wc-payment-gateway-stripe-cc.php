@@ -148,9 +148,10 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 		if ( $this->is_custom_form_active() ) {
 			return parent::get_element_options( $this->get_custom_form()['elementOptions'] );
 		} elseif ( $this->is_payment_element_active() ) {
-			$options = \PaymentPlugins\Stripe\Controllers\PaymentIntent::instance()->get_element_options();
+			$options                       = \PaymentPlugins\Stripe\Controllers\PaymentIntent::instance()->get_element_options();
+			$options['paymentMethodTypes'] = array( 'card' );
 			if ( \PaymentPlugins\Stripe\Link\LinkIntegration::instance()->is_active() ) {
-				$options = array_merge( $options, array( 'payment_method_types' => array( 'card', 'link' ) ) );
+				$options['paymentMethodTypes'][] = 'link';
 			}
 			$options['appearance'] = array( 'theme' => $this->get_option( 'theme', 'stripe' ) );
 
@@ -230,7 +231,7 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 	 *
 	 * @see WC_Payment_Gateway_Stripe::add_stripe_order_args()
 	 */
-	public function add_stripe_order_args( &$args, $order ) {
+	public function add_stripe_order_args( &$args, $order, $intent = null ) {
 		// if the merchant is forcing 3D secure for all intents then add the required args.
 		if ( $this->is_active( 'force_3d_secure' ) && is_checkout() && ! doing_action( 'woocommerce_scheduled_subscription_payment_' . $this->id ) ) {
 			$args['payment_method_options']['card']['request_three_d_secure'] = 'any';

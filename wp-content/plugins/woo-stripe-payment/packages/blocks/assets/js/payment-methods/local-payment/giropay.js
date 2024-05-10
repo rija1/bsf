@@ -16,10 +16,7 @@ if (getData()) {
         ariaLabel: 'Giropay',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            confirmationMethod={'confirmGiropayPayment'}
-            getData={getData}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: false,

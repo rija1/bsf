@@ -8,34 +8,35 @@ import './style.scss';
 export const Installments = (
     {
         i18n,
-        paymentMethodName,
+        active,
+        paymentMethodType,
         cardFormComplete = false,
-        addPaymentMethodData = null,
-        getPaymentMethod
+        onChange = null,
+        createPaymentMethod
     }) => {
     const [installments, setInstallments] = useState(null);
     const [installment, setInstallment] = useState('');
     const [loading, setLoading] = useState(false);
     const onInstallmentSelected = (e) => {
         setInstallment(e.target.value);
-        if (addPaymentMethodData) {
-            addPaymentMethodData({_stripe_installment_plan: e.target.value});
+        if (onChange) {
+            onChange(e.target.value);
         }
     }
 
     useEffect(() => {
-        if (cardFormComplete) {
+        if (active && cardFormComplete && paymentMethodType === 'card') {
             // fetch the installments
             setLoading(true);
             setInstallment('');
 
-            getPaymentMethod().then(async paymentMethod => {
+            createPaymentMethod().then(async paymentMethod => {
                 if (paymentMethod) {
                     // fetch the installment plans
                     const result = await apiFetch({
                         url: getRoute('create/payment_intent'),
                         method: 'POST',
-                        data: {payment_method_id: paymentMethod, payment_method: paymentMethodName}
+                        data: {payment_method_id: paymentMethod.id, payment_method: 'stripe_cc'}
                     });
                     setInstallments(result.installments);
                     if (Object.keys(result.installments)?.length) {
@@ -46,22 +47,30 @@ export const Installments = (
                 console.log(error);
             }).finally(() => setLoading(false));
         }
-    }, [cardFormComplete, getPaymentMethod]);
+    }, [
+        active,
+        cardFormComplete,
+        paymentMethodType,
+        createPaymentMethod
+    ]);
 
-    return (
-        <div className='wc-stripe-installments__container'>
-            <label className={'wc-stripe-installments__label'}>
-                {i18n.installments.pay}
-                <Loader loading={loading}/>
-            </label>
-            <InstallmentOptions
-                i18n={i18n}
-                installment={installment}
-                onChange={onInstallmentSelected}
-                installments={installments}
-                isLoading={loading}/>
-        </div>
-    )
+    if (active && paymentMethodType === 'card') {
+        return (
+            <div className='wc-stripe-installments__container'>
+                <label className={'wc-stripe-installments__label'}>
+                    {i18n.installments.pay}
+                    <Loader loading={loading}/>
+                </label>
+                <InstallmentOptions
+                    i18n={i18n}
+                    installment={installment}
+                    onChange={onInstallmentSelected}
+                    installments={installments}
+                    isLoading={loading}/>
+            </div>
+        )
+    }
+    return null;
 }
 
 const InstallmentOptions = ({installment, installments, onChange, isLoading, i18n}) => {

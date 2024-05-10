@@ -50,7 +50,6 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 	}
 
 	protected function init() {
-		add_filter( 'woocommerce_saved_payment_methods_list', array( $this, 'transform_payment_method_type' ), 99 );
 	}
 
 	public function initialize() {
@@ -98,19 +97,6 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 	 * @return mixed
 	 */
 	public function transform_payment_method_type( $list ) {
-		if ( isset( $list[ $this->get_name() ] ) ) {
-			if ( $this->is_active() ) {
-				if ( isset( $list['cc'] ) ) {
-					foreach ( $list[ $this->get_name() ] as $entry ) {
-						$list['cc'][] = $entry;
-					}
-				} else {
-					$list['cc'] = $list[ $this->get_name() ];
-				}
-			}
-			unset( $list[ $this->get_name() ] );
-		}
-
 		return $list;
 	}
 

@@ -38,12 +38,16 @@ export const useDeferredPaymentIntent = (
     const createPaymentMethod = useCallback(async () => {
         const {billingAddress} = currentData.current;
         await elements.submit();
-        return await stripe.createPaymentMethod({
+        const result = await stripe.createPaymentMethod({
             elements,
             params: {
                 billing_details: getBillingDetailsFromAddress(billingAddress)
             }
         });
+        if (result.error) {
+            return result;
+        }
+        return result.paymentMethod;
     }, [stripe, elements]);
 
     useEffect(() => {
@@ -57,7 +61,7 @@ export const useDeferredPaymentIntent = (
                 if (result.error) {
                     throw new StripeError(result.error);
                 }
-                const paymentMethod = result.paymentMethod.id;
+                const paymentMethod = result.id;
                 currentData.current.paymentMethod = paymentMethod;
                 return ensureSuccessResponse(emitResponse.responseTypes, getSuccessResponse(paymentMethod, shouldSavePayment));
             } catch (error) {

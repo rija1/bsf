@@ -86,7 +86,11 @@ class WC_Payment_Gateway_Stripe_Affirm extends WC_Payment_Gateway_Stripe_Local_P
 
 	public function enqueue_checkout_scripts( $scripts ) {
 		parent::enqueue_checkout_scripts( $scripts );
-		$scripts->assets_api->register_script( 'wc-stripe-affirm-checkout', 'assets/build/affirm-message.js' );
+		$scripts->assets_api->register_script(
+			'wc-stripe-affirm-checkout',
+			'assets/build/affirm-message.js',
+			array( 'wc-stripe-vendors' )
+		);
 		wp_enqueue_script( 'wc-stripe-affirm-checkout' );
 	}
 
@@ -96,7 +100,11 @@ class WC_Payment_Gateway_Stripe_Affirm extends WC_Payment_Gateway_Stripe_Local_P
 	 * @return void
 	 */
 	public function enqueue_cart_scripts( $scripts ) {
-		$scripts->assets_api->register_script( 'wc-stripe-affirm-cart', 'assets/build/affirm-message.js' );
+		$scripts->assets_api->register_script(
+			'wc-stripe-affirm-cart',
+			'assets/build/affirm-message.js',
+			array( 'wc-stripe-vendors' )
+		);
 		wp_enqueue_script( 'wc-stripe-affirm-cart' );
 		$this->enqueue_payment_method_styles();
 		$scripts->localize_script( 'wc-stripe-affirm-cart', $this->get_localized_params( 'cart' ) );
@@ -108,7 +116,11 @@ class WC_Payment_Gateway_Stripe_Affirm extends WC_Payment_Gateway_Stripe_Local_P
 	 * @return void
 	 */
 	public function enqueue_product_scripts( $scripts ) {
-		$scripts->assets_api->register_script( 'wc-stripe-affirm-product', 'assets/build/affirm-message.js' );
+		$scripts->assets_api->register_script(
+			'wc-stripe-affirm-product',
+			'assets/build/affirm-message.js',
+			array( 'wc-stripe-vendors' )
+		);
 		wp_enqueue_script( 'wc-stripe-affirm-product' );
 		$scripts->localize_script( 'wc-stripe-affirm-product', $this->get_localized_params( 'product' ) );
 	}
@@ -120,7 +132,7 @@ class WC_Payment_Gateway_Stripe_Affirm extends WC_Payment_Gateway_Stripe_Local_P
 	 * @return void
 	 */
 	public function enqueue_category_scripts( $assets_api, $asset_data ) {
-		$assets_api->register_script( 'wc-stripe-affirm-category', 'assets/build/affirm-message.js' );
+		$assets_api->register_script( 'wc-stripe-affirm-category', 'assets/build/affirm-message.js', array( 'wc-stripe-vendors' ) );
 		$asset_data->add( $this->id, array(
 			'messageOptions'      => array(
 				'logoColor' => $this->get_option( "shop_logo_color", 'primary' ),

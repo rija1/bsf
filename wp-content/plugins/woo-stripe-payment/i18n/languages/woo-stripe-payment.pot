@@ -2,273 +2,283 @@
 # This file is distributed under the same license as the Payment Plugins for Stripe WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Payment Plugins for Stripe WooCommerce 3.3.60\n"
+"Project-Id-Version: Payment Plugins for Stripe WooCommerce 3.3.62\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-stripe-payment\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-18T16:53:10+00:00\n"
+"POT-Creation-Date: 2024-05-09T01:02:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: woo-stripe-payment\n"
 
 #. Plugin Name of the plugin
+#: stripe-payments.php
 msgid "Payment Plugins for Stripe WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: stripe-payments.php
 msgid "https://docs.paymentplugins.com/wc-stripe/config/"
 msgstr ""
 
 #. Description of the plugin
+#: stripe-payments.php
 msgid "Accept Credit Cards, Google Pay, Apple Pay, ACH, Klarna and more using Stripe."
 msgstr ""
 
 #. Author of the plugin
+#: stripe-payments.php
 msgid "Payment Plugins, support@paymentplugins.com"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:104
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:103
 #: includes/admin/meta-boxes/views/html-product-data.php:14
 #: includes/gateways/settings/ach-settings.php:12
 #: includes/gateways/settings/applepay-settings.php:14
 #: includes/gateways/settings/cc-settings.php:5
 #: includes/gateways/settings/googlepay-settings.php:26
 #: includes/gateways/settings/payment-request-settings.php:12
+#: includes/gateways/settings/upm-settings.php:5
 msgid "Enabled"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:109
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:108
 msgid "If enabled, your site can accept %s payments through Stripe."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:113
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:112
 #: includes/gateways/settings/ach-settings.php:21
 #: includes/gateways/settings/applepay-settings.php:23
 #: includes/gateways/settings/cc-settings.php:18
 #: includes/gateways/settings/googlepay-settings.php:35
 #: includes/gateways/settings/payment-request-settings.php:21
+#: includes/gateways/settings/upm-settings.php:39
 msgid "General Settings"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:117
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:116
 #: includes/admin/meta-boxes/views/html-charge-data-subview.php:47
 #: includes/gateways/settings/ach-settings.php:25
 #: includes/gateways/settings/applepay-settings.php:27
 #: includes/gateways/settings/cc-settings.php:22
 #: includes/gateways/settings/googlepay-settings.php:46
 #: includes/gateways/settings/payment-request-settings.php:25
+#: includes/gateways/settings/upm-settings.php:43
 msgid "Title"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:123
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:122
 #: includes/gateways/settings/ach-settings.php:31
 #: includes/gateways/settings/applepay-settings.php:33
 #: includes/gateways/settings/cc-settings.php:28
 #: includes/gateways/settings/googlepay-settings.php:52
 #: includes/gateways/settings/payment-request-settings.php:31
+#: includes/gateways/settings/upm-settings.php:49
 msgid "Description"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:126
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:125
 #: includes/gateways/settings/ach-settings.php:34
 #: includes/gateways/settings/applepay-settings.php:36
 #: includes/gateways/settings/cc-settings.php:31
 #: includes/gateways/settings/googlepay-settings.php:55
 #: includes/gateways/settings/payment-request-settings.php:34
+#: includes/gateways/settings/upm-settings.php:52
 msgid "Leave blank if you don't want a description to show for the gateway."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:130
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:129
 #: includes/gateways/settings/ach-settings.php:38
 msgid "Order Button Text"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:133
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:132
 #: includes/gateways/settings/ach-settings.php:41
 msgid "The text on the Place Order button that displays when the gateway is selected on the checkout page."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:157
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:156
 msgid "When the billing country matches one of these values, the payment method will be hidden on the checkout page."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:170
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:169
 msgid "When the billing country matches one of these values, the payment method will be shown on the checkout page."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:228
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:227
 msgid "Order %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:371
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:356
 msgid "Gateway will appear when store currency is <strong>%s</strong>"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:374
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:359
 msgid " & billing country is not <strong>%s</strong>"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:376
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:379
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:361
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:364
 msgid " & billing country is <strong>%s</strong>"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:401
+#: includes/abstract/abstract-wc-payment-gateway-stripe-local-payment.php:386
 msgid "Pay with %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:168
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:178
 #: includes/admin/meta-boxes/views/html-order-pay.php:51
 msgid "New Card"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:169
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:179
 #: includes/admin/meta-boxes/views/html-order-pay.php:39
 msgid "Saved Cards"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:447
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:458
 msgid "Please fill out all required fields."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:466
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:477
 #: includes/controllers/class-wc-stripe-controller-cart.php:136
 #: includes/controllers/class-wc-stripe-controller-cart.php:192
 #: includes/controllers/class-wc-stripe-controller-googlepay.php:134
-#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:110
-#: packages/blocks/src/Payments/AbstractStripePayment.php:79
+#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:111
+#: packages/blocks/src/Payments/AbstractStripePayment.php:78
 #: packages/blocks/src/Payments/Gateways/GooglePayPayment.php:28
 msgid "Total"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:533
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:544
 msgid "User must be logged in."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:571
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:582
 msgid "Error saving payment method. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:590
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:601
 msgid "Order refunded in Stripe. Refund ID: %s. Amount: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:630
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:641
 msgid "Order amount captured in Stripe. Amount: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:634
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:645
 msgid "Error capturing charge in Stripe. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:662
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:673
 msgid "Error voiding charge. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:664
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:675
 msgid "Charge voided in Stripe."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:844
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:863
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:719
 msgid "n/a"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:884
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:903
 msgid "Save payment method"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1094
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1113
 msgid "Attempt to save payment method failed. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1122
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1141
 msgid "We were not able to save your payment method. To prevent billing issues with your subscription, please add a payment method to the subscription."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1124
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1143
 msgid "We were not able to save your payment method. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1158
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1173
 msgid "Payment Method Token"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1162
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1177
 msgid "Stripe Customer ID"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1182
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1197
 msgid "Recurring payment for order failed. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1199
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1214
 msgid "Renewal payment initiated in Stripe. Waiting for the payment to clear."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1203
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1218
 msgid "Recurring payment captured in Stripe. Payment method: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1207
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1222
 msgid "Recurring payment authorized in Stripe. Payment method: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1213
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1442
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1228
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1457
 msgid "Customer must manually complete payment for payment method %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1247
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1262
 #: includes/abstract/abstract-wc-stripe-payment.php:277
 msgid "Order %1$s from %2$s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1424
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1439
 msgid "Pre-order payment for order failed. Reason: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1431
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1446
 msgid "Pre-order payment initiated in Stripe. Waiting for the payment to clear."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1435
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1450
 msgid "Pre-order payment captured in Stripe. Payment method: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1439
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1454
 msgid "Pre-order payment authorized in Stripe. Payment method: %s"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1512
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1527
 msgid "Cannot process payment"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1520
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1535
 msgid "Increase your conversion rate by offering %1$s on your Product and Cart pages, or at the top of the checkout page. <br/><strong>Note:</strong> you can control which products display %s by going to the product edit page."
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1656
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1687
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1671
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1702
 msgid "Shipping"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1664
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1690
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1679
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1705
 msgid "Discount"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1667
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1682
 msgid "Tax"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1697
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1712
 msgid "Fees"
 msgstr ""
 
-#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1891
+#: includes/abstract/abstract-wc-payment-gateway-stripe.php:1916
 msgid "Error saving payment method for subscription. Reason: %s"
 msgstr ""
 
@@ -293,18 +303,26 @@ msgid "Transaction Id cannot be empty."
 msgstr ""
 
 #: includes/abstract/abstract-wc-stripe-payment.php:344
-#: includes/traits/wc-stripe-payment-traits.php:113
+#: includes/traits/wc-stripe-payment-traits.php:181
 msgid "Error processing payment. Reason: %s"
 msgstr ""
 
 #: includes/abstract/abstract-wc-stripe-rest-controller.php:58
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:306
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:404
 #: includes/controllers/class-wc-stripe-controller-order-actions.php:343
 msgid "You do not have permissions to access this resource."
 msgstr ""
 
-#: includes/admin/class-wc-stripe-admin-assets.php:69
+#: includes/admin/class-wc-stripe-admin-assets.php:74
 msgid "Are you sure you want to delete your connection data?"
+msgstr ""
+
+#: includes/admin/class-wc-stripe-admin-assets.php:75
+msgid "Creating"
+msgstr ""
+
+#: includes/admin/class-wc-stripe-admin-assets.php:76
+msgid "Please select or create a payment method configuration"
 msgstr ""
 
 #: includes/admin/class-wc-stripe-admin-menus.php:19
@@ -374,9 +392,9 @@ msgstr ""
 #: includes/admin/meta-boxes/views/html-charge-data-subview.php:14
 #: includes/admin/meta-boxes/views/html-order-pay.php:32
 #: includes/admin/meta-boxes/views/html-product-data.php:46
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:144
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:156
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:69
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:169
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:170
 #: includes/gateways/settings/applepay-settings.php:55
 #: includes/gateways/settings/cc-settings.php:50
 #: includes/gateways/settings/googlepay-settings.php:74
@@ -399,13 +417,13 @@ msgstr ""
 
 #: includes/admin/meta-boxes/views/html-charge-data-subview.php:25
 #: includes/admin/settings/class-wc-stripe-api-settings.php:44
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:188
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:209
 msgid "Live"
 msgstr ""
 
 #: includes/admin/meta-boxes/views/html-charge-data-subview.php:25
 #: includes/admin/settings/class-wc-stripe-api-settings.php:43
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:188
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:209
 msgid "Test"
 msgstr ""
 
@@ -485,9 +503,9 @@ msgstr ""
 
 #: includes/admin/meta-boxes/views/html-order-pay.php:30
 #: includes/admin/meta-boxes/views/html-product-data.php:15
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:140
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:152
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:65
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:165
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:166
 #: includes/gateways/settings/applepay-settings.php:51
 #: includes/gateways/settings/cc-settings.php:46
 #: includes/gateways/settings/googlepay-settings.php:70
@@ -497,9 +515,9 @@ msgstr ""
 
 #: includes/admin/meta-boxes/views/html-order-pay.php:33
 #: includes/admin/meta-boxes/views/html-product-data.php:48
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:145
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:157
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:70
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:170
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:171
 #: includes/gateways/settings/applepay-settings.php:56
 #: includes/gateways/settings/cc-settings.php:51
 #: includes/gateways/settings/googlepay-settings.php:75
@@ -714,7 +732,7 @@ msgid "If enabled, the plugin will listen for the <strong>charge.dispute.created
 msgstr ""
 
 #: includes/admin/settings/class-wc-stripe-advanced-settings.php:200
-msgid "Disputed Created Order Status"
+msgid "Dispute Created Order Status"
 msgstr ""
 
 #: includes/admin/settings/class-wc-stripe-advanced-settings.php:204
@@ -910,6 +928,20 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
+#: includes/admin/views/html-payment-config-modal.php:6
+msgid "Create Payment Configuration"
+msgstr ""
+
+#: includes/admin/views/html-payment-config-modal.php:17
+msgid "Configuration Name"
+msgstr ""
+
+#: includes/admin/views/html-payment-config-modal.php:24
+#: includes/gateways/settings/upm-settings.php:15
+#: includes/gateways/settings/upm-settings.php:25
+msgid "Create"
+msgstr ""
+
 #: includes/admin/views/html-settings-nav.php:11
 msgid "for"
 msgstr ""
@@ -1035,20 +1067,24 @@ msgstr ""
 msgid "Error saving customer. Reason: %s"
 msgstr ""
 
-#: includes/class-wc-stripe-frontend-scripts.php:97
+#: includes/class-wc-stripe-frontend-scripts.php:106
 msgid "No matches found"
 msgstr ""
 
-#: includes/class-wc-stripe-redirect-handler.php:40
+#: includes/class-wc-stripe-redirect-handler.php:60
 msgid "Error retrieving payment source. Reason: %s"
 msgstr ""
 
-#: includes/class-wc-stripe-redirect-handler.php:42
+#: includes/class-wc-stripe-redirect-handler.php:62
 msgid "This request is invalid. Please try again."
 msgstr ""
 
-#: includes/class-wc-stripe-redirect-handler.php:77
+#: includes/class-wc-stripe-redirect-handler.php:111
 msgid "Payment authorization failed. Please select another payment method."
+msgstr ""
+
+#: includes/class-wc-stripe-redirect-handler.php:203
+msgid "Invalid setup intent secret."
 msgstr ""
 
 #: includes/class-wc-stripe-rest-api.php:44
@@ -1073,8 +1109,8 @@ msgid "Invalid order key."
 msgstr ""
 
 #: includes/controllers/class-wc-stripe-controller-checkout.php:175
-#: includes/controllers/class-wc-stripe-controller-payment-intent.php:135
-#: includes/controllers/class-wc-stripe-controller-payment-intent.php:175
+#: includes/controllers/class-wc-stripe-controller-payment-intent.php:163
+#: includes/controllers/class-wc-stripe-controller-payment-intent.php:203
 #: packages/cartflows/src/Routes/PaymentIntentRoute.php:47
 msgid "You are not authorized to update this order."
 msgstr ""
@@ -1084,41 +1120,49 @@ msgstr ""
 msgid "Please review your order details then click Place Order."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:93
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:114
 msgid "You cannot register your domain until you have completed the Connect process on the API Settings page. A registered domain is not required when test mode is enabled."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:123
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:144
 msgid "Domain registered successfully. You can confirm in your Stripe Dashboard at https://dashboard.stripe.com/account/apple_pay."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:146
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:167
 msgid "You must configure your secret key before creating webhooks."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:168
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:189
 msgid "There is already a webhook configured for this site. If you want to delete the webhook, login to your Stripe Dashboard."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:185
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:206
 msgid "Webhook created in Stripe for %s environment. You can test your webhook by logging in to the Stripe dashboard"
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:233
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:254
 msgid "You must enter your API keys or connect the plugin before performing a connection test."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:246
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:267
 msgid "Mode: %s. Invalid secret key. Please check your entry."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:270
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:273
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:291
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:294
 msgid "Mode: %s. Invalid publishable key. Please check your entry."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:287
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:308
 msgid "Connection test to Stripe was successful. Mode: %s."
+msgstr ""
+
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:335
+msgid "Error creating payment method configuration. Reason: %s"
+msgstr ""
+
+#: includes/controllers/class-wc-stripe-controller-gateway-settings.php:368
+msgid "Error retrieving payment method config. Check logs for more details."
 msgstr ""
 
 #: includes/controllers/class-wc-stripe-controller-googlepay.php:86
@@ -1146,11 +1190,11 @@ msgstr ""
 msgid "You do not have permission to access this resource."
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-payment-intent.php:113
+#: includes/controllers/class-wc-stripe-controller-payment-intent.php:141
 msgid "Error creating setup intent. Reason: %s"
 msgstr ""
 
-#: includes/controllers/class-wc-stripe-controller-payment-intent.php:129
+#: includes/controllers/class-wc-stripe-controller-payment-intent.php:157
 #: packages/cartflows/src/Routes/PaymentIntentRoute.php:38
 msgid "Invalid order id provided"
 msgstr ""
@@ -1200,13 +1244,13 @@ msgstr ""
 msgid "Saved Banks"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:161
-#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:165
+#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:167
+#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:171
 #: includes/gateways/settings/ach-settings.php:81
 msgid "ACH Fee"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:256
+#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:233
 msgid ""
 "By clicking %1$s, you authorize %2$s to debit the bank \n"
 "\t\taccount you select for any amount owed for charges arising from your use of %2$s \n"
@@ -1215,7 +1259,7 @@ msgid ""
 "\t\tauthorization at any time by providing notice to %2$s with 30 (thirty) days notice."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:275
+#: includes/gateways/class-wc-payment-gateway-stripe-ach.php:252
 msgid "The %1$sPlaid ACH%2$s gateway has been deprecated. If you still want to use the Plaid gateway, you can download it %1$shere%2$s."
 msgstr ""
 
@@ -1236,81 +1280,81 @@ msgstr ""
 msgid "Complete Order"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:148
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:160
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:73
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:173
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:174
 #: includes/gateways/settings/applepay-settings.php:59
 #: includes/gateways/settings/cc-settings.php:54
 #: includes/gateways/settings/payment-request-settings.php:57
 msgid "This option determines whether the customer's funds are captured immediately or authorized and can be captured at a later date."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:153
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:165
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:91
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:189
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:190
 msgid "Message Sections"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:156
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:168
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:94
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:192
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:193
 msgid "Checkout page"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:157
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:169
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:95
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:193
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:194
 #: includes/gateways/settings/applepay-settings.php:66
 #: includes/gateways/settings/googlepay-settings.php:85
 #: includes/gateways/settings/payment-request-settings.php:64
 msgid "Product Page"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:158
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:170
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:96
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:194
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:195
 #: includes/gateways/settings/applepay-settings.php:67
 #: includes/gateways/settings/googlepay-settings.php:86
 #: includes/gateways/settings/payment-request-settings.php:65
 msgid "Cart Page"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:159
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:171
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:98
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:195
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:196
 msgid "Shop/Category Page"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:163
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:175
 msgid "These are the sections where the Affirm messaging will be enabled."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:171
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:213
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:266
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:320
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:183
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:225
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:278
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:332
 msgid "Logo Color"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:175
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:217
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:270
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:324
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:187
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:229
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:282
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:336
 msgid "Primary"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:176
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:218
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:271
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:325
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:188
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:230
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:283
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:337
 #: includes/gateways/settings/googlepay-settings.php:132
 msgid "Black"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:177
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:219
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:272
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:326
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:189
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:231
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:284
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:338
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:158
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:217
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:287
@@ -1319,137 +1363,137 @@ msgstr ""
 msgid "White"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:180
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:222
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:275
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:329
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:192
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:234
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:287
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:341
 msgid "The color of the Affirm logo that appears in the messaging."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:183
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:225
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:278
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:332
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:195
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:237
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:290
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:344
 msgid "Font Color"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:187
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:229
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:282
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:336
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:199
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:241
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:294
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:348
 msgid "The color of the Affirm message font. Valid values are hex color codes or values like red, blue, green, etc."
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:190
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:232
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:285
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:339
-msgid "Font Size"
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:194
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:236
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:289
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:343
-msgid "The size of the Affirm message font. Valid values are in px, em, rem"
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:197
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:239
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:292
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:346
-msgid "Font Alignment"
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:201
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:243
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:296
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:350
-msgid "Start"
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:202
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:244
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:297
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:351
-msgid "End"
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:203
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:245
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:298
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:352
-msgid "Center"
+msgid "Font Size"
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:206
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:248
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:301
 #: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:355
+msgid "The size of the Affirm message font. Valid values are in px, em, rem"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:209
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:251
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:304
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:358
+msgid "Font Alignment"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:213
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:255
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:308
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:362
+msgid "Start"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:214
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:256
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:309
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:363
+msgid "End"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:215
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:257
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:310
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:364
+msgid "Center"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:218
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:260
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:313
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:367
 msgid "The alignment of the Affirm message."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:251
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:304
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:263
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:316
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:231
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:301
 msgid "Message Location"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:255
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:267
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:235
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:207
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:208
 msgid "Below Total"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:256
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:268
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:236
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:208
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:209
 msgid "Below Checkout Button"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:259
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:313
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:366
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:271
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:325
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:378
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:239
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:310
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:380
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:211
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:223
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:234
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:212
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:224
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:235
 msgid "This option controls the location in which the messaging for the payment method will appear."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:308
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:320
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:305
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:218
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:219
 msgid "Above Price"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:309
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:362
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:321
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:374
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:306
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:376
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:219
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:230
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:220
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:231
 msgid "Below Price"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:310
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:363
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:322
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:375
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:307
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:377
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:220
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:231
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:221
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:232
 msgid "Below Add to Cart"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:358
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:370
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:372
 msgid "Shop/Category Location"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:386
+#: includes/gateways/class-wc-payment-gateway-stripe-affirm.php:398
 msgid "and cart/product total is between %1$s and %2$s."
 msgstr ""
 
@@ -1471,7 +1515,7 @@ msgstr ""
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:176
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:246
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:317
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:177
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:178
 #: includes/gateways/settings/googlepay-settings.php:111
 msgid "Icon"
 msgstr ""
@@ -1539,7 +1583,7 @@ msgstr ""
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:186
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:256
 #: includes/gateways/class-wc-payment-gateway-stripe-afterpay.php:327
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:185
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:186
 msgid "This is the icon style that appears next to the gateway on the checkout page."
 msgstr ""
 
@@ -1676,15 +1720,15 @@ msgstr ""
 msgid "Please select a product option before updating quantity."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-bancontact.php:26
+#: includes/gateways/class-wc-payment-gateway-stripe-bancontact.php:28
 msgid "Bancontact"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-bancontact.php:27
+#: includes/gateways/class-wc-payment-gateway-stripe-bancontact.php:29
 msgid "Bancontact (Stripe) by Payment Plugins"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-bancontact.php:28
+#: includes/gateways/class-wc-payment-gateway-stripe-bancontact.php:30
 msgid "Bancontact gateway that integrates with your Stripe account."
 msgstr ""
 
@@ -1746,60 +1790,56 @@ msgstr ""
 msgid "BLIK gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-blik.php:38
+#: includes/gateways/class-wc-payment-gateway-stripe-blik.php:39
 msgid "Please provide your 6 digit BLIK code."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:30
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:32
 msgid "Boleto"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:31
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:33
 msgid "Boleto (Stripe) by Payment Plugins"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:32
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:34
 msgid "Boleto gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:41
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:42
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:40
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:43
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:44
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:42
 msgid "Expiration Days"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:45
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:46
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:44
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:47
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:48
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:46
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:50
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:51
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:52
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:53
 msgid "The number of days before the Boleto voucher expires."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:53
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:54
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:52
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:55
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:56
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:54
 msgid "Voucher Link In Email"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:57
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:58
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:56
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:59
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:60
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:58
 msgid "If enabled, the voucher link will be included in the order on-hold email sent to the customer."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:65
+#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:68
 #: includes/wc-stripe-functions.php:1176
 msgid "Please enter a valid CPF / CNPJ"
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-boleto.php:108
-msgid "Please click %shere%s to view your Boleto voucher."
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-cc.php:24
@@ -1816,15 +1856,17 @@ msgid "Credit card gateway that integrates with your Stripe account."
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-cc.php:88
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:141
 #: packages/blocks/src/Payments/Gateways/CreditCardPayment.php:114
+#: packages/blocks/src/Payments/Gateways/UniversalPayment.php:88
 msgid "Loading installments..."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-cc.php:300
+#: includes/gateways/class-wc-payment-gateway-stripe-cc.php:301
 msgid "Only the Stripe payment form and inline form can be used while Link is enabled."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-cc.php:311
+#: includes/gateways/class-wc-payment-gateway-stripe-cc.php:312
 #: packages/blocks/src/Payments/Gateways/CreditCardPayment.php:48
 msgid "Save Card"
 msgstr ""
@@ -1879,15 +1921,15 @@ msgstr ""
 msgid "Google Pay gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:112
+#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:113
 msgid "Please update you product quantity before using Google Pay."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:167
+#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:168
 msgid "Waiting..."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:168
+#: includes/gateways/class-wc-payment-gateway-stripe-googlepay.php:169
 msgid "loading shipping methods..."
 msgstr ""
 
@@ -1903,15 +1945,15 @@ msgstr ""
 msgid "GrabPay gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-ideal.php:25
+#: includes/gateways/class-wc-payment-gateway-stripe-ideal.php:27
 msgid "iDEAL"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-ideal.php:26
+#: includes/gateways/class-wc-payment-gateway-stripe-ideal.php:28
 msgid "iDEAL (Stripe) by Payment Plugins"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-ideal.php:27
+#: includes/gateways/class-wc-payment-gateway-stripe-ideal.php:29
 msgid "Ideal gateway that integrates with your Stripe account."
 msgstr ""
 
@@ -1927,80 +1969,72 @@ msgstr ""
 msgid "Klarna gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:180
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:181
 msgid "Black text"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:181
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:182
 msgid "Pink background black text"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:199
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:200
 msgid "These are the sections where the Klarna messaging will be enabled."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:203
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:204
 msgid "Cart Message Location"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:214
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:215
 msgid "Product Message Location"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:226
+#: includes/gateways/class-wc-payment-gateway-stripe-klarna.php:227
 msgid "Shop/Category Message Location"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:32
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:34
 msgid "Konbini"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:33
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:35
 msgid "Konbini (Stripe) by Payment Plugins"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:34
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:36
 msgid "Konbini gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:68
+#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:70
 msgid "Order %1$s"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-konbini.php:114
-msgid "Please click %shere%s to view your Konbini voucher."
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-multibanco.php:23
+#: includes/gateways/class-wc-payment-gateway-stripe-multibanco.php:31
 msgid "Multibanco"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-multibanco.php:26
+#: includes/gateways/class-wc-payment-gateway-stripe-multibanco.php:34
 msgid "Multibanco (Stripe) by Payment Plugins"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-multibanco.php:27
+#: includes/gateways/class-wc-payment-gateway-stripe-multibanco.php:35
 msgid "Multibanco gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:30
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:32
 msgid "OXXO"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:31
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:33
 msgid "OXXO (Stripe) by Payment Plugins"
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:32
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:34
 msgid "OXXO gateway that integrates with your Stripe account."
 msgstr ""
 
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:49
+#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:51
 msgid "The number of days before the OXXO voucher expires."
-msgstr ""
-
-#: includes/gateways/class-wc-payment-gateway-stripe-oxxo.php:90
-msgid "Please click %shere%s to view your OXXO voucher."
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-p24.php:25
@@ -2060,7 +2094,7 @@ msgid "PromptPay gateway that integrates with your Stripe account."
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-sepa.php:30
-#: includes/tokens/class-wc-payment-token-stripe-sepa.php:67
+#: includes/tokens/class-wc-payment-token-stripe-sepa.php:89
 msgid "SEPA"
 msgstr ""
 
@@ -2110,6 +2144,80 @@ msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-swish.php:27
 msgid "Swish gateway that integrates with your Stripe account."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:22
+msgid "Universal Payment Method"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:25
+msgid "Universal Payment Methods (Stripe) By Payment Plugins"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:26
+msgid "Stripe payment method that lets you combine all payment methods into a single integration."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:56
+msgid "%s is an unsupported payment method. Please remove it from your payment method configuration."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:80
+msgid "Payment method type is required"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:303
+msgid "Invalid payment method token. Please try again."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:356
+msgid ""
+"The following list of payment methods are supported by the UPM integration. Payment methods that are\n"
+"\t\t\t\t\t\t\tdisabled are not supported by your Stripe account. Stripe will dynamically render these enabled payment methods based on inputs like the cart currency, amount, and customer location."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:360
+msgid "Payment method settings are still maintained on their respective settings page."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:493
+msgid "New Payment Method"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:497
+msgid "Saved Payment Methods"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:550
+msgid "Please connect to Stripe before configuring"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:556
+msgid "Error fetching payment method configurations."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:612
+msgid "Add New"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:615
+msgid "Sync"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:629
+msgid "Please %1$sconnect your Stripe account%2$s to %3$s mode before configuring the Universal Payment Method."
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:632
+msgid "test"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:632
+msgid "live"
+msgstr ""
+
+#: includes/gateways/class-wc-payment-gateway-stripe-upm.php:697
+msgid "Error saving payment method configuration in Stripe. Reason: %s"
 msgstr ""
 
 #: includes/gateways/class-wc-payment-gateway-stripe-wechat.php:25
@@ -2171,6 +2279,7 @@ msgstr ""
 #: includes/gateways/settings/cc-settings.php:131
 #: includes/gateways/settings/googlepay-settings.php:98
 #: includes/gateways/settings/payment-request-settings.php:77
+#: includes/gateways/settings/upm-settings.php:80
 msgid "Default"
 msgstr ""
 
@@ -2270,7 +2379,7 @@ msgid "This is the style for all Apple Pay buttons presented on your store."
 msgstr ""
 
 #: includes/gateways/settings/applepay-settings.php:101
-#: includes/gateways/settings/googlepay-settings.php:166
+#: includes/gateways/settings/googlepay-settings.php:169
 msgid "Button Design"
 msgstr ""
 
@@ -2313,6 +2422,7 @@ msgid "Product button type"
 msgstr ""
 
 #: includes/gateways/settings/cc-settings.php:10
+#: includes/gateways/settings/upm-settings.php:10
 msgid "If enabled, your site can accept credit card payments through Stripe."
 msgstr ""
 
@@ -2410,14 +2520,17 @@ msgstr ""
 
 #: includes/gateways/settings/cc-settings.php:127
 #: includes/gateways/settings/payment-request-settings.php:99
+#: includes/gateways/settings/upm-settings.php:76
 msgid "Theme"
 msgstr ""
 
 #: includes/gateways/settings/cc-settings.php:132
+#: includes/gateways/settings/upm-settings.php:81
 msgid "Night"
 msgstr ""
 
 #: includes/gateways/settings/cc-settings.php:133
+#: includes/gateways/settings/upm-settings.php:82
 msgid "Flat"
 msgstr ""
 
@@ -2561,7 +2674,15 @@ msgstr ""
 msgid "The button style of the GPay button."
 msgstr ""
 
-#: includes/gateways/settings/googlepay-settings.php:168
+#: includes/gateways/settings/googlepay-settings.php:154
+msgid "Button Radius"
+msgstr ""
+
+#: includes/gateways/settings/googlepay-settings.php:158
+msgid "The border radius of the button."
+msgstr ""
+
+#: includes/gateways/settings/googlepay-settings.php:171
 msgid "If you can't see the Google Pay button, try switching to a Chrome browser."
 msgstr ""
 
@@ -2611,6 +2732,69 @@ msgstr ""
 msgid "The height of the button. Max height is 64"
 msgstr ""
 
+#: includes/gateways/settings/upm-settings.php:14
+msgid "Payment Method Configuration (live mode)"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:19
+#: includes/gateways/settings/upm-settings.php:29
+msgid "Please select a payment method configuration"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:24
+msgid "Payment Method Configuration (test mode)"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:34
+msgid ""
+"The Universal Payment Method (UPM) allows you to combine all payment methods into a single integration. On your checkout page, the UPM will show all of the enabled payment methdods\n"
+"\t\t that are eligible."
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:44
+msgid "Popular payment methods"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:57
+msgid "Payment Methods (Test)"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:62
+msgid "Payment Methods (Live)"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:86
+msgid "Layout"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:90
+msgid "Tabs layout"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:91
+msgid "Vertical layout"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:93
+msgid "The layout option determines how the payment methods in the Universal Payment Method are displayed."
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:96
+msgid "Radio Input"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:100
+msgid "Display a radio button next to each payment method."
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:105
+msgid "Spaced Payment Methods"
+msgstr ""
+
+#: includes/gateways/settings/upm-settings.php:109
+msgid "When true, the Payment Methods render as standalone buttons with space in between them."
+msgstr ""
+
 #: includes/tokens/class-wc-payment-token-stripe-ach.php:82
 #: includes/tokens/class-wc-payment-token-stripe-ach.php:87
 #: includes/tokens/class-wc-payment-token-stripe-cc.php:99
@@ -2629,19 +2813,19 @@ msgstr ""
 #: includes/tokens/class-wc-payment-token-stripe-becs.php:63
 #: includes/tokens/class-wc-payment-token-stripe-cc.php:134
 #: includes/tokens/class-wc-payment-token-stripe-local-payment.php:34
-#: includes/tokens/class-wc-payment-token-stripe-sepa.php:73
+#: includes/tokens/class-wc-payment-token-stripe-sepa.php:95
 msgid "Gateway Title"
 msgstr ""
 
 #: includes/tokens/class-wc-payment-token-stripe-becs.php:65
 #: includes/tokens/class-wc-payment-token-stripe-cc.php:101
-#: includes/tokens/class-wc-payment-token-stripe-sepa.php:75
+#: includes/tokens/class-wc-payment-token-stripe-sepa.php:97
 msgid "{brand} ending in {last4}"
 msgstr ""
 
 #: includes/tokens/class-wc-payment-token-stripe-becs.php:68
 #: includes/tokens/class-wc-payment-token-stripe-cc.php:114
-#: includes/tokens/class-wc-payment-token-stripe-sepa.php:78
+#: includes/tokens/class-wc-payment-token-stripe-sepa.php:100
 msgid "Type Last 4"
 msgstr ""
 
@@ -2679,6 +2863,10 @@ msgstr ""
 
 #: includes/traits/wc-stripe-controller-traits.php:40
 msgid "Invalid shipping method format. Expected: index:id"
+msgstr ""
+
+#: includes/traits/wc-stripe-payment-traits.php:414
+msgid "Please click %shere%s to view your Konbini voucher."
 msgstr ""
 
 #: includes/updates/update-3.1.0.php:28
@@ -2961,6 +3149,11 @@ msgstr ""
 msgid "We are unable to authenticate your payment method. Please choose a different payment method and try again."
 msgstr ""
 
+#: includes/wc-stripe-functions.php:1185
+#: packages/blocks/src/Payments/AbstractStripeLocalPayment.php:71
+msgid "Payment has been cancelled."
+msgstr ""
+
 #: includes/wc-stripe-webhook-functions.php:106
 msgid "Charge.succeeded webhook received. Payment has been completed."
 msgstr ""
@@ -2989,19 +3182,15 @@ msgstr ""
 msgid "A review has been closed for charge %1$s. Reason: %2$s."
 msgstr ""
 
-#: packages/blocks/src/Payments/AbstractStripeLocalPayment.php:61
+#: packages/blocks/src/Payments/AbstractStripeLocalPayment.php:66
 msgid "After clicking \"%1$s\", you will be redirected to %2$s to complete your purchase securely"
 msgstr ""
 
-#: packages/blocks/src/Payments/AbstractStripeLocalPayment.php:65
+#: packages/blocks/src/Payments/AbstractStripeLocalPayment.php:70
 msgid "Please enter your payment info before proceeding."
 msgstr ""
 
-#: packages/blocks/src/Payments/AbstractStripeLocalPayment.php:66
-msgid "Payment has been cancelled."
-msgstr ""
-
-#: packages/blocks/src/Payments/Gateways/ACHPayment.php:38
+#: packages/blocks/src/Payments/Gateways/ACHPayment.php:43
 msgid "ACH payment has been cancelled"
 msgstr ""
 
@@ -3030,30 +3219,6 @@ msgstr ""
 msgid "You will receive a notification on your mobile device asking you to authorize the payment."
 msgstr ""
 
-#: packages/blocks/src/Payments/Gateways/BoletoPayment.php:17
-msgid "Please enter a valid CPF/CNPJ value"
-msgstr ""
-
-#: packages/blocks/src/Payments/Gateways/BoletoPayment.php:19
-#: templates/checkout/boleto.php:17
-msgid "Test mode values"
-msgstr ""
-
-#: packages/blocks/src/Payments/Gateways/BoletoPayment.php:20
-#: templates/checkout/boleto.php:27
-msgid "Accepted formats"
-msgstr ""
-
-#: packages/blocks/src/Payments/Gateways/BoletoPayment.php:21
-#: templates/checkout/boleto.php:29
-msgid "XXX.XXX.XXX-XX or XXXXXXXXXXX"
-msgstr ""
-
-#: packages/blocks/src/Payments/Gateways/BoletoPayment.php:22
-#: templates/checkout/boleto.php:32
-msgid "XX.XXX.XXX/XXXX-XX or XXXXXXXXXXXXXX"
-msgstr ""
-
 #: packages/blocks/src/Payments/Gateways/CreditCardPayment.php:107
 #: templates/cc-forms/bootstrap.php:10
 #: templates/cc-forms/inline.php:9
@@ -3080,11 +3245,13 @@ msgid "Unsupported custom form. Please choose another custom form option in the 
 msgstr ""
 
 #: packages/blocks/src/Payments/Gateways/CreditCardPayment.php:113
+#: packages/blocks/src/Payments/Gateways/UniversalPayment.php:87
 #: templates/installment-plans.php:13
 msgid "Pay in installments:"
 msgstr ""
 
 #: packages/blocks/src/Payments/Gateways/CreditCardPayment.php:115
+#: packages/blocks/src/Payments/Gateways/UniversalPayment.php:89
 #: templates/installment-plans.php:8
 msgid "Fill out card form for eligibility."
 msgstr ""
@@ -3169,7 +3336,7 @@ msgstr ""
 msgid "%1$s - Order %2$s - One Time offer"
 msgstr ""
 
-#: src/Installments/InstallmentController.php:131
+#: src/Installments/InstallmentController.php:132
 msgid "Installments:"
 msgstr ""
 
@@ -3266,12 +3433,38 @@ msgstr ""
 msgid "Enter your CPF/CNPJ"
 msgstr ""
 
+#: templates/checkout/boleto.php:17
+msgid "Test mode values"
+msgstr ""
+
+#: templates/checkout/boleto.php:27
+msgid "Accepted formats"
+msgstr ""
+
+#: templates/checkout/boleto.php:29
+msgid "XXX.XXX.XXX-XX or XXXXXXXXXXX"
+msgstr ""
+
+#: templates/checkout/boleto.php:32
+msgid "XX.XXX.XXX/XXXX-XX or XXXXXXXXXXXXXX"
+msgstr ""
+
 #: templates/checkout/checkout-banner.php:17
 msgid "OR"
 msgstr ""
 
 #: templates/offsite-notice.php:12
 msgid "After clicking \"%1$s\", you will be redirected to %2$s to complete your purchase securely."
+msgstr ""
+
+#: packages/blocks/assets/js/blocks/cart/bnpl-messages/block.json
+msgctxt "block title"
+msgid "Stripe BNPL Cart Block"
+msgstr ""
+
+#: packages/blocks/assets/js/blocks/cart/bnpl-messages/block.json
+msgctxt "block description"
+msgid "Adds BNPL messaging to the cart block."
 msgstr ""
 
 #: packages/blocks/assets/js/payment-methods/link/block.json

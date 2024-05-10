@@ -3,7 +3,6 @@ import {getSettings} from "../util";
 import {LocalPaymentIntentContent} from './local-payment-method';
 import {PaymentMethodLabel, PaymentMethod} from "../../components/checkout";
 import {canMakePayment} from "./local-payment-method";
-import {IdealBankElement} from "@stripe/react-stripe-js";
 
 const getData = getSettings('stripe_ideal_data');
 
@@ -17,11 +16,7 @@ if (getData()) {
         ariaLabel: 'Ideal',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            getData={getData}
-            confirmationMethod={'confirmIdealPayment'}
-            component={IdealBankElement}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: false,

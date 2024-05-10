@@ -85,7 +85,7 @@ class SettingsController {
    *     padding: array{bottom: string, left: string, right: string, top: string}
    *   },
    *   color: array{
-   *     background: array{layout: string, content: string}
+   *     background: string
    *   },
    *   typography: array{
    *     fontFamily: string
@@ -104,17 +104,6 @@ class SettingsController {
     $width -= $this->parseNumberFromStringWithPixels($styles['spacing']['padding']['left']);
     $width -= $this->parseNumberFromStringWithPixels($styles['spacing']['padding']['right']);
     return "{$width}px";
-  }
-
-  /**
-   * This functions converts an array of styles to a string that can be used in HTML.
-   */
-  public function convertStylesToString(array $styles): string {
-    $cssString = '';
-    foreach ($styles as $property => $value) {
-      $cssString .= $property . ':' . $value . ';';
-    }
-    return trim($cssString); // Remove trailing space and return the formatted string
   }
 
   public function parseStylesToArray(string $styles): array {

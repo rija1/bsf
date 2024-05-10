@@ -258,7 +258,7 @@ export const handleCardAction = async (
         redirectUrl,
         emitResponse,
         name,
-        method = 'handleCardAction',
+        method = 'confirmCardPayment',
         savePaymentMethod = false,
         data = {}
     }) => {
@@ -268,7 +268,7 @@ export const handleCardAction = async (
             let {type, client_secret, order_id, order_key} = JSON.parse(window.atob(decodeURIComponent(match[1])));
             const stripe = await initStripe;
             let result;
-            if (type === 'intent') {
+            if (type === 'payment_intent') {
                 result = await stripe[method](client_secret);
             } else {
                 result = await stripe.confirmCardSetup(client_secret);
@@ -313,6 +313,82 @@ export const handleCardAction = async (
                 messageContext: emitResponse.noticeContexts.PAYMENTS
             }
         );
+    }
+}
+
+export const handleNextAction = async (
+    {
+        args,
+        stripe,
+        elements = null,
+        emitResponse,
+        billingAddress
+    }) => {
+    let {type, client_secret, status, return_url = null} = args;
+    if (['requires_action', 'requires_payment_method', 'requires_confirmation'].includes(status)) {
+        try {
+            let result;
+            if (type === 'payment_intent') {
+                result = await stripe.confirmPayment({
+                    ...(elements && {elements}),
+                    clientSecret: client_secret,
+                    redirect: 'if_required',
+                    confirmParams: {
+                        return_url: return_url,
+                        payment_method_data: {
+                            billing_details: getBillingDetailsFromAddress(billingAddress)
+                        },
+                        expand: ['payment_method']
+                    }
+                });
+            } else {
+                result = await stripe.confirmSetup({
+                    clientSecret: client_secret,
+                    redirect: 'always',
+                    confirmParams: {
+                        return_url: return_url,
+                        payment_method_data: {
+                            billing_details: getBillingDetailsFromAddress(billingAddress)
+                        },
+                        expand: ['payment_method']
+                    }
+                });
+            }
+            if (result.error) {
+                throw result.error;
+            }
+            const {payment_method} = result.paymentIntent;
+
+            if (['promptpay', 'swish', 'paynow', 'cashapp'].includes(payment_method.type)) {
+                if (result.paymentIntent.status === 'requires_action') {
+                    throw {
+                        code: 'payment_cancelled'
+                    };
+                }
+                if (result.paymentIntent.status === 'requires_payment_method') {
+                    throw {
+                        code: result.paymentIntent.last_payment_error.code
+                    };
+                }
+            }
+
+            const url = new URL(return_url);
+            url.searchParams.append('payment_intent', result.paymentIntent.id);
+            url.searchParams.append('payment_intent_client_secret', result.paymentIntent.client_secret);
+            return ensureSuccessResponse(emitResponse.responseTypes, {
+                redirectUrl: url.toString()
+            });
+        } catch (error) {
+            return ensureErrorResponse(
+                emitResponse.responseTypes,
+                error,
+                {
+                    messageContext: emitResponse.noticeContexts.PAYMENTS
+                }
+            );
+        }
+    } else {
+        return ensureSuccessResponse(emitResponse.responseTypes);
     }
 }
 

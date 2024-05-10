@@ -55,7 +55,6 @@ abstract class WC_Payment_Gateway_Stripe_Local_Payment extends WC_Payment_Gatewa
 
 	public function hooks() {
 		parent::hooks();
-		add_filter( 'wc_stripe_local_gateway_tabs', array( $this, 'local_gateway_tab' ) );
 		remove_filter( 'wc_stripe_settings_nav_tabs', array( $this, 'admin_nav_tab' ) );
 		add_filter( 'wc_stripe_local_gateways_tab', array( $this, 'admin_nav_tab' ) );
 	}
@@ -282,27 +281,13 @@ abstract class WC_Payment_Gateway_Stripe_Local_Payment extends WC_Payment_Gatewa
 	}
 
 	/**
-	 *
 	 * @param WC_Order $order
 	 *
 	 * @return string
+	 * @deprecated 3.3.60
 	 */
 	public function get_local_payment_return_url( $order ) {
-		global $wp;
-		if ( isset( $wp->query_vars['order-pay'] ) ) {
-			$url = $order->get_checkout_payment_url();
-		} else {
-			$url = wc_get_checkout_url();
-		}
-
-		return add_query_arg(
-			array(
-				'key'                   => $order->get_order_key(),
-				'order_id'              => $order->get_id(),
-				'_stripe_local_payment' => $this->id,
-			),
-			$url
-		);
+		return parent::get_complete_payment_return_url( $order );
 	}
 
 	public function is_local_payment_available() {

@@ -44,6 +44,8 @@ class WC_Stripe_Frontend_Scripts {
 			$this->register_script( $handle, $src );
 		}
 
+		$this->assets_api->register_script( 'wc-stripe-vendors', 'assets/build/vendors.js' );
+
 		$this->register_script( 'form-handler', $this->assets_url( 'js/frontend/form-handler.js' ), array( 'jquery' ) );
 
 		// register scripts that aren't part of gateways
@@ -73,6 +75,9 @@ class WC_Stripe_Frontend_Scripts {
 				}
 			}());' );
 		}
+
+
+		wp_register_style( $this->prefix . 'styles', $this->assets_url( 'css/stripe.css' ), array(), stripe_wc()->version() );
 	}
 
 	public function localize_scripts() {
@@ -87,7 +92,11 @@ class WC_Stripe_Frontend_Scripts {
 				'stripeParams' => array(
 					'stripeAccount' => $account_id,
 					'apiVersion'    => '2022-08-01',
-					'betas'         => array()
+					'betas'         => array(
+						'deferred_intent_blik_beta_1',
+						'disable_deferred_intent_client_validation_beta_1',
+						'multibanco_pm_beta_1'
+					)
 				)
 			),
 			'wc_stripe_params_v3'

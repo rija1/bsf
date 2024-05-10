@@ -21,3 +21,51 @@ import './konbini';
 import './paynow';
 import './promptpay';
 import './swish';
+
+
+/**
+ *  * = upe @ = segregated
+ * affirm *@
+ * afterpay *@
+ * alipay *@
+ * bancontact *@
+ * becs *@
+ * blik *@
+ * boleto *@
+ * eps *@
+ * fpx *@
+ * giropay *@
+ * grabpay *@
+ * ideal *@
+ * klarna *@
+ * konbini *@
+ * multibanco *@
+ * oxxo *@
+ * p24 *@
+ * paynow *@
+ * promptpay *@
+ * sepa *@
+ * sofort *@
+ * swish *@
+ * wechat *@
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */

@@ -563,7 +563,7 @@ function wc_stripe_available_payment_gateways( $gateways ) {
 	if ( is_add_payment_method_page() && ! isset( $wp->query_vars['payment-methods'] ) ) {
 		foreach ( $gateways as $gateway ) {
 			if ( $gateway instanceof WC_Payment_Gateway_Stripe ) {
-				if ( 'stripe_cc' !== $gateway->id ) {
+				if ( ! in_array( $gateway->id, array( 'stripe_cc', 'stripe_upm' ) ) ) {
 					unset( $gateways[ $gateway->id ] );
 				}
 			}
@@ -1181,7 +1181,8 @@ function wc_stripe_get_error_messages() {
 			'ach_instant_only'                                    => __( 'Your payment could not be processed at this time because your bank account does not support instant verification.', 'woo-stripe-payment' ),
 			'payment_intent_konbini_rejected_confirmation_number' => __( 'The confirmation number was rejected by Konbini. Please try again.', 'woo-stripe-payment' ),
 			'payment_intent_payment_attempt_expired'              => __( 'The payment attempt for this payment method has expired. Please try again.', 'woo-stripe-payment' ),
-			'payment_intent_authentication_failure'               => __( 'We are unable to authenticate your payment method. Please choose a different payment method and try again.', 'woo-stripe-payment' )
+			'payment_intent_authentication_failure'               => __( 'We are unable to authenticate your payment method. Please choose a different payment method and try again.', 'woo-stripe-payment' ),
+			'payment_cancelled'                                   => __( 'Payment has been cancelled.', 'woo-stripe-payment' )
 		)
 	);
 }

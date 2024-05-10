@@ -90,6 +90,15 @@ class NewslettersRepository extends Repository {
       ->getSingleScalarResult());
   }
 
+  public function getCountOfEmailsWithWPPost(): int {
+    return intval($this->entityManager->createQueryBuilder()
+      ->select('COUNT(n.id)')
+      ->from(NewsletterEntity::class, 'n')
+      ->andWhere('n.wpPost IS NOT NULL')
+      ->getQuery()
+      ->getSingleScalarResult());
+  }
+
   /**
    * @return NewsletterEntity[]
    */
@@ -190,6 +199,7 @@ class NewslettersRepository extends Repository {
       'automation_emails_count' => $analyticsMap[NewsletterEntity::TYPE_AUTOMATION] ?? 0,
       're-engagement_emails_count' => $analyticsMap[NewsletterEntity::TYPE_RE_ENGAGEMENT] ?? 0,
       'sent_newsletters_count' => $analyticsMap[NewsletterEntity::TYPE_STANDARD] ?? 0,
+      'sent_newsletters_7_days' => $this->getStandardNewsletterSentCount(Carbon::now()->subDays(7)),
       'sent_newsletters_3_months' => $this->getStandardNewsletterSentCount(Carbon::now()->subMonths(3)),
       'sent_newsletters_30_days' => $this->getStandardNewsletterSentCount(Carbon::now()->subDays(30)),
       'first_purchase_emails_count' => $analyticsMap[NewsletterEntity::TYPE_AUTOMATIC][FirstPurchase::SLUG] ?? 0,
@@ -305,6 +315,13 @@ class NewslettersRepository extends Repository {
        WHERE q.`newsletter_id` IN (:ids)
     ", ['ids' => $ids], ['ids' => Connection::PARAM_INT_ARRAY]);
 
+    // Trash CPT.
+    $wpPostIds = $this->getWpPostIds($ids);
+
+    foreach ($wpPostIds as $wpPostId) {
+      wp_trash_post($wpPostId);
+    }
+
     return count($ids);
   }
 
@@ -345,6 +362,12 @@ class NewslettersRepository extends Repository {
        WHERE q.`newsletter_id` IN (:ids)
     ", ['ids' => $ids], ['ids' => Connection::PARAM_INT_ARRAY]);
 
+    // Untrash CPT.
+    $wpPostIds = $this->getWpPostIds($ids);
+
+    foreach ($wpPostIds as $wpPostId) {
+      wp_untrash_post($wpPostId);
+    }
     return count($ids);
   }
 
@@ -548,5 +571,21 @@ class NewslettersRepository extends Repository {
       ->getQuery()
       ->getSingleColumnResult();
     return array_map('intval', $ids);
+  }
+
+  public function getWpPostIds(array $ids): array {
+      /** @var string[] $wpPostIds */
+      $wpPostIds = $this->entityManager->createQueryBuilder()
+        ->select('IDENTITY(n.wpPost) AS id')
+        ->from(NewsletterEntity::class, 'n')
+        ->where('n.id IN (:ids)')
+        ->andWhere('n.wpPost IS NOT NULL')
+        ->setParameter('ids', $ids)
+        ->getQuery()
+        ->getSingleColumnResult();
+
+      $wpPostIds = array_map('intval', $wpPostIds);
+
+      return $wpPostIds;
   }
 }

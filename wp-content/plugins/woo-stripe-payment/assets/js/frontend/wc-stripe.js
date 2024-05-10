@@ -668,7 +668,7 @@
                 var obj = JSON.parse(window.atob(decodeURIComponent(match[1])));
                 if (obj && obj.hasOwnProperty('client_secret') && obj.gateway_id === this.gateway_id) {
                     history.pushState({}, '', window.location.pathname);
-                    if (obj.type === 'intent') {
+                    if (obj.type === 'payment_intent') {
                         this.handle_next_action(obj);
                     } else {
                         this.handle_payment_method_setup(obj);
@@ -1605,7 +1605,8 @@
             onClick: this.start.bind(this),
             buttonColor: this.params.button_color,
             buttonType: this.params.button_style,
-            buttonSizeMode: this.params.button_size_mode
+            buttonSizeMode: this.params.button_size_mode,
+            buttonRadius: parseInt(this.params.button_radius)
         };
         if (this.params.button_locale !== null) {
             options.buttonLocale = this.params.button_locale;
@@ -2018,7 +2019,7 @@
                 }
             },
             get: function get(prefix) {
-                return this.get('first_name', prefix) + ' ' + this.get('last_name', prefix);
+                return this.fields.get(prefix + '_first_name') + ' ' + this.fields.get(prefix + '_last_name');
             }
         };
     };

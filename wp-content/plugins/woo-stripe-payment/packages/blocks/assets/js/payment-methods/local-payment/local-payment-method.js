@@ -1,8 +1,7 @@
-import {useCallback} from '@wordpress/element';
-import {useElements, Elements} from "@stripe/react-stripe-js";
+import {Elements, PaymentElement} from "@stripe/react-stripe-js";
 import {initStripe as loadStripe, cartContainsSubscription, cartContainsPreOrder} from '../util'
-import {useAfterProcessLocalPayment, useValidateCheckout, useCreateSource} from "./hooks";
-import {useProcessCheckoutError} from "../hooks";
+import {useCreateSource} from "./hooks";
+import {useCreatePaymentMethod, useProcessCheckoutError, useProcessCheckoutSuccess} from "../hooks";
 
 /**
  * Return true if the local payment method can be used.
@@ -41,10 +40,25 @@ export const canMakePayment = (settings, callback = false) => ({billingAddress, 
     return canMakePayment;
 }
 
-export const LocalPaymentIntentContent = ({getData, ...props}) => {
+export const LocalPaymentIntentContent = (props) => {
+    const {getData, billing, cartData} = props;
+    const name = getData('name');
+    const {extensions} = cartData;
+    const {cartTotal, currency} = billing;
+
+    let ELEMENT_OPTIONS = {
+        mode: 'payment',
+        currency: currency?.code?.toLowerCase(),
+        ...extensions[name].elementOptions
+    }
+
+    if (['payment', 'subscription'].includes(ELEMENT_OPTIONS.mode)) {
+        ELEMENT_OPTIONS.amount = cartTotal.value;
+    }
+
     return (
-        <Elements stripe={loadStripe} options={getData('elementOptions')}>
-            <LocalPaymentIntentMethod {...{...props, getData}}/>
+        <Elements stripe={loadStripe} options={ELEMENT_OPTIONS}>
+            <PaymentMethodContent {...props}/>
         </Elements>
     )
 }
@@ -94,81 +108,68 @@ const LocalPaymentSourceMethod = (
     return null;
 }
 
-export const LocalPaymentIntentMethod = (
+const PaymentMethodContent = (
     {
         getData,
         billing,
         emitResponse,
+        shouldSavePayment,
         eventRegistration,
         activePaymentMethod,
-        confirmationMethod = null,
-        component = null,
-        callback = null,
-        shouldSavePayment = false,
-        ...props
+        shouldCreatePaymentMethod = true
     }) => {
-    const elements = useElements();
+    const name = getData('name');
+    const displayName = '';
     const {billingAddress} = billing;
-    const {onPaymentSetup, onCheckoutFail} = eventRegistration;
-    const getPaymentMethodArgs = useCallback((billingAddress) => {
-        if (component) {
-            return {
-                [getData('paymentType')]: elements.getElement(component)
-            }
-        } else if (callback) {
-            return callback(billingAddress);
-        }
-        return {};
-    }, [
-        elements,
-        callback
-    ]);
-    const {setIsValid} = useValidateCheckout({
-            subscriber: onPaymentSetup,
-            emitResponse,
-            component,
-            shouldSavePayment,
-            paymentMethodName: getData('name'),
-            msg: getData('i18n').empty_data
-        }
-    );
+    const {onCheckoutSuccess, onCheckoutFail} = eventRegistration;
 
-    useAfterProcessLocalPayment({
-        getData,
-        billingAddress,
-        eventRegistration,
-        emitResponse,
-        activePaymentMethod,
-        confirmationMethod,
-        getPaymentMethodArgs
-    });
+    const PAYMENT_ELEMENT_OPTIONS = {
+        defaultValues: {
+            billingDetails: {
+                phone: billingAddress.phone,
+                email: billingAddress.email,
+                name: `${billingAddress.first_name} ${billingAddress.last_name}`,
+                address: {
+                    country: billingAddress.country,
+                    state: billingAddress.state
+                }
+            }
+        },
+        fields: {
+            billingDetails: {address: 'never', name: 'never', email: 'never'}
+        },
+        wallets: {applePay: 'never', googlePay: 'never'},
+        ...getData('paymentElementOptions')
+    }
+
+
     useProcessCheckoutError({
         emitResponse,
         subscriber: onCheckoutFail,
         messageContext: emitResponse.noticeContexts.PAYMENTS
     });
-    if (component) {
-        const onChange = (event) => setIsValid(!event.empty)
-        return (
-            <LocalPaymentElementContainer
-                name={getData('name')}
-                options={getData('paymentElementOptions')}
-                onChange={onChange}
-                element={component}
-                callback={callback}
-                billing={billing}
-                {...props}/>
-        )
-    }
-    return null;
-}
 
-const LocalPaymentElementContainer = ({name, onChange, element, options, ...props}) => {
-    const Tag = element;
-    const displayName = Tag?.displayName || '';
+    useCreatePaymentMethod({
+        name,
+        emitResponse,
+        billingAddress,
+        shouldSavePayment,
+        eventRegistration,
+        shouldCreatePaymentMethod
+    });
+
+    useProcessCheckoutSuccess({
+        name,
+        emitResponse,
+        billingAddress,
+        onCheckoutSuccess,
+        activePaymentMethod,
+    });
+
+    const onChange = (event) => {
+    };
+
     return (
-        <div className={`wc-stripe-local-payment-container ${name} ${displayName}`}>
-            <Tag options={options} onChange={onChange} {...props}/>
-        </div>
+        <PaymentElement options={PAYMENT_ELEMENT_OPTIONS} onChange={onChange}/>
     )
 }

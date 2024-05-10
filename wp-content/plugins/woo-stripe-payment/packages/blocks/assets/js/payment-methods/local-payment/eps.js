@@ -2,7 +2,6 @@ import {registerPaymentMethod} from '@woocommerce/blocks-registry';
 import {getSettings} from "../util";
 import {canMakePayment, LocalPaymentIntentContent} from './local-payment-method';
 import {PaymentMethodLabel, PaymentMethod} from "../../components/checkout";
-import {EpsBankElement} from "@stripe/react-stripe-js";
 
 const getData = getSettings('stripe_eps_data');
 
@@ -18,8 +17,6 @@ if (getData()) {
         canMakePayment: canMakePayment(getData),
         content: <PaymentMethod
             content={LocalPaymentIntentContent}
-            confirmationMethod={'confirmEpsPayment'}
-            component={EpsBankElement}
             getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {

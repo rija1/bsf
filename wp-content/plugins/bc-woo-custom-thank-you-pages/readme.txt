@@ -6,7 +6,7 @@ Requires at least: 5.0
 Tested up to: 6.4.3
 WC tested up to: 8.6.1
 R equires PHP: 5.3
-Stable tag: 1.4.15
+Stable tag: 1.4.16
 
 Create thank you pages for all products, per products or per category
 

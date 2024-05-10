@@ -3,7 +3,6 @@ import {getSettings} from "../util";
 import {LocalPaymentIntentContent} from './local-payment-method';
 import {PaymentMethodLabel, PaymentMethod} from "../../components/checkout";
 import {canMakePayment} from "./local-payment-method";
-import {P24BankElement} from "@stripe/react-stripe-js";
 
 const getData = getSettings('stripe_p24_data');
 
@@ -17,11 +16,7 @@ if (getData()) {
         ariaLabel: 'P24',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            getData={getData}
-            confirmationMethod={'confirmP24Payment'}
-            component={P24BankElement}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: false,

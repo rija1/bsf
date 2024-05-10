@@ -4,7 +4,7 @@
  * Plugin Name: BC Woo Custom Thank You Pages
  * Plugin URI: https://www.binarycarpenter.com/app/bc-thank-you-page-builder-for-woocommerce/
  * Description: Helps you create custom thank you pages for products, categories
- * Version: 1.4.15
+ * Version: 1.4.16
  * Author: WooCommerce & WordPress Tutorials
  * Author URI: https://www.binarycarpenter.com
  * License: GPL2
@@ -281,14 +281,11 @@ class Initiator
     {
         add_shortcode(Shortcode::BCTK_FORMATTED_ORDER_TOTAL, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_formatted_order_total'));
         add_shortcode(Shortcode::BCTK_ORDER_DETAILS, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_order_details'));
-        // add_shortcode(Shortcode::BCTK_DATA, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_data'));
-        // add_shortcode(Shortcode::BCTK_CHANGES, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_changes'));
         add_shortcode(Shortcode::BCTK_ORDER_NUMBER, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_order_number'));
         add_shortcode(Shortcode::BCTK_ORDER_KEY, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_order_key'));
         add_shortcode(Shortcode::BCTK_CUSTOMER_ID, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_customer_id'));
         add_shortcode(Shortcode::BCTK_USER_ID, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_user_id'));
         add_shortcode(Shortcode::BCTK_USER, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_user'));
-        // add_shortcode(Shortcode::BCTK_ADDRESS_PROP, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_address_prop'));
         add_shortcode(Shortcode::BCTK_BILLING_DETAILS, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_billing_details'));
         add_shortcode(Shortcode::BCTK_BILLING_FIRST_NAME, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_billing_first_name'));
         add_shortcode(Shortcode::BCTK_BILLING_LAST_NAME, array('BinaryCarpenter\BC_TK\TK_Shortcode', 'bctk_billing_last_name'));

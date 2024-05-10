@@ -203,6 +203,24 @@ label.wc-stripe-label-payment-type:after {
     background-image: url(../img/sepa.svg);
 }
 
+.select2-container .select2-selection--single .wc-stripe-select2-container.stripe_sepa:before,
+.select2-results__options li.wc-stripe-select2-container.stripe_sepa:before,
+.select2-results__options li.wc-stripe-select2-container.stripe_sepa:before {
+    background-image: url(../img/sepa.svg);
+}
+
+.select2-container .select2-selection--single .wc-stripe-select2-container.stripe_upm.amazon_pay:before,
+.select2-results__options li.wc-stripe-select2-container.stripe_upm.amazon_pay:before,
+.select2-results__options li.wc-stripe-select2-container.stripe_upm.amazon_pay:before {
+    background-image: url(../img/amazon_pay.svg);
+}
+
+.select2-container .select2-selection--single .wc-stripe-select2-container.stripe_upm.revolut_pay:before,
+.select2-results__options li.wc-stripe-select2-container.stripe_upm.revolut_pay:before,
+.select2-results__options li.wc-stripe-select2-container.stripe_upm.revolut_pay:before {
+    background-image: url(../img/revolut_pay.svg);
+}
+
 .select2-results__options li.wc-stripe-select2-container.wc-stripe-ach:before,
 .select2-results__options li.wc-stripe-select2-container.stripe_becs:before,
 .select2-container .select2-selection--single .wc-stripe-select2-container.stripe_becs:before {
@@ -1311,4 +1329,8 @@ div.product .wc-stripe-bnpl-product-message {
 
 .wc-stripe-bnpl-cart-message-container:nth-of-type(n+2) {
     margin-top: 10px;
+}
+
+.woocommerce-checkout #payment ul.payment_methods li:not(.woocommerce-notice) div.wc-stripe-gateway-container li::before {
+    content: none;
 }

@@ -50,12 +50,13 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 		$order->update_meta_data( WC_Stripe_Constants::PAYMENT_METHOD_TOKEN, is_object( $intent->payment_method ) ? $intent->payment_method->id : $intent->payment_method );
 		$order->update_meta_data( WC_Stripe_Constants::MODE, wc_stripe_mode() );
 		$order->update_meta_data( WC_Stripe_Constants::PAYMENT_INTENT, WC_Stripe_Utils::sanitize_intent( $intent->toArray() ) );
+		$order->set_payment_method( $this->payment_method->id );
 		$order->save();
 
-		if ( $intent->status === 'requires_confirmation' ) {
+		if ( $intent->status === 'requires_confirmation' && $this->payment_method->process_server_side_confirmation( $intent, $order ) ) {
 			$intent = $this->gateway->paymentIntents->confirm(
 				$intent->id,
-				apply_filters( 'wc_stripe_payment_intent_confirmation_args', $this->payment_method->get_payment_intent_confirmation_args( $intent, $order ), $intent, $order )
+				apply_filters( 'wc_stripe_payment_intent_confirmation_args', $this->payment_method->get_payment_intent_confirmation_args( $intent, $order ), $intent, $order, $this->payment_method )
 			);
 			if ( is_wp_error( $intent ) ) {
 				$this->post_payment_process_error_handling( $intent, $order );
@@ -93,7 +94,7 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 				'redirect'         => $this->payment_method->get_return_url( $order ),
 			);
 		}
-		if ( in_array( $intent->status, array( 'requires_action', 'requires_payment_method', 'requires_source_action', 'requires_source' ), true ) ) {
+		if ( in_array( $intent->status, array( 'requires_action', 'requires_payment_method', 'requires_confirmation' ), true ) ) {
 			/**
 			 * Allow 3rd party code to alter the order status of an asynchronous payment method.
 			 * The plugin uses the charge.pending event to set the order's status to on-hold.
@@ -272,6 +273,9 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 				}
 			}
 			$result = false;
+		} elseif ( $intent && in_array( $intent->status, array( 'succeeded', 'requires_capture' ) ) ) {
+			// if the intent's status is succeeded or requires capture, this can't be updated.
+			$result = false;
 		} else {
 			$intent = ! $intent ? $order->get_meta( WC_Stripe_Constants::PAYMENT_INTENT ) : $intent;
 			if ( $intent ) {
@@ -368,7 +372,7 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 			$args['payment_method_types'] = array_values( array_unique( array_merge( $args['payment_method_types'], $intent->payment_method_types ) ) );
 		}
 
-		$this->payment_method->add_stripe_order_args( $args, $order );
+		$this->payment_method->add_stripe_order_args( $args, $order, $intent );
 
 		/**
 		 * @param array                    $args
@@ -474,13 +478,15 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 			if ( $intent->status === 'canceled' ) {
 				$intent = false;
 			} else {
-				if ( \in_array( $intent->status, array( 'succeeded', 'requires_capture', 'processing' ) ) && ! defined( WC_Stripe_Constants::REDIRECT_HANDLER ) ) {
-					/**
-					 * If the status is succeeded, and the order ID on the intent doesn't match this checkout's order ID, we know this is
-					 * a previously processed intent and so should not be used.
-					 */
-					if ( isset( $intent->metadata['order_id'] ) && $intent->metadata['order_id'] != $order->get_id() ) {
-						$intent = false;
+				if ( \in_array( $intent->status, array( 'succeeded', 'requires_capture', 'processing' ) ) ) {
+					if ( ! defined( WC_Stripe_Constants::REDIRECT_HANDLER ) ) {
+						/**
+						 * If the status is succeeded, and the order ID on the intent doesn't match this checkout's order ID, we know this is
+						 * a previously processed intent and so should not be used.
+						 */
+						if ( isset( $intent->metadata['order_id'] ) && $intent->metadata['order_id'] != $order->get_id() ) {
+							$intent = false;
+						}
 					}
 				} elseif ( $intent['confirmation_method'] != $this->payment_method->get_confirmation_method( $order ) ) {
 					$intent = false;
@@ -582,14 +588,7 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 		if ( $this->retry_count < 1 ) {
 			// $data can be an exception, so validate that it's an array.
 			if ( $data && is_array( $data ) ) {
-				if ( isset( $data['payment_intent'] ) ) {
-					if ( isset( $data['payment_intent']['status'] ) ) {
-						$result = in_array( $data['payment_intent']['status'], array( 'succeeded', 'requires_capture' ), true );
-						if ( $result ) {
-							$delete_data();
-						}
-					}
-				} elseif ( isset( $data['code'] ) ) {
+				if ( isset( $data['code'] ) ) {
 					if ( $data['code'] === 'resource_missing' ) {
 						if ( $data['param'] === 'customer' ) {
 							$create_customer();

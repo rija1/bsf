@@ -130,7 +130,7 @@ registerPaymentMethod({
     ariaLabel: 'Credit Cards',
     canMakePayment: () => loadStripe,
     content: <PaymentMethod content={CreditCardContent} getData={getData}/>,
-    savedTokenComponent: <SavedCardComponent getData={getData} method={'handleCardAction'}/>,
+    savedTokenComponent: <SavedCardComponent getData={getData} confirmation_method={'manual'}/>,
     edit: <PaymentMethod content={CreditCardContent} getData={getData}/>,
     supports: {
         showSavedCards: getData('showSavedCards'),

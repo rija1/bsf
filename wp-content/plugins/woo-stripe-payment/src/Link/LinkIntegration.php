@@ -78,7 +78,11 @@ class LinkIntegration {
 	}
 
 	private function register_assets() {
-		$this->assets->register_script( 'wc-stripe-link-checkout', 'assets/build/link-checkout.js', [ 'wc-stripe-external', 'wc-stripe-credit-card' ] );
+		$this->assets->register_script(
+			'wc-stripe-link-checkout',
+			'assets/build/link-checkout.js',
+			[ 'wc-stripe-external', 'wc-stripe-credit-card', 'wc-stripe-vendors' ]
+		);
 	}
 
 	public function get_supported_countries() {

@@ -34,6 +34,7 @@
 <% endblock %>
 
 <script type="text/javascript">
+  var mailpoet_wp_locale = "<%= get_locale() %>";
   var mailpoet_datetime_format = "<%= wp_datetime_format()|escape('js') %>";
   var mailpoet_date_format = "<%= wp_date_format()|escape('js') %>";
   var mailpoet_time_format = "<%= wp_time_format()|escape('js') %>";
@@ -98,6 +99,7 @@
   var mailpoet_email_volume_limit = <%= json_encode(email_volume_limit) %>;
   var mailpoet_email_volume_limit_reached = <%= json_encode(email_volume_limit_reached) %>;
   var mailpoet_capabilities = <%= json_encode(capabilities) %>;
+  var mailpoet_tier = <%= json_encode(tier) %>;
   var mailpoet_cdn_url = <%= json_encode(cdn_url("")) %>;
   var mailpoet_tags = <%= json_encode(tags) %>;
 

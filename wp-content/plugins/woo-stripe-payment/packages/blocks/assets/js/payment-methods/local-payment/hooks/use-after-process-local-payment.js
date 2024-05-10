@@ -43,6 +43,11 @@ export const useAfterProcessLocalPayment = (
                         if (result.error) {
                             throw new StripeError(result.error);
                         }
+
+                        const url = new URL(decodeURI(return_url));
+                        url.searchParams.append('payment_intent', result.paymentIntent.id);
+                        url.searchParams.append('payment_intent_client_secret', result.paymentIntent.client_secret);
+
                         if (result.paymentIntent.status === 'requires_action') {
                             if (['stripe_wechat', 'stripe_swish'].includes(activePaymentMethod)) {
                                 return ensureErrorResponse(
@@ -53,9 +58,8 @@ export const useAfterProcessLocalPayment = (
                                     }
                                 );
                             }
-                            window.location = decodeURI(order.order_received_url);
                         }
-                        window.location = decodeURI(order.order_received_url);
+                        window.location = decodeURI(url.toString());
                     }
                 } catch (e) {
                     console.log(e);

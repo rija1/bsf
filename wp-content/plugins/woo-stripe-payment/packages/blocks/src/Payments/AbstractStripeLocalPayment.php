@@ -3,6 +3,11 @@
 
 namespace PaymentPlugins\Blocks\Stripe\Payments;
 
+use Automattic\WooCommerce\StoreApi\Schemas\V1\CartSchema;
+use PaymentPlugins\Blocks\Stripe\StoreApi\EndpointData;
+use PaymentPlugins\Stripe\Controllers\PaymentIntent;
+use PaymentPlugins\Stripe\RequestContext;
+
 /**
  * Class AbstractLocalStripePayment
  *
@@ -65,6 +70,33 @@ abstract class AbstractStripeLocalPayment extends AbstractStripePayment {
 			'empty_data'        => __( 'Please enter your payment info before proceeding.', 'woo-stripe-payment' ),
 			'payment_cancelled' => __( 'Payment has been cancelled.', 'woo-stripe-payment' )
 		];
+	}
+
+	public function get_endpoint_data() {
+		$endpoint_data = new EndpointData();
+		$endpoint_data->set_namespace( $this->get_name() );
+		$endpoint_data->set_endpoint( CartSchema::IDENTIFIER );
+		$endpoint_data->set_schema_type( ARRAY_A );
+		$endpoint_data->set_data_callback( [ $this, 'get_cart_extension_data' ] );
+
+		return $endpoint_data;
+	}
+
+	public function get_cart_extension_data() {
+		$payment_intent_ctrl = PaymentIntent::instance();
+		$payment_intent_ctrl->set_request_context( new RequestContext( RequestContext::CHECKOUT ) );
+		if ( method_exists( $this->payment_method, 'get_payment_method_type' ) ) {
+			return [
+				'elementOptions' => array_merge(
+					$payment_intent_ctrl->get_element_options(),
+					[
+						'paymentMethodTypes' => [ $this->payment_method->get_payment_method_type() ]
+					]
+				)
+			];
+		}
+
+		return [];
 	}
 
 }

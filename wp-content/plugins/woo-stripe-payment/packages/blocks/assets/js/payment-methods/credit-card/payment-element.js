@@ -51,7 +51,6 @@ export const PaymentElementComponent = (props) => {
 const CardElement = ({options, ...props}) => {
     const [formComplete, setFormComplete] = useState(false);
     const installmentsActive = getData('installmentsActive')
-    const elements = useElements();
     const stripe = useStripe();
     const {billing: {billingAddress}, eventRegistration, emitResponse, shouldSavePayment} = props;
     const {email, phone, first_name, last_name} = billingAddress;
@@ -77,15 +76,6 @@ const CardElement = ({options, ...props}) => {
         messageContext: emitResponse.noticeContexts.PAYMENTS
     });
 
-    const getPaymentMethod = useCallback(async () => {
-        let paymentMethod = null;
-        const result = await createPaymentMethod();
-        if (result?.paymentMethod?.id) {
-            paymentMethod = result.paymentMethod.id;
-        }
-        return paymentMethod;
-    }, [createPaymentMethod]);
-
     const elementOptions = {
         defaultValues: {
             billingDetails: {
@@ -102,13 +92,14 @@ const CardElement = ({options, ...props}) => {
     return (
         <>
             <PaymentElement options={elementOptions} onChange={onChange}/>
-            {installmentsActive && <Installments
+            <Installments
+                active={installmentsActive}
                 i18n={i18n}
-                paymentMethodName={getData('name')}
+                paymentMethodType={'card'}
                 stripe={stripe}
                 cardFormComplete={formComplete}
-                getPaymentMethod={getPaymentMethod}
-                addPaymentMethodData={addPaymentMethodData}/>}
+                createPaymentMethod={createPaymentMethod}
+                onChange={(value) => addPaymentMethodData({_stripe_installment_plan: value})}/>
         </>
     )
 }

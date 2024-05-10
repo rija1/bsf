@@ -1,9 +1,9 @@
 === MailPoet - Newsletters, Email Marketing, and Automation ===
 Contributors: mailpoet, woocommerce, automattic
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
-Requires at least: 6.3
-Tested up to: 6.4
-Stable tag: 4.48.2
+Requires at least: 6.4
+Tested up to: 6.5
+Stable tag: 4.50.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -235,6 +235,18 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 4.50.0 - 2024-05-07 =
+* Improved: "Send email" automation step waits for the email to be queued before marking the step as completed;
+* Fixed: Previously, the association of orders to emails in the statistics was incorrect in some cases.
+
+= 4.49.1 - 2024-04-29 =
+* Improved: Add additional transactional email triggers;
+* Improved: new design of Segments listing page.
+
+= 4.49.0 - 2024-04-23 =
+* Fixed: manually confirming a subscriber in the UI doesn't trigger automations;
+* Fixed: some automation filter values rendering as "Unknown value".
 
 = 4.48.2 - 2024-04-08 =
 * Improved: 1-click unsubscribe headers for non MailPoet sending methods;

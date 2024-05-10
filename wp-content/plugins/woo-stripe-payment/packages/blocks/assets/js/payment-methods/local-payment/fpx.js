@@ -3,7 +3,6 @@ import {getSettings} from "../util";
 import {LocalPaymentIntentContent} from './local-payment-method';
 import {PaymentMethodLabel, PaymentMethod} from "../../components/checkout";
 import {canMakePayment} from "./local-payment-method";
-import {FpxBankElement} from "@stripe/react-stripe-js";
 
 const getData = getSettings('stripe_fpx_data');
 
@@ -17,11 +16,7 @@ if (getData()) {
         ariaLabel: 'FPX',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            getData={getData}
-            confirmationMethod={'confirmFpxPayment'}
-            component={FpxBankElement}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: false,

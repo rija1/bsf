@@ -1,0 +1,1 @@
+<?php return array('dependencies' => array('react', 'wc-blocks-checkout', 'wc-price-format', 'wc-settings', 'wp-api-fetch', 'wp-element', 'wp-plugins', 'wp-polyfill'), 'version' => 'a0fcb4490aeebed428bb');

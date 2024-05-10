@@ -5,10 +5,6 @@ import {PaymentMethodLabel, PaymentMethod} from "../../components/checkout";
 
 const getData = getSettings('stripe_sofort_data');
 
-const getConfirmationArgs = (billingAddress) => {
-    return {sofort: {country: billingAddress.country}};
-}
-
 if (getData()) {
     registerPaymentMethod({
         name: getData('name'),
@@ -19,11 +15,7 @@ if (getData()) {
         ariaLabel: 'Sofort',
         placeOrderButtonLabel: getData('placeOrderButtonLabel'),
         canMakePayment: canMakePayment(getData),
-        content: <PaymentMethod
-            content={LocalPaymentIntentContent}
-            confirmationMethod={'confirmSofortPayment'}
-            getData={getData}
-            callback={getConfirmationArgs}/>,
+        content: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         edit: <PaymentMethod content={LocalPaymentIntentContent} getData={getData}/>,
         supports: {
             showSavedCards: false,

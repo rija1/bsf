@@ -18,7 +18,6 @@ if (getData()) {
         canMakePayment: canMakePayment(getData),
         content: <PaymentMethod
             content={LocalPaymentIntentContent}
-            confirmationMethod={'confirmAlipayPayment'}
             getData={getData}/>,
         edit: <PaymentMethod
             content={LocalPaymentIntentContent}

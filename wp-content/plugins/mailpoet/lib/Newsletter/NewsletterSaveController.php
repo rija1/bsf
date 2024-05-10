@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Cron\Workers\SendingQueue\Tasks\Newsletter as NewsletterQueueTask;
+use MailPoet\EmailEditor\Engine\Patterns\Library\DefaultContent;
 use MailPoet\EmailEditor\Integrations\MailPoet\EmailEditor;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\NewsletterOptionEntity;
@@ -26,6 +27,7 @@ use MailPoet\NotFoundException;
 use MailPoet\Services\AuthorizedEmailsController;
 use MailPoet\Settings\SettingsController;
 use MailPoet\UnexpectedValueException;
+use MailPoet\Util\CdnAssetUrl;
 use MailPoet\Util\Security;
 use MailPoet\WP\Emoji;
 use MailPoet\WP\Functions as WPFunctions;
@@ -81,8 +83,7 @@ class NewsletterSaveController {
   /*** @var NewsletterCoupon */
   private $newsletterCoupon;
 
-  /** @var EmailEditor */
-  private $emailEditor;
+  private CdnAssetUrl $cdnAssetUrl;
 
   public function __construct(
     AuthorizedEmailsController $authorizedEmailsController,
@@ -101,7 +102,7 @@ class NewsletterSaveController {
     ApiDataSanitizer $dataSanitizer,
     Scheduler $scheduler,
     NewsletterCoupon $newsletterCoupon,
-    EmailEditor $emailEditor
+    CdnAssetUrl $cdnAssetUrl
   ) {
     $this->authorizedEmailsController = $authorizedEmailsController;
     $this->emoji = $emoji;
@@ -119,7 +120,7 @@ class NewsletterSaveController {
     $this->dataSanitizer = $dataSanitizer;
     $this->scheduler = $scheduler;
     $this->newsletterCoupon = $newsletterCoupon;
-    $this->emailEditor = $emailEditor;
+    $this->cdnAssetUrl = $cdnAssetUrl;
   }
 
   public function save(array $data = []): NewsletterEntity {
@@ -466,7 +467,7 @@ class NewsletterSaveController {
     }
 
     $newPostId = $this->wp->wpInsertPost([
-      'post_content' => $this->emailEditor->getEmailDefaultContent(),
+      'post_content' => $this->getEmailDefaultContent(),
       'post_type' => EmailEditor::MAILPOET_EMAIL_POST_TYPE,
       'post_status' => 'draft',
       'post_author' => $this->wp->getCurrentUserId(),
@@ -474,5 +475,10 @@ class NewsletterSaveController {
     ]);
     $newsletter->setWpPost($this->entityManager->getReference(WpPostEntity::class, $newPostId));
     $this->entityManager->flush();
+  }
+
+  private function getEmailDefaultContent(): string {
+    $defaultPattern = new DefaultContent($this->cdnAssetUrl);
+    return $defaultPattern->getProperties()['content'];
   }
 }

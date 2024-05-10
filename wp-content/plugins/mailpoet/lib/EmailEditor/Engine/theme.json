@@ -17,7 +17,7 @@
       "units": ["px"],
       "blockGap": true,
       "padding": true,
-      "margin": false,
+      "margin": true,
       "spacingSizes": [
         {
           "name": "1",
@@ -60,6 +60,7 @@
     "typography": {
       "dropCap": false,
       "fontWeight": true,
+      "lineHeight": true,
       "fontFamilies": [
         {
           "name": "Arial",
@@ -176,6 +177,28 @@
           "slug": "pacifico",
           "fontFamily": "Pacifico, 'Arial Narrow', Arial, sans-serif"
         }
+      ],
+      "fontSizes": [
+        {
+          "name": "small",
+          "size": "13px",
+          "slug": "small"
+        },
+        {
+          "name": "medium",
+          "size": "16px",
+          "slug": "medium"
+        },
+        {
+          "name": "large",
+          "size": "28px",
+          "slug": "large"
+        },
+        {
+          "name": "extra-large",
+          "size": "42px",
+          "slug": "x-large"
+        }
       ]
     },
     "useRootPaddingAwareAlignments": true
@@ -191,15 +214,63 @@
       }
     },
     "color": {
-      "background": {
-        "layout": "#f0f0f0",
-        "content": "#ffffff"
-      },
+      "background": "#f0f0f0",
       "text": "#000000"
     },
     "typography": {
       "fontFamily": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-      "fontSize": "16px"
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "fontStyle": "normal",
+      "letterSpacing": "0",
+      "lineHeight": "1.5",
+      "textDecoration": "none",
+      "textTransform": "none"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+          "fontWeight": "400",
+          "fontStyle": "normal",
+          "lineHeight": "1.5"
+        },
+        "color": {
+          "text": "#000000"
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontSize": "42px",
+          "fontWeight": "700",
+          "fontStyle": "normal"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "42px"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "28px"
+        }
+      },
+      "h4": {
+        "typography": {
+          "fontSize": "16px"
+        }
+      },
+      "h5": {
+        "typography": {
+          "fontSize": "13px"
+        }
+      },
+      "h6": {
+        "typography": {
+          "fontSize": "13px"
+        }
+      }
     }
   }
 }
