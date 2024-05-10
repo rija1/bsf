@@ -126,6 +126,11 @@ footer .footer_block {
      object-position: 0% 44%;
 }
 
+.page-id-74 .page_featured_img_title_group img {
+  -o-object-position: 0% 42%;
+     object-position: 0% 42%;
+}
+
 @media (min-width: 600px) {
   .wp-block-navigation__responsive-container-open:not(.always-shown) {
     display: -webkit-box;
