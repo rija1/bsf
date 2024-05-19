@@ -296,7 +296,7 @@ object-position: 0% 42%;
     margin: 0 auto;
     max-width: 900px;
     // border-bottom: 4px solid $colour_yellow;
-    @media (min-width: 900px) {
+    @media (max-width: 900px) {
         position: unset;
         max-width: auto;
         h1.has-background {

@@ -156,7 +156,7 @@ footer .footer_block {
   max-width: 900px;
 }
 
-@media (min-width: 900px) {
+@media (max-width: 900px) {
   .page_title {
     position: unset;
     max-width: auto;
