@@ -28,7 +28,7 @@
 class Visualizer_Plugin {
 
 	const NAME = 'visualizer';
-	const VERSION = '3.10.15';
+	const VERSION = '3.11.1';
 
 	// custom post types
 	const CPT_VISUALIZER = 'visualizer';

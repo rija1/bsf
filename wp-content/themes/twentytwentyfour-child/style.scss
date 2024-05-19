@@ -210,6 +210,11 @@ footer .footer_block {
         6vw 6vw;
 }
 
+// Fixes bug on left/right aligned images
+.wp-container-core-post-content-is-layout-1.wp-container-core-post-content-is-layout-1 > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+    max-width: none !important;
+}
+
 // WPForms Submit button
 .page div.wpforms-container-full button[type="submit"]:not(:hover):not(:active).contact_form_submit {
     background: $colour_darkblue;

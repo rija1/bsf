@@ -1,0 +1,8 @@
+.wc-stripe-blocks-payment-method__desc + .wc-stripe-blocks-payment-method-content {
+  margin-top: 10px;
+}
+
+.wc-stripe-blocks-payment-method__desc + .wc-stripe-blocks-payment-method-content.no-content {
+  margin-top: 0;
+}
+/*# sourceMappingURL=styles.css.map */
