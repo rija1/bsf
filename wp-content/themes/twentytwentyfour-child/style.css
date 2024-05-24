@@ -171,6 +171,21 @@ footer .footer_block {
      object-position: 0 63%;
 }
 
+.page-id-343 {
+  -o-object-position: 0 38%;
+     object-position: 0 38%;
+}
+
+.page-id-343 {
+  -o-object-position: 0 37%;
+     object-position: 0 37%;
+}
+
+.page-id-61 {
+  -o-object-position: 0 39%;
+     object-position: 0 39%;
+}
+
 @media (min-width: 600px) {
   .wp-block-navigation__responsive-container-open:not(.always-shown) {
     display: -webkit-box;
