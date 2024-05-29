@@ -125,53 +125,53 @@ header {
 // Header pattern background
 header {
 
-    background: #FFEFBA;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    // background: #FFEFBA;  /* fallback for old browsers */
+    // background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
 
-    // background:
-    //     linear-gradient(
-    //         45deg,
-    //         #0000 calc(25% / 3),
-    //         #ffffff 0 calc(50% / 3),
-    //         #0000 0 calc(250% / 3),
-    //         #ffffff 0 calc(275% / 3),
-    //         #0000 0
-    //     ),
-    //     linear-gradient(
-    //         45deg,
-    //         #ffffff calc(25% / 3),
-    //         #0000 0 calc(50% / 3),
-    //         #ffffff 0 25%,
-    //         #0000 0 75%,
-    //         #ffffff 0 calc(250% / 3),
-    //         #0000 0 calc(275% / 3),
-    //         #ffffff 0
-    //     ),
-    //     linear-gradient(
-    //         -45deg,
-    //         #0000 calc(25% / 3),
-    //         #ffffff 0 calc(50% / 3),
-    //         #0000 0 calc(250% / 3),
-    //         #ffffff 0 calc(275% / 3),
-    //         #0000 0
-    //     ),
-    //     linear-gradient(
-    //             -45deg,
-    //             #ffffff calc(25% / 3),
-    //             #0000 0 calc(50% / 3),
-    //             #ffffff 0 25%,
-    //             #0000 0 75%,
-    //             #ffffff 0 calc(250% / 3),
-    //             #0000 0 calc(275% / 3),
-    //             #ffffff 0
-    //         )
-    //         #fafafa;
-    // background-size: 12vw 12vw;
-    // background-position:
-    //     0 0,
-    //     6vw 6vw;
+    background:
+        linear-gradient(
+            45deg,
+            #0000 calc(25% / 3),
+            #ffffff 0 calc(50% / 3),
+            #0000 0 calc(250% / 3),
+            #ffffff 0 calc(275% / 3),
+            #0000 0
+        ),
+        linear-gradient(
+            45deg,
+            #ffffff calc(25% / 3),
+            #0000 0 calc(50% / 3),
+            #ffffff 0 25%,
+            #0000 0 75%,
+            #ffffff 0 calc(250% / 3),
+            #0000 0 calc(275% / 3),
+            #ffffff 0
+        ),
+        linear-gradient(
+            -45deg,
+            #0000 calc(25% / 3),
+            #ffffff 0 calc(50% / 3),
+            #0000 0 calc(250% / 3),
+            #ffffff 0 calc(275% / 3),
+            #0000 0
+        ),
+        linear-gradient(
+                -45deg,
+                #ffffff calc(25% / 3),
+                #0000 0 calc(50% / 3),
+                #ffffff 0 25%,
+                #0000 0 75%,
+                #ffffff 0 calc(250% / 3),
+                #0000 0 calc(275% / 3),
+                #ffffff 0
+            )
+            #fafafa;
+    background-size: 12vw 12vw;
+    background-position:
+        0 0,
+        6vw 6vw;
 }
 
 // Footer
