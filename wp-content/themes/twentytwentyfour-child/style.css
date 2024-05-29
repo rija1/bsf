@@ -45,8 +45,11 @@ a {
 
 h1.has-background {
   bottom: 0px;
-  border-top-right-radius: 13px;
-  border-top-left-radius: 13px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 15px;
+  /* border-radius: 0; */
+  padding-right: 15px;
 }
 
 /* Header */
@@ -89,9 +92,12 @@ header nav .wp-block-navigation
 }
 
 header {
-  background: linear-gradient(45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0), linear-gradient(-45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(-45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0) #fafafa;
-  background-size: 12vw 12vw;
-  background-position: 0 0, 6vw 6vw;
+  background: #FFEFBA;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#FFFFFF), to(#FFEFBA));
+  background: linear-gradient(to right, #FFFFFF, #FFEFBA);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 footer .footer_block {
@@ -149,9 +155,10 @@ footer .footer_block {
 
 .page_title {
   position: absolute;
-  top: 240px;
-  left: 0;
-  right: 0;
+  top: 209px;
+  left: 20px;
+  border-radius: 0;
+  border: none;
   margin: 0 auto;
   max-width: 900px;
 }
