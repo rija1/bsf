@@ -78,6 +78,10 @@ h1.has-background {
 }
 
 header {
+    .bsf-site-title {
+        word-spacing: 3px;
+    }
+
     .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
         background-color: $colour_red;
     }
@@ -124,11 +128,9 @@ header {
 
 // Header pattern background
 header {
-
     // background: #FFEFBA;  /* fallback for old browsers */
     // background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
     // background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
 
     background:
         linear-gradient(
@@ -221,7 +223,8 @@ footer .footer_block {
 }
 
 // Fixes bug on left/right aligned images
-.wp-container-core-post-content-is-layout-1.wp-container-core-post-content-is-layout-1 > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+.wp-container-core-post-content-is-layout-1.wp-container-core-post-content-is-layout-1
+    > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
     max-width: none !important;
 }
 
@@ -236,6 +239,7 @@ footer .footer_block {
 }
 
 .page_content {
+    position: relative;
     // background-color: $colour_lightyellow;
 }
 
@@ -279,7 +283,7 @@ footer .footer_block {
 }
 // What we do page - featured img
 .page-id-74 .page_featured_img_title_group img {
-object-position: 0% 42%;
+    object-position: 0% 42%;
 }
 
 @media (min-width: 600px) {
@@ -299,13 +303,9 @@ object-position: 0% 42%;
     // padding-bottom: 30px;
     // background: #eee;
     position: absolute;
-    top: 209px;
-    left: 20px;
-    border-radius: 0;
-    border: none;
-    margin: 0 auto;
-    max-width: 900px;
-    
+    top: -100px;
+    height: 78px;
+
     // border-bottom: 4px solid $colour_yellow;
     @media (max-width: 900px) {
         position: unset;
@@ -313,7 +313,7 @@ object-position: 0% 42%;
         h1.has-background {
             border-top-left-radius: none !important;
         }
-    } 
+    }
 }
 
 // Background position of pages featured img
@@ -326,7 +326,6 @@ object-position: 0% 42%;
 .page-id-343 {
     object-position: 0 55%;
 }
-
 
 // Shree School
 .page-id-343 {

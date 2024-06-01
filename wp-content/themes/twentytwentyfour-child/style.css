@@ -53,6 +53,10 @@ h1.has-background {
 }
 
 /* Header */
+header .bsf-site-title {
+  word-spacing: 3px;
+}
+
 header .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
   background-color: #d8613c;
 }
@@ -103,12 +107,17 @@ footer .footer_block {
   background-position: 0 0, 6vw 6vw;
 }
 
-.wp-container-core-post-content-is-layout-1.wp-container-core-post-content-is-layout-1 > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+.wp-container-core-post-content-is-layout-1.wp-container-core-post-content-is-layout-1
+> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
   max-width: none !important;
 }
 
 .page div.wpforms-container-full button[type="submit"]:not(:hover):not(:active).contact_form_submit {
   background: #137088;
+}
+
+.page_content {
+  position: relative;
 }
 
 .wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open {
@@ -152,12 +161,8 @@ footer .footer_block {
 
 .page_title {
   position: absolute;
-  top: 209px;
-  left: 20px;
-  border-radius: 0;
-  border: none;
-  margin: 0 auto;
-  max-width: 900px;
+  top: -100px;
+  height: 78px;
 }
 
 @media (max-width: 900px) {
