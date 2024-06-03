@@ -82,7 +82,6 @@ header nav .wp-block-navigation__responsive-container.is-menu-open
   font-weight: 900;
   padding: 5px;
   display: block;
-  color: #137088;
   background-color: #fff;
 }
 
@@ -92,7 +91,6 @@ header nav .wp-block-navigation
   display: block;
   margin-top: 5px;
   font-weight: 900;
-  color: #6c97b4;
 }
 
 header {
