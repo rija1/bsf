@@ -354,6 +354,8 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 
 		if ( ( $customer_id = wc_stripe_get_customer_id( $order->get_customer_id() ) ) ) {
 			$args['customer'] = $customer_id;
+		} elseif ( ( $customer_id = $order->get_meta( WC_Stripe_Constants::CUSTOMER_ID ) ) ) {
+			$args['customer'] = $customer_id;
 		}
 
 		if ( $this->payment_method->should_save_payment_method( $order )
@@ -423,14 +425,21 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 	 */
 	public function void_charge( $order ) {
 		// fetch the intent and check its status
-		$payment_intent = $this->gateway->paymentIntents->mode( wc_stripe_order_mode( $order ) )->retrieve( $order->get_meta( WC_Stripe_Constants::PAYMENT_INTENT_ID ) );
+		$payment_intent = $this->gateway->mode( $order )->paymentIntents->retrieve( $order->get_meta( WC_Stripe_Constants::PAYMENT_INTENT_ID ) );
 		if ( is_wp_error( $payment_intent ) ) {
 			return $payment_intent;
 		}
 		$statuses = array( 'requires_payment_method', 'requires_capture', 'requires_confirmation', 'requires_action' );
 		if ( 'canceled' !== $payment_intent->status ) {
 			if ( in_array( $payment_intent->status, $statuses ) ) {
-				return $this->gateway->paymentIntents->mode( wc_stripe_order_mode( $order ) )->cancel( $payment_intent->id );
+				// update the charge with metadata so we know this cancellation request originates from the plugin.
+				$this->gateway->charges->update( $order->get_transaction_id(), array(
+					'metadata' => array(
+						'cancellation_via' => 'woocommerce_admin'
+					)
+				) );
+
+				return $this->gateway->paymentIntents->cancel( $payment_intent->id );
 			} elseif ( 'succeeded' === $payment_intent->status ) {
 				return $this->process_refund( $order, $order->get_total() - $order->get_total_refunded() );
 			}
@@ -465,14 +474,14 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 	 * @param WC_Order $order
 	 */
 	public function can_use_payment_intent( $order ) {
-		$intent         = $order->get_meta( WC_Stripe_Constants::PAYMENT_INTENT );
-		$session_intent = (array) WC_Stripe_Utils::get_payment_intent_from_session();
+		$payment_intent_id = $order->get_meta( WC_Stripe_Constants::PAYMENT_INTENT_ID );
+		$session_intent    = (array) WC_Stripe_Utils::get_payment_intent_from_session();
 		if ( $session_intent ) {
-			if ( ! $intent || $session_intent['id'] !== $intent['id'] ) {
-				$intent = $session_intent;
+			if ( ! $payment_intent_id || $session_intent['id'] !== $payment_intent_id ) {
+				$payment_intent_id = $session_intent['id'];
 			}
 		}
-		$intent = $intent ? $this->gateway->paymentIntents->retrieve( $intent['id'], apply_filters( 'wc_stripe_payment_intent_retrieve_args', array( 'expand' => array( 'payment_method' ) ), $order, $intent['id'] ) ) : false;
+		$intent = $payment_intent_id ? $this->gateway->paymentIntents->retrieve( $payment_intent_id, apply_filters( 'wc_stripe_payment_intent_retrieve_args', array( 'expand' => array( 'payment_method' ) ), $order, $payment_intent_id ) ) : false;
 		if ( $intent && ! is_wp_error( $intent ) ) {
 			// If an intent is cancelled, then it's likely that it timed out and can't be used.
 			if ( $intent->status === 'canceled' ) {
@@ -625,8 +634,9 @@ class WC_Stripe_Payment_Intent extends WC_Stripe_Payment {
 	 */
 	public function post_payment_process_error_handling( $error, $order ) {
 		$data = $error->get_error_data();
-		if ( isset( $data['payment_intent'] ) ) {
-			WC_Stripe_Utils::save_payment_intent_to_session( $data['payment_intent'], $order );
+		if ( isset( $data['code'] ) && $data['code'] === 'payment_intent_invalid_parameter' ) {
+			$order->delete_meta_data( WC_Stripe_Constants::PAYMENT_INTENT_ID );
+			$order->save();
 		}
 	}
 

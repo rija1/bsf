@@ -14,9 +14,7 @@ if ( ! class_exists( 'WC_Payment_Gateway_Stripe_Local_Payment' ) ) {
  */
 class WC_Payment_Gateway_Stripe_Konbini extends WC_Payment_Gateway_Stripe_Local_Payment {
 
-	use WC_Stripe_Local_Payment_Intent_Trait {
-		get_payment_intent_checkout_params as get_payment_intent_checkout_params_v1;
-	}
+	use WC_Stripe_Local_Payment_Intent_Trait;
 
 	use WC_Stripe_Voucher_Payment_Trait;
 
@@ -50,7 +48,7 @@ class WC_Payment_Gateway_Stripe_Konbini extends WC_Payment_Gateway_Stripe_Local_
 					return $carry;
 				}, array() ),
 				'desc_tip'    => true,
-				'description' => __( 'The number of days before the Boleto voucher expires.', 'woo-stripe-payment' )
+				'description' => __( 'The number of days before the voucher expires.', 'woo-stripe-payment' )
 			),
 			'email_link'      => array(
 				'title'       => __( 'Voucher Link In Email', 'woo-stripe-payment' ),
@@ -74,6 +72,7 @@ class WC_Payment_Gateway_Stripe_Konbini extends WC_Payment_Gateway_Stripe_Local_
 
 	public function get_payment_intent_confirmation_args( $intent, $order ) {
 		return array(
+			'return_url'             => $this->get_complete_payment_return_url( $order ),
 			'payment_method_options' => array(
 				'konbini' => array(
 					'confirmation_number' => $this->sanitize_confirmation_number( $order->get_billing_phone() )
@@ -90,20 +89,6 @@ class WC_Payment_Gateway_Stripe_Konbini extends WC_Payment_Gateway_Stripe_Local_
 	 */
 	private function sanitize_confirmation_number( $value ) {
 		return preg_replace( '/[^\d]/', '', $value );
-	}
-
-	protected function get_payment_intent_checkout_params( $intent, $order, $type ) {
-		$params                        = $this->get_payment_intent_checkout_params_v1( $intent, $order, $type );
-		$params['billing_phone']       = $this->sanitize_confirmation_number( $order->get_billing_phone() );
-		$params['confirmation_number'] = rand( 10000000000, 99999999999 );
-
-		return $params;
-	}
-
-	public function get_local_payment_description() {
-		$this->local_payment_description = wc_stripe_get_template_html( 'checkout/konbini-instructions.php', array( 'button_text' => $this->order_button_text ) );
-
-		return parent::get_local_payment_description();
 	}
 
 	public function validate_local_payment_available( $currency, $billing_country, $total ) {

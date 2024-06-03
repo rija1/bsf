@@ -18,6 +18,9 @@ class WC_Payment_Token_Stripe_Local extends WC_Payment_Token_Stripe {
 	protected $stripe_data = array( 'gateway_title' => '' );
 
 	public function details_to_props( $details ) {
+		if ( isset( $details['type'] ) ) {
+			$this->set_brand( $details['type'] );
+		}
 	}
 
 	public function set_gateway_title( $value ) {

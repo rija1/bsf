@@ -328,7 +328,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			}
 		}
 		//if ( ! empty( stripe_wc()->scripts()->enqueued_scripts ) ) {
-			$this->enqueue_payment_method_styles();
+		$this->enqueue_payment_method_styles();
 		//}
 	}
 
@@ -448,7 +448,9 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 	 * @return array
 	 */
 	public function get_localized_params() {
+		$page = wc_stripe_get_current_page();
 		$data = array(
+			'page'                  => $page,
 			'gateway_id'            => $this->id,
 			'api_key'               => wc_stripe_get_publishable_key(),
 			'saved_method_selector' => '[name="' . $this->saved_method_key . '"]',
@@ -478,8 +480,25 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			'country_code'          => wc_get_base_location()['country'],
 			'user_id'               => get_current_user_id(),
 			'description'           => $this->get_description(),
-			'elementOptions'        => $this->get_element_options()
+			'elementOptions'        => $this->get_element_options(),
+			'confirmParams'         => array(
+				'return_url' => \PaymentPlugins\Stripe\Utilities\PaymentMethodUtils::create_return_url( $this, $page )
+			),
+			'paymentElementOptions' => $this->get_payment_element_options()
 		);
+
+		$ip_address                            = WC_Geolocation::get_ip_address();
+		$user_agent                            = wc_get_user_agent();
+		$data['confirmParams']['mandate_data'] = array(
+			'customer_acceptance' => [
+				'type'   => 'online',
+				'online' => [
+					'ip_address' => $ip_address ? $ip_address : \WC_Geolocation::get_external_ip_address(),
+					'user_agent' => $user_agent ? $user_agent : 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' )
+				]
+			]
+		);
+
 		global $wp;
 		if ( isset( $wp->query_vars['order-pay'] ) ) {
 			$data['order_id']  = absint( $wp->query_vars['order-pay'] );
@@ -487,6 +506,10 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 		}
 
 		return $data;
+	}
+
+	public function get_payment_element_options() {
+		return array();
 	}
 
 	/**
@@ -1092,14 +1115,17 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 		$user_id     = $order->get_customer_id();
 		$customer_id = wc_stripe_get_customer_id( $user_id, $mode );
 		if ( ! $customer_id ) {
-			$response = WC_Stripe_Customer_Manager::instance()->create_customer( new WC_Customer( $user_id, ! $user_id ), $mode );
-			if ( ! is_wp_error( $response ) ) {
-				$payment_details = null;
-				$customer_id     = $response->id;
-				if ( $user_id ) {
-					wc_stripe_save_customer( $customer_id, $user_id, $mode );
-				} else {
-					$order->update_meta_data( WC_Stripe_Constants::CUSTOMER_ID, $customer_id );
+			$customer_id = $order->get_meta( WC_Stripe_Constants::CUSTOMER_ID );
+			if ( ! $customer_id ) {
+				$response = WC_Stripe_Customer_Manager::instance()->create_customer( new WC_Customer( $user_id, ! $user_id ), $mode );
+				if ( ! is_wp_error( $response ) ) {
+					$payment_details = null;
+					$customer_id     = $response->id;
+					if ( $user_id ) {
+						wc_stripe_save_customer( $customer_id, $user_id, $mode );
+					} else {
+						$order->update_meta_data( WC_Stripe_Constants::CUSTOMER_ID, $customer_id );
+					}
 				}
 			}
 		}
@@ -1923,10 +1949,13 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 		$token = $this->get_token( $this->payment_method_token, $subscription->get_user_id() );
 
 		// update the meta data needed by the gateway to process a subscription payment.
-		$subscription->set_payment_method( $token->get_gateway_id() );
+		if ( $token ) {
+			$subscription->set_payment_method( $token->get_gateway_id() );
+			$subscription->update_meta_data( WC_Stripe_Constants::CUSTOMER_ID, $token->get_customer_id() );
+			$subscription->set_payment_method_title( $token->get_payment_method_title() );
+		}
+
 		$subscription->update_meta_data( WC_Stripe_Constants::PAYMENT_METHOD_TOKEN, $this->payment_method_token );
-		$subscription->update_meta_data( WC_Stripe_Constants::CUSTOMER_ID, $token->get_customer_id() );
-		$subscription->set_payment_method_title( $token->get_payment_method_title() );
 		$subscription->save();
 
 		return array( 'result' => 'success', 'redirect' => wc_get_page_permalink( 'myaccount' ) );
@@ -1956,7 +1985,18 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 	 * @return mixed|void
 	 */
 	public function get_element_options( $options = array() ) {
-		$options = array_merge( array( 'locale' => wc_stripe_get_site_locale() ), $options );
+		$options = array_merge(
+			array( 'locale' => wc_stripe_get_site_locale() ),
+			\PaymentPlugins\Stripe\Controllers\PaymentIntent::instance()->get_element_options(),
+			$options
+		);
+		if ( $this->get_payment_method_type() ) {
+			$options = array_merge(
+				array( 'paymentMethodTypes' => array( $this->get_payment_method_type() ) ),
+				$options
+			);
+		}
+
 
 		return apply_filters( 'wc_stripe_get_element_options', $options, $this );
 	}

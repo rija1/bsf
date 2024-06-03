@@ -52,6 +52,15 @@ return array(
 		'description' => __( 'Leave blank if you don\'t want a description to show for the gateway.', 'woo-stripe-payment' ),
 		'desc_tip'    => true,
 	),
+	'save_card_enabled'                 => array(
+		'type'        => 'checkbox',
+		'value'       => 'yes',
+		'default'     => 'yes',
+		'title'       => __( 'Allow Payment Method Save', 'woo-stripe-payment' ),
+		'desc_tip'    => true,
+		'description' => __( 'If enabled, a checkbox will be available on the checkout page allowing your customers to save their payment method. The payment methods are stored securely in Stripe\'s vault and never touch your server. Note: if the cart contains a subscription, there will be no checkbox because the payment method will be saved automatically.',
+			'woo-stripe-payment' ),
+	),
 	'test_payment_methods'              => array(
 		'type'    => 'payment_methods',
 		'title'   => __( 'Payment Methods (Test)', 'woo-stripe-payment' ),

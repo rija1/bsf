@@ -81,7 +81,7 @@ class LinkIntegration {
 		$this->assets->register_script(
 			'wc-stripe-link-checkout',
 			'assets/build/link-checkout.js',
-			[ 'wc-stripe-external', 'wc-stripe-credit-card', 'wc-stripe-vendors' ]
+			[ 'wc-stripe-credit-card', 'wc-stripe-checkout-modules' ]
 		);
 	}
 

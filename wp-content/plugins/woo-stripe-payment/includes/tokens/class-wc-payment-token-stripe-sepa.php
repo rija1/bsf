@@ -111,7 +111,7 @@ class WC_Payment_Token_Stripe_Sepa extends WC_Payment_Token_Stripe_Local {
 	public function get_payment_method_type() {
 		$value = $this->get_prop( 'payment_method_type' );
 
-		return $value ?? 'sepa_debit';
+		return empty( $value ) ?? 'sepa_debit';
 	}
 
 	public function save_payment_method() {

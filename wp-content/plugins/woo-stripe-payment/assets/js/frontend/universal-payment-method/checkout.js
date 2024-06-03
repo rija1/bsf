@@ -1,11 +1,5 @@
-import UPECheckoutGateway from './checkout-gateway';
+import {CheckoutGateway, registerPaymentMethod} from '@paymentplugins/wc-stripe/checkout';
 
-class UniversalPaymentMethod {
-
-    constructor(gateway, params) {
-        this.gateway = gateway;
-        this.params = params;
-    }
-}
-
-new UniversalPaymentMethod(new UPECheckoutGateway(wc_stripe_upm_checkout_params), wc_stripe_upm_checkout_params);
+registerPaymentMethod(
+    new CheckoutGateway(wc_stripe_upm_checkout_params, '#wc-stripe-upm-element')
+)

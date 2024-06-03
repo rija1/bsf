@@ -113,7 +113,7 @@ class WC_Stripe_Controller_Payment_Intent extends WC_Stripe_Rest_Controller {
 				throw new Exception( $intent->get_error_message() );
 			}
 
-			$response = array( 'intent' => array( 'client_secret' => $intent->client_secret ) );
+			$response = array( 'intent' => $intent );
 
 			$context = new \PaymentPlugins\Stripe\RequestContext( $request->get_param( 'context' ) );
 

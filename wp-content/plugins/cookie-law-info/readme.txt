@@ -1,15 +1,15 @@
 === CookieYes - Cookie Banner for Cookie Consent (Easy to setup GDPR/CCPA Compliant Cookie Notice) ===
 Contributors: webtoffee, cookieyesdev
 Donate link: https://www.cookieyes.com/ 
-Tags: GDPR, CCPA, cookie notice, DSGVO, cookie consent, cookie notice, cookie banner, eu cookie law, cookieyes, eprivacy, gdpr consent
+Tags: GDPR, CCPA, cookie notice, DSGVO, cookie consent, cookie banner, eu cookie law, cookieyes, eprivacy, gdpr consent
 Requires at least: 5.0.0
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 3.2.2
+Stable tag: 3.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Easily set up cookie banners or notices and cookie policy page for GDPR (DSGVO, RGPD) compliance. Also supports CCPA/CPRA and other major global laws.
+Easily set up cookie banner or cookie notice and cookie policy page for GDPR (DSGVO, RGPD) compliance. Also supports CCPA/CPRA and other major global laws.
 
 == Description ==
 
@@ -117,6 +117,9 @@ This WordPress cookie plugin will:
 * Allow you to record which cookies your site uses and neatly display a list of these cookies. You can add this list to your Privacy Policy page or Cookie Policy page using a shortcode.
 Note: If you connect your site to the CookieYes web app, you have to replace the shortcode with an HTML code.
 
+= What is a cookie notice? =
+A cookie notice, also known as a cookie banner, is a message informing visitors about the site's use of cookies. It typically explains what cookies are, why they are used, and how they affect user privacy. It often includes options for users to consent to or manage cookie preferences, ensuring compliance with privacy laws like the GDPR and CCPA. The goal is to provide transparency and allow users to make informed decisions about their data.
+
 = Do visitors now have to accept/refuse cookies in order to use websites? =
 No, Only the ‘Necessary’ cookies will be loaded until the user gives consent. 
 
@@ -200,6 +203,15 @@ Every time we update the plugin, you will see a notification on the installed pl
 9. Privacy policy generator and cookie policy generator
 
 == Changelog ==
+
+= 3.2.4 =
+
+[Fix] - Minor bug fixes.
+
+= 3.2.3 =
+
+[Add] - An option to migrate to the new UI is added to the legacy UI.
+[Fix] - Minor bug fixes.
 
 = 3.2.2 =
 
@@ -694,9 +706,6 @@ Tested OK with WordPress version 6.2
 
 == Upgrade Notice ==
 
-= 3.2.2 =
+= 3.2.4 =
 
-[Compatibility] – Tested OK with WordPress version 6.5
-[Enhancement] - Cookie banner auto-translation for 40+ languages.
-[Tweak] - Limited the total languages to two for stand-alone plugin.
 [Fix] - Minor bug fixes.

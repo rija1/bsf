@@ -73,7 +73,7 @@ class Cookie_Law_Info {
 		if ( defined( 'CLI_VERSION' ) ) {
 			$this->version = CLI_VERSION;
 		} else {
-			$this->version = '3.2.2';
+			$this->version = '3.2.4';
 		}
 		$this->plugin_name = 'cookie-law-info';
 

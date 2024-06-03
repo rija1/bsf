@@ -31,39 +31,4 @@ class WC_Payment_Gateway_Stripe_BLIK extends WC_Payment_Gateway_Stripe_Local_Pay
 		$this->template_name = 'blik.php';
 	}
 
-	public function validate_fields() {
-		if ( ! doing_action( 'woocommerce_rest_checkout_process_payment_with_context' ) ) {
-			foreach ( range( 0, 5 ) as $idx ) {
-				$code = isset( $_POST[ 'blik_code_' . $idx ] ) ? $_POST[ 'blik_code_' . $idx ] : null;
-				if ( $code === null || strlen( $code ) === 0 ) {
-					wc_add_notice( __( 'Please provide your 6 digit BLIK code.', 'woo-stripe-payment' ), 'error' );
-
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	public function get_payment_intent_confirmation_args( $intent, $order ) {
-		$code = '';
-		foreach ( range( 0, 5 ) as $idx ) {
-			if ( isset( $_POST[ 'blik_code_' . $idx ] ) ) {
-				$code .= wc_clean( $_POST[ 'blik_code_' . $idx ] );
-			}
-		}
-		if ( $code ) {
-			return array(
-				'payment_method_options' => array(
-					'blik' => array(
-						'code' => $code
-					)
-				)
-			);
-		}
-
-		return array();
-	}
-
 }

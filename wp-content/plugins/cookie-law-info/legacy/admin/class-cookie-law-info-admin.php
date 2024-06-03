@@ -262,8 +262,7 @@ class Cookie_Law_Info_Admin {
 	}
 	public function plugin_action_links( $links ) {
 		$links[] = '<a href="' . get_admin_url( null, 'edit.php?post_type=' . CLI_POST_TYPE . '&page=cookie-law-info' ) . '">' . __( 'Settings', 'cookie-law-info' ) . '</a>';
-		$links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank">' . esc_html__( 'Support', 'cookie-law-info' ) . '</a>';
-		$links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=free_plugin_listing&utm_medium=gdpr_basic&utm_campaign=GDPR&utm_content=' . CLI_VERSION . '" target="_blank" style="color: #3db634; font-weight: 500;">' . __( 'Premium Upgrade', 'cookie-law-info' ) . '</a>';
+		$links[] = '<a href="https://www.cookieyes.com/support/" target="_blank">' . esc_html__( 'Support', 'cookie-law-info' ) . '</a>';
 		return $links;
 	}
 

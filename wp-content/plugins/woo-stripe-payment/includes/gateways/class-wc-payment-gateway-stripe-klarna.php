@@ -60,8 +60,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 		$this->method_title       = __( 'Klarna (Stripe) by Payment Plugins', 'woo-stripe-payment' );
 		$this->method_description = __( 'Klarna gateway that integrates with your Stripe account.', 'woo-stripe-payment' );
 		parent::__construct();
-		$this->template_name = 'klarna-v2.php';
-		$this->icon          = stripe_wc()->assets_url( 'img/' . $this->get_option( 'icon' ) . '.svg' );
+		$this->icon = stripe_wc()->assets_url( 'img/' . $this->get_option( 'icon' ) . '.svg' );
 		add_filter( 'woocommerce_gateway_icon', array( $this, 'get_woocommerce_gateway_icon' ), 10, 2 );
 	}
 
@@ -100,7 +99,13 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 		if ( $billing_country ) {
 			$params = $this->get_required_parameters();
 
-			return isset( $params[ $currency ] ) && in_array( $billing_country, $params[ $currency ] ) !== false;
+			if ( isset( $params[ $currency ] ) && in_array( $billing_country, $params[ $currency ] ) !== false ) {
+				if ( stripe_wc()->account_settings->get_account_country( wc_stripe_mode() ) === 'US' ) {
+					return $currency === 'USD';
+				}
+
+				return true;
+			}
 		}
 
 		return false;
@@ -241,7 +246,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 
 	public function enqueue_checkout_scripts( $scripts ) {
 		parent::enqueue_checkout_scripts( $scripts );
-		$scripts->assets_api->register_script( 'wc-stripe-klarna-checkout', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors' ) );
+		$scripts->assets_api->register_script( 'wc-stripe-klarna-checkout', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors', 'wc-stripe-local-payment' ) );
 		wp_enqueue_script( 'wc-stripe-klarna-checkout' );
 	}
 
@@ -268,7 +273,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 		$assets_api->register_script( 'wc-stripe-klarna-category', 'assets/build/klarna-message.js', array( 'wc-stripe-vendors' ) );
 		$asset_data->add( $this->id, array(
 			'messageOptions' => array(
-				'countryCode'        => stripe_wc()->account_settings->get_account_country(),
+				'countryCode'        => stripe_wc()->account_settings->get_account_country( wc_stripe_mode() ),
 				'paymentMethodTypes' => array( 'klarna' )
 			)
 		) );
@@ -278,7 +283,7 @@ class WC_Payment_Gateway_Stripe_Klarna extends WC_Payment_Gateway_Stripe_Local_P
 	public function get_localized_params() {
 		return array_merge( parent::get_localized_params(), array(
 			'messageOptions' => array(
-				'countryCode'        => stripe_wc()->account_settings->get_account_country(),
+				'countryCode'        => stripe_wc()->account_settings->get_account_country( wc_stripe_mode() ),
 				'paymentMethodTypes' => array( 'klarna' )
 			)
 		) );

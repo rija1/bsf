@@ -80,7 +80,9 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 			'icons'                  => $this->get_payment_method_icon(),
 			'placeOrderButtonLabel'  => \esc_html( $this->get_setting( 'order_button_text' ) ),
 			'description'            => $this->get_setting( 'description' ),
-			'i18n'                   => $this->get_script_translations()
+			'i18n'                   => $this->get_script_translations(),
+			'elementOptions'         => $this->payment_method->get_element_options(),
+			'paymentElementOptions'  => $this->payment_method->get_payment_element_options()
 		);
 	}
 

@@ -51,4 +51,15 @@ class WC_Payment_Gateway_Stripe_Ideal extends WC_Payment_Gateway_Stripe_Local_Pa
 		);
 	}
 
+	public function get_payment_element_options() {
+		return array_merge(
+			parent::get_payment_element_options(),
+			array(
+				'terms' => array(
+					'ideal' => 'auto'
+				)
+			)
+		);
+	}
+
 }

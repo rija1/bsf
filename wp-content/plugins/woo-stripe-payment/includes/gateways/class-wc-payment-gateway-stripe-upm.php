@@ -17,6 +17,8 @@ class WC_Payment_Gateway_Stripe_UPM extends WC_Payment_Gateway_Stripe {
 
 	public $installments;
 
+	protected $supports_save_payment_method = true;
+
 	public function __construct() {
 		$this->id                 = 'stripe_upm';
 		$this->tab_title          = __( 'Universal Payment Method', 'woo-stripe-payment' );
@@ -67,6 +69,7 @@ class WC_Payment_Gateway_Stripe_UPM extends WC_Payment_Gateway_Stripe {
 			$this->child_payment_gateway->set_payment_method_token( $this->get_saved_source_id() );
 			$_POST[ $this->child_payment_gateway->payment_intent_key ] = wc_get_var( $_POST[ $this->payment_intent_key ], '' );
 			$_POST[ $this->child_payment_gateway->payment_type_key ]   = wc_get_var( $_POST[ $this->payment_type_key ], '' );
+			$_POST[ $this->child_payment_gateway->save_source_key ]    = wc_get_var( $_POST[ $this->save_source_key ], '' );
 
 			return $this->child_payment_gateway->process_payment( $order_id );
 		}
@@ -129,9 +132,7 @@ class WC_Payment_Gateway_Stripe_UPM extends WC_Payment_Gateway_Stripe {
 	}
 
 	public function get_localized_params() {
-		$page = wc_stripe_get_current_page();
 		$data = array(
-			'page'                  => $page,
 			'paymentElementOptions' => array(
 				'layout' => array(
 					'type' => $this->get_option( 'layout_type', 'tabs' )
@@ -139,9 +140,6 @@ class WC_Payment_Gateway_Stripe_UPM extends WC_Payment_Gateway_Stripe {
 			),
 			'installments'          => array(
 				'loading' => __( 'Loading installments...', 'woo-stripe-payment' )
-			),
-			'confirmParams'         => array(
-				'return_url' => \PaymentPlugins\Stripe\Utilities\PaymentMethodUtils::create_return_url( $this, $page )
 			)
 		);
 		if ( $this->get_option( 'layout_type' ) === 'accordion' ) {
@@ -149,23 +147,10 @@ class WC_Payment_Gateway_Stripe_UPM extends WC_Payment_Gateway_Stripe {
 			$data['paymentElementOptions']['layout']['spacedAccordionItems'] = wc_string_to_bool( $this->get_option( 'spaced_items', 'no' ) );
 		}
 
-		$ip_address                            = WC_Geolocation::get_ip_address();
-		$user_agent                            = wc_get_user_agent();
-		$data['confirmParams']['mandate_data'] = array(
-			'customer_acceptance' => [
-				'type'   => 'online',
-				'online' => [
-					'ip_address' => $ip_address ? $ip_address : \WC_Geolocation::get_external_ip_address(),
-					'user_agent' => $user_agent ? $user_agent : 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' )
-				]
-			]
-		);
-
 		return array_merge( parent::get_localized_params(), $data );
 	}
 
 	public function get_element_options( $options = array() ) {
-		$options               = \PaymentPlugins\Stripe\Controllers\PaymentIntent::instance()->get_element_options();
 		$payment_method_config = $this->get_payment_method_configuration();
 		if ( $payment_method_config ) {
 			$options['paymentMethodConfiguration'] = $payment_method_config;

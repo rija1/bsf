@@ -4,7 +4,7 @@ Tags: stripe, ach, klarna, credit card, apple pay, google pay
 Requires at least: 3.0.1
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 3.3.62
+Stable tag: 3.3.71
 Copyright: Payment Plugins
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -63,6 +63,19 @@ If your site is not loading over https, then Stripe won't render the Payment Req
 9. Stripe Link for high conversion
 
 == Changelog ==
+= 3.3.71 - 05/30/24 =
+* Added - MobilePay payments can be authorized or captured
+* Added - Extended authorizations for card payments. [Stripe Docs](https://docs.stripe.com/payments/extended-authorization). Make sure your account is eligible before enabling this feature.
+* Added - EUR support for Revolut. EUR support is in beta so make sure it's enabled on your Stripe account.
+= 3.3.70 - 05/21/24 =
+* Added - Amazon Pay, Cash App, Revolut, Zip Pay, MobilePay can now be used as stand alone gateways. They can also be used in the Universal Payment Method.
+* Added - Support for recurring payments for iDEAL
+* Added - SEPA, ACH, and other payment methods added to the My Account > Add Payment Method page
+* Added - New payment notice for Apple Pay and GPay which provides improved instructions on checkout page. This must be enabled for all merchants that have used previous versions of the plugin. [Screenshot](https://imgur.com/aFD1Eq9d)
+* Added - Option to create Stripe customers for guest checkout. [https://wordpress.org/support/topic/create-a-stripe-customer-account-on-purchase/](https://wordpress.org/support/topic/create-a-stripe-customer-account-on-purchase/)
+* Updated - Consolidated code for smaller Javascript files
+* Updated - Improved ACH integration which now supports micro-deposit verification
+* Updated - If Afterpay/Clearpay is disabled, don't show messaging either. The messaging relied on the Messaging Section settings but Afterpay should also be enabled before messaging shows.
 = 3.3.62 - 05/9/24 =
 * Added - Universal Payment Method integration
 * Added - Amazon Pay, Zip Pay, Cashapp, Revolut

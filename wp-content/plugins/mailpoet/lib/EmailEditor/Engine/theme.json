@@ -5,17 +5,21 @@
     "color": {
       "customGradient": false,
       "defaultGradients": false,
-      "gradients": []
+      "gradients": [],
+      "background": true,
+      "text": true,
+      "link": true
     },
     "layout": {
-      "contentSize": "660px"
+      "contentSize": "660px",
+      "wideSize": "660px"
     },
     "background": {
       "backgroundImage": true
     },
     "spacing": {
       "units": ["px"],
-      "blockGap": true,
+      "blockGap": false,
       "padding": true,
       "margin": true,
       "spacingSizes": [

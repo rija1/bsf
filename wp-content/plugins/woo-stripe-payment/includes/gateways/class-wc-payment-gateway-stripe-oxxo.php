@@ -48,7 +48,7 @@ class WC_Payment_Gateway_Stripe_OXXO extends WC_Payment_Gateway_Stripe_Local_Pay
 					return $carry;
 				}, array() ),
 				'desc_tip'    => true,
-				'description' => __( 'The number of days before the OXXO voucher expires.', 'woo-stripe-payment' )
+				'description' => __( 'The number of days before the voucher expires.', 'woo-stripe-payment' )
 			),
 			'email_link'      => array(
 				'title'       => __( 'Voucher Link In Email', 'woo-stripe-payment' ),

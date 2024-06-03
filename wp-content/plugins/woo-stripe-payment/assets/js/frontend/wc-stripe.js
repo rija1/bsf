@@ -55,7 +55,7 @@
     };
 
     wc_stripe.BaseGateway.prototype.get_element_options = function () {
-        return this.params.elementOptions;
+        return {};
     };
 
     wc_stripe.BaseGateway.prototype.initialize = function () {
@@ -80,7 +80,7 @@
     wc_stripe.BaseGateway.prototype.submit_error = function (error, skip_form) {
         var message = this.get_error_message(error);
 
-        if (message.indexOf('</ul>') < 0) {
+        if (message.indexOf('</ul>') < 0 || Array.isArray(error)) {
             var classes = (function () {
                 var classes = 'woocommerce-NoticeGroup';
                 if (this.is_current_page('checkout')) {
@@ -88,7 +88,20 @@
                 }
                 return classes;
             }.bind(this)());
-            message = '<div class="' + classes + '"><ul class="woocommerce-error"><li>' + message + '</li></ul></div>';
+
+            function getErrorMessage(message) {
+                var result = '';
+                if (Array.isArray(message)) {
+                    message.forEach(function (msg) {
+                        result += '<li>' + msg + '</li>';
+                    })
+                } else {
+                    result += '<li>' + message + '</li>';
+                }
+                return result;
+            }
+
+            message = '<div class="' + classes + '"><ul class="woocommerce-error">' + getErrorMessage(message) + '</ul></div>';
         }
         var custom_message = $(document.body).triggerHandler('wc_stripe_submit_error', [message, error, this]);
         message = typeof custom_message === 'undefined' ? message : custom_message;
@@ -100,6 +113,9 @@
     };
 
     wc_stripe.BaseGateway.prototype.get_error_message = function (message) {
+        if (Array.isArray(message)) {
+            return message;
+        }
         if (typeof message == 'object') {
             if (message.hasOwnProperty('message')) {
                 if (message.message.indexOf('server_side_confirmation_beta=v1') > -1) {
@@ -130,6 +146,7 @@
         }
 
         if ($().unblock) {
+            this.unblock();
             $container.unblock();
         }
 
@@ -709,7 +726,10 @@
     }
 
     wc_stripe.BaseGateway.prototype.create_setup_intent = function (data) {
-        return new Promise(function (resolve, reject) {
+        if (this.creating_setup_intent) {
+            return this.creating_setup_intent;
+        }
+        this.creating_setup_intent = new Promise(function (resolve, reject) {
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
@@ -724,8 +744,12 @@
                 }
             }.bind(this)).fail(function (xhr, textStatus, errorThrown) {
                 this.submit_error(errorThrown);
+            }.bind(this)).always(function () {
+                this.creating_setup_intent = null;
             }.bind(this));
         }.bind(this))
+
+        return this.creating_setup_intent;
     }
 
     wc_stripe.BaseGateway.prototype.serialize_form = function ($form) {
@@ -852,6 +876,10 @@
 
         this.hasOrderReviewParams();
     };
+
+    wc_stripe.CheckoutGateway.prototype.get_element_options = function () {
+        return this.params.elementOptions;
+    }
 
     wc_stripe.CheckoutGateway.prototype.container_styles = function () {
         if (!this.params.description) {
@@ -1111,6 +1139,7 @@
                         window.location.href = response.redirect;
                     }
                 } else {
+                    this.payment_token_received = true;
                     this.get_form().trigger('submit');
                 }
             } else {

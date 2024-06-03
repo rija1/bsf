@@ -148,6 +148,21 @@ class PaymentsApi {
 		$this->container->register( Gateways\SwishPayment::class, function ( Container $container ) {
 			return new Gateways\SwishPayment( $container->get( AssetsApi::class ) );
 		} );
+		$this->container->register( Gateways\AmazonPayPayment::class, function ( Container $container ) {
+			return new Gateways\AmazonPayPayment( $container->get( AssetsApi::class ) );
+		} );
+		$this->container->register( Gateways\CashAppPayment::class, function ( $container ) {
+			return new Gateways\CashAppPayment( $container->get( AssetsApi::class ) );
+		} );
+		$this->container->register( Gateways\RevolutPayment::class, function ( $container ) {
+			return new Gateways\RevolutPayment( $container->get( AssetsApi::class ) );
+		} );
+		$this->container->register( Gateways\ZipPayment::class, function ( $container ) {
+			return new Gateways\ZipPayment( $container->get( AssetsApi::class ) );
+		} );
+		$this->container->register( Gateways\MobilePayPayment::class, function ( $container ) {
+			return new Gateways\MobilePayPayment( $container->get( AssetsApi::class ) );
+		} );
 		$this->container->register( Gateways\UniversalPayment::class, function ( Container $container ) {
 			return new Gateways\UniversalPayment(
 				$container->get( AssetsApi::class ),
@@ -195,7 +210,12 @@ class PaymentsApi {
 			Gateways\PayNowPayment::class,
 			Gateways\PromptPayPayment::class,
 			Gateways\SwishPayment::class,
-			Gateways\UniversalPayment::class
+			Gateways\AmazonPayPayment::class,
+			Gateways\UniversalPayment::class,
+			Gateways\CashAppPayment::class,
+			Gateways\RevolutPayment::class,
+			Gateways\ZipPayment::class,
+			Gateways\MobilePayPayment::class
 		);
 
 		foreach ( $payment_methods as $clazz ) {
@@ -325,13 +345,11 @@ class PaymentsApi {
 			foreach ( $items as $item ) {
 				$payment_method = $this->payment_methods[ $item['method']['gateway'] ] ?? null;
 				if ( $payment_method ) {
-					if ( $payment_method->is_active()
-					     || ( $universal_payment_method->is_active() && $universal_payment_method->is_payment_method_active( $payment_method->get_name() ) )
-					) {
-						if ( $universal_payment_method->is_payment_method_active( $payment_method->get_name() ) ) {
-							$item['method']['gateway'] = $universal_payment_method->get_name();
-						}
+					if ( $payment_method->is_active() ) {
 						$list['cc'][] = $item;
+					} elseif ( $universal_payment_method->is_active() && $universal_payment_method->is_payment_method_active( $payment_method->get_name() ) ) {
+						$item['method']['gateway'] = $universal_payment_method->get_name();
+						$list['cc'][]              = $item;
 					}
 				}
 			}
@@ -339,22 +357,6 @@ class PaymentsApi {
 				unset( $list[ $type ] );
 			}
 		}
-
-		/*foreach ( $this->payment_methods as $payment_method ) {
-			if ( isset( $list[ $payment_method->get_name() ] ) ) {
-				if ( $payment_method->is_active()
-				     || ( $universal_payment_method->is_active() && $universal_payment_method->is_payment_method_active( $payment_method->get_name() ) )
-				) {
-					foreach ( $list[ $payment_method->get_name() ] as $entry ) {
-						if ( $universal_payment_method->is_payment_method_active( $payment_method->get_name() ) ) {
-							$entry['method']['gateway'] = $universal_payment_method->get_name();
-						}
-						$list['cc'][] = $entry;
-					}
-				}
-				unset( $list[ $payment_method->get_name() ] );
-			}
-		}*/
 
 		return $list;
 	}

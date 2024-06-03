@@ -16,7 +16,7 @@ use PaymentPlugins\Stripe\RequestContext;
 abstract class AbstractStripeLocalPayment extends AbstractStripePayment {
 
 	public function get_payment_method_script_handles() {
-		if ( ! wp_script_is( 'wc-stripe-block-local-payment', 'registered' ) && ! is_checkout() ) {
+		if ( ! wp_script_is( 'wc-stripe-block-local-payment', 'registered' ) ) {
 			$this->assets_api->register_script( 'wc-stripe-block-local-payment', 'build/wc-stripe-local-payment.js' );
 		}
 
@@ -36,13 +36,14 @@ abstract class AbstractStripeLocalPayment extends AbstractStripePayment {
 			'specificCountries'     => $this->payment_method->get_option( 'specific_countries', array() ),
 			'countries'             => $this->payment_method->limited_countries,
 			'currencies'            => $this->payment_method->currencies,
-			'paymentElementOptions' => $this->payment_method->get_element_params(),
+			'paymentElementOptions' => $this->payment_method->get_payment_element_options(),
 			'elementOptions'        => $this->payment_method->get_element_options(),
 			'isAdmin'               => is_admin(),
 			'returnUrl'             => $this->get_source_return_url(),
 			'paymentType'           => $this->payment_method->local_payment_type,
 			'locale'                => str_replace( '_', '-', substr( get_locale(), 0, 5 ) ),
-			'i18n'                  => $this->get_script_translations()
+			'i18n'                  => $this->get_script_translations(),
+			'mandate'               => wc_string_to_bool( $this->get_setting( 'stripe_mandate', 'yes' ) )
 		);
 	}
 
@@ -90,6 +91,7 @@ abstract class AbstractStripeLocalPayment extends AbstractStripePayment {
 				'elementOptions' => array_merge(
 					$payment_intent_ctrl->get_element_options(),
 					[
+						'locale'             => wc_stripe_get_site_locale(),
 						'paymentMethodTypes' => [ $this->payment_method->get_payment_method_type() ]
 					]
 				)

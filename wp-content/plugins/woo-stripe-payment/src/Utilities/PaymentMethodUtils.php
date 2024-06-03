@@ -118,7 +118,9 @@ class PaymentMethodUtils {
 
 		return array_reduce( $gateways, function ( $carry, $gateway ) use ( $upm ) {
 			$include = $gateway !== false
-			           && ( wc_string_to_bool( $gateway->enabled ) || $upm->is_enabled_payment_method( $gateway->id ) );
+			           && ( wc_string_to_bool( $gateway->enabled )
+			                || ( wc_string_to_bool( $upm->enabled ) && $upm->is_enabled_payment_method( $gateway->id ) )
+			           );
 			if ( $include ) {
 				$carry[ $gateway->id ] = $gateway;
 			}

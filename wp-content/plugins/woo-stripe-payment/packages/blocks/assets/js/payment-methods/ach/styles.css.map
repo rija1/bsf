@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAGM,0BAHoB,AACvB,WAAW,CACV,GAAG,AACA,oDAAoD,CAAC;EACpD,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,eAAe;CAC5B;;AAMP,AAAA,4BAA4B,CAAC;EAC3B,UAAU,EAAE,IAAI;CAKjB;;AAND,AAGE,4BAH0B,CAG1B,kCAAkC,CAAC;EACjC,WAAW,EAAE,GAAG;CACjB",
-    "sources": [
-        "styles.scss"
-    ],
-    "names": [],
-    "file": "styles.css"
-}

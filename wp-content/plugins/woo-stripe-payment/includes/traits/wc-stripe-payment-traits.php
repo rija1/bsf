@@ -66,11 +66,14 @@ trait WC_Stripe_Payment_Intent_Trait {
 			)
 		);
 
+		/*$billing_details            = array_filter( $billing_details );
+		$billing_details['address'] = array_filter( $billing_details['address'] );*/
+
 		$billing_details            = array_map( function ( $value ) {
-			return empty( $value ) ? '' : $value;
+			return empty( $value ) ? null : $value;
 		}, $billing_details );
 		$billing_details['address'] = array_map( function ( $value ) {
-			return empty( $value ) ? '' : $value;
+			return empty( $value ) ? null : $value;
 		}, $billing_details['address'] );
 
 		$args = array(
@@ -85,7 +88,6 @@ trait WC_Stripe_Payment_Intent_Trait {
 			'order_received_url' => $this->get_return_url( $order ),
 			'confirmation_args'  => $this->get_payment_intent_confirmation_args( $intent, $order ),
 			'billing_details'    => $billing_details,
-			'stripe_upm'         => $this->has_parent_gateway || $this->id === 'stripe_upm',
 			'entropy'            => rand(
 				0,
 				999999
@@ -105,6 +107,22 @@ trait WC_Stripe_Payment_Intent_Trait {
 	 * @param WC_Order              $order
 	 */
 	public function get_payment_intent_confirmation_args( $intent, $order ) {
+		$args = array(
+			'return_url' => $this->get_complete_payment_return_url( $order )
+		);
+
+		if ( isset( $intent['setup_future_usage'] ) && $intent['setup_future_usage'] === 'off_session' ) {
+			$this->add_payment_intent_mandate_args( $args, $order );
+		}
+
+		return $args;
+	}
+
+	public function get_setup_intent_checkout_params( $intent, $order ) {
+		return array();
+	}
+
+	protected function add_payment_intent_mandate_args( &$args, $order ) {
 		$ip_address = $order->get_customer_ip_address();
 		$user_agent = $order->get_customer_user_agent();
 		if ( ! $ip_address ) {
@@ -114,22 +132,15 @@ trait WC_Stripe_Payment_Intent_Trait {
 			$user_agent = 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' );
 		}
 
-		return array(
-			'return_url'   => $this->get_complete_payment_return_url( $order ),
-			'mandate_data' => array(
-				'customer_acceptance' => array(
-					'type'   => 'online',
-					'online' => array(
-						'ip_address' => $ip_address,
-						'user_agent' => $user_agent
-					)
+		$args['mandate_data'] = array(
+			'customer_acceptance' => array(
+				'type'   => 'online',
+				'online' => array(
+					'ip_address' => $ip_address,
+					'user_agent' => $user_agent
 				)
 			)
 		);
-	}
-
-	public function get_setup_intent_checkout_params( $intent, $order ) {
-		return array();
 	}
 
 	/**
@@ -411,13 +422,23 @@ trait WC_Stripe_Voucher_Payment_Trait {
 					$voucher_property_name = $this->payment_method_type . '_display_details';
 					$link                  = isset( $payment_intent->next_action->{$voucher_property_name}->hosted_voucher_url ) ? $payment_intent->next_action->{$voucher_property_name}->hosted_voucher_url : null;
 					if ( $link ) {
-						$content .= '<p>' . sprintf( __( 'Please click %shere%s to view your Konbini voucher.', 'woo-stripe-payment' ), '<a href="' . $link . '" target="_blank">', '</a>' ) . '</p>';
+						$content .= '<p>' . sprintf( __( 'Please click %shere%s to view your %s voucher.', 'woo-stripe-payment' ), '<a href="' . $link . '" target="_blank">', '</a>', $this->get_title() ) . '</p>';
 					}
 				}
 			}
 		}
 
 		return $content;
+	}
+
+}
+
+trait WC_Stripe_Express_Payment_Trait {
+
+	public function get_element_options( $options = array() ) {
+		$options = array( 'locale' => wc_stripe_get_site_locale() );
+
+		return apply_filters( 'wc_stripe_get_element_options', $options, $this );
 	}
 
 }

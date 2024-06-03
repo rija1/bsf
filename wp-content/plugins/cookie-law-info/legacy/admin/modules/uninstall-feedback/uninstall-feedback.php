@@ -147,12 +147,12 @@ class Cookie_Law_Info_Uninstall_Feedback {
 					</ul>
 					<div class="wt-uninstall-feedback-privacy-policy">
 						<?php esc_html__( "We do not collect any personal data when you submit this form. It's your feedback that we value.", 'cookie-law-info' ); ?>
-						<a href="https://www.webtoffee.com/privacy-policy/" target="_blank"><?php echo esc_html__( 'Privacy Policy', 'cookie-law-info' ); ?></a>
+						<a href="https://www.cookieyes.com/privacy-policy/" target="_blank"><?php echo esc_html__( 'Privacy Policy', 'cookie-law-info' ); ?></a>
 					</div>
 				</div>
 				<div class="<?php echo esc_attr( $this->plugin_id ); ?>-modal-footer">
 
-					<a class="button-primary" href="https://www.webtoffee.com/support/" target="_blank">
+					<a class="button-primary" href="https://www.cookieyes.com/support/" target="_blank">
 						<span class="dashicons dashicons-external" style="margin-top:3px;"></span>
 						<?php echo esc_html__( 'Go to support', 'cookie-law-info' ); ?></a>
 					<button class="button-primary <?php echo esc_attr( $this->plugin_id ); ?>-model-submit"><?php echo esc_html__( 'Submit & Deactivate', 'cookie-law-info' ); ?></button>

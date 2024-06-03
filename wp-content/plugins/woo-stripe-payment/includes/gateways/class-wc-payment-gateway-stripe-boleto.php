@@ -49,7 +49,7 @@ class WC_Payment_Gateway_Stripe_Boleto extends WC_Payment_Gateway_Stripe_Local_P
 					return $carry;
 				}, array() ),
 				'desc_tip'    => true,
-				'description' => __( 'The number of days before the Boleto voucher expires.', 'woo-stripe-payment' )
+				'description' => __( 'The number of days before the voucher expires.', 'woo-stripe-payment' )
 			),
 			'email_link'      => array(
 				'title'       => __( 'Voucher Link In Email', 'woo-stripe-payment' ),
@@ -61,33 +61,12 @@ class WC_Payment_Gateway_Stripe_Boleto extends WC_Payment_Gateway_Stripe_Local_P
 		) );
 	}
 
-	public function validate_fields() {
-		if ( ! doing_action( 'woocommerce_rest_checkout_process_payment_with_context' ) ) {
-			$regex = '/^(\w{3}\.){2}\w{3}-\w{2}$|^(\w{11}|\w{14})$|^\w{2}\.\w{3}\.\w{3}\/\w{4}-\w{2}$/';
-			if ( empty( $_POST['wc_stripe_boleto_tax_id'] ) || ! preg_match_all( $regex, $_POST['wc_stripe_boleto_tax_id'] ) ) {
-				wc_add_notice( __( 'Please enter a valid CPF / CNPJ', 'woo-stripe-payment' ), 'error' );
-			}
-		}
-	}
-
 	public function add_stripe_order_args( &$args, $order, $intent = null ) {
 		$args['payment_method_options'] = array(
 			'boleto' => array(
 				'expires_after_days' => $this->get_option( 'expiration_days', 3 )
 			)
 		);
-	}
-
-	public function get_payment_intent_confirmation_args( $intent, $order ) {
-		if ( isset( $_POST['wc_stripe_boleto_tax_id'] ) ) {
-			return array(
-				'payment_method' => array(
-					'boleto' => array(
-						'tax_id' => \wc_clean( $_POST['wc_stripe_boleto_tax_id'] )
-					)
-				)
-			);
-		}
 	}
 
 }

@@ -26,7 +26,7 @@ class WC_Stripe_Manager {
 	 *
 	 * @var string
 	 */
-	public $version = '3.3.62';
+	public $version = '3.3.71';
 
 	/**
 	 *
@@ -244,6 +244,11 @@ class WC_Stripe_Manager {
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-paynow.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-promptpay.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-swish.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-amazonpay.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-cashapp.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-revolut.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-zip.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-mobilepay.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-upm.php';
 
 		// tokens
@@ -312,6 +317,11 @@ class WC_Stripe_Manager {
 				'WC_Payment_Gateway_Stripe_PayNow',
 				'WC_Payment_Gateway_Stripe_PromptPay',
 				'WC_Payment_Gateway_Stripe_Swish',
+				'WC_Payment_Gateway_Stripe_AmazonPay',
+				'WC_Payment_Gateway_Stripe_CashApp',
+				'WC_Payment_Gateway_Stripe_Revolut',
+				'WC_Payment_Gateway_Stripe_Zip',
+				'WC_Payment_Gateway_Stripe_MobilePay',
 				'WC_Payment_Gateway_Stripe_UPM'
 			)
 		);
