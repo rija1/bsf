@@ -231,6 +231,22 @@
 					"name": "Inter",
 					"slug": "body"
 				},
+                {
+					"fontFace": [
+						{
+							"fontFamily": "Domine",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400 700",
+							"src": [
+								"file:./fonts/Domine-VariableFont_wght.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"Domine\", sans-serif",
+					"name": "Domine",
+					"slug": "body"
+				},
 				{
 					"fontFace": [
 						{
