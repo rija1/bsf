@@ -275,17 +275,6 @@ footer .footer_block {
     border: solid 1px #f8bd3b !important;
 }
 
-// KSLC     object-position: 0 44%;
-
-// Donation page - featured img
-.page-id-61 .page_featured_img_title_group img {
-    object-position: 0% 44%;
-}
-// What we do page - featured img
-.page-id-74 .page_featured_img_title_group img {
-    object-position: 0% 42%;
-}
-
 @media (min-width: 600px) {
     .wp-block-navigation__responsive-container-open:not(.always-shown) {
         display: flex;
@@ -316,37 +305,46 @@ footer .footer_block {
     }
 }
 
+// KSLC     object-position: 0 44%;
+
+
+
 // Background position of pages featured img
 // Thank you page
-.page-id-283 {
+.page-id-283 .page_featured_img_title_group img {
     object-position: 0 63%;
 }
 
 // KSL Congo
-.page-id-343 {
+.page-id-343 .page_featured_img_title_group img {
     object-position: 0 55%;
 }
 
 // Shree School
-.page-id-343 {
+.page-id-343 .page_featured_img_title_group img {
     object-position: 0 34%;
 }
 // About Us
-.page-id-73 {
+.page-id-73 .page_featured_img_title_group img {
     object-position: 0 63%;
 }
 
 // Donation
-.page-id-61 {
+.page-id-61 .page_featured_img_title_group img {
     object-position: 0 39%;
 }
 
-.page-id-77 {
+// What we do page
+.page-id-74 .page_featured_img_title_group img {
+    object-position: 0 39%;
+}
+
+.page-id-77 .page_featured_img_title_group img {
     object-position: 0 40%;
 }
 
 // News Page
-.page-id-548 {
+.page-id-548 .page_featured_img_title_group img {
     object-position: 0 38%;
 }
 

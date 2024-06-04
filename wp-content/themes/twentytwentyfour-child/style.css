@@ -135,16 +135,6 @@ footer .footer_block {
   border: solid 1px #f8bd3b !important;
 }
 
-.page-id-61 .page_featured_img_title_group img {
-  -o-object-position: 0% 44%;
-     object-position: 0% 44%;
-}
-
-.page-id-74 .page_featured_img_title_group img {
-  -o-object-position: 0% 42%;
-     object-position: 0% 42%;
-}
-
 @media (min-width: 600px) {
   .wp-block-navigation__responsive-container-open:not(.always-shown) {
     display: -webkit-box;
@@ -173,37 +163,42 @@ footer .footer_block {
   }
 }
 
-.page-id-283 {
+.page-id-283 .page_featured_img_title_group img {
   -o-object-position: 0 63%;
      object-position: 0 63%;
 }
 
-.page-id-343 {
+.page-id-343 .page_featured_img_title_group img {
   -o-object-position: 0 55%;
      object-position: 0 55%;
 }
 
-.page-id-343 {
+.page-id-343 .page_featured_img_title_group img {
   -o-object-position: 0 34%;
      object-position: 0 34%;
 }
 
-.page-id-73 {
+.page-id-73 .page_featured_img_title_group img {
   -o-object-position: 0 63%;
      object-position: 0 63%;
 }
 
-.page-id-61 {
+.page-id-61 .page_featured_img_title_group img {
   -o-object-position: 0 39%;
      object-position: 0 39%;
 }
 
-.page-id-77 {
+.page-id-74 .page_featured_img_title_group img {
+  -o-object-position: 0 39%;
+     object-position: 0 39%;
+}
+
+.page-id-77 .page_featured_img_title_group img {
   -o-object-position: 0 40%;
      object-position: 0 40%;
 }
 
-.page-id-548 {
+.page-id-548 .page_featured_img_title_group img {
   -o-object-position: 0 38%;
      object-position: 0 38%;
 }
