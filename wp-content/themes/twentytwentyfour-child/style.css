@@ -127,6 +127,16 @@ footer .footer_block {
   max-width: 305px;
 }
 
+#wcdp-donation-amount {
+  width: calc(100% - 1ch - 40px);
+}
+
+.wcdp_options > li > label {
+  background-color: #fff5dc;
+  font-size: 1.8rem;
+  font-family: 'Domine';
+}
+
 .wc-donation-platform .button {
   border-radius: 4px;
 }
