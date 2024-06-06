@@ -12,6 +12,7 @@ body {
   color: #2c3333;
   font-family: "Quicksand";
   position: relative;
+  font-synthesis: none !important;
 }
 
 a {

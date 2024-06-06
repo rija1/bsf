@@ -189,9 +189,9 @@
 							"fontFamily": "Reemkufi",
 							"fontStretch": "normal",
 							"fontStyle": "normal",
-							"fontWeight": "400 500 600 700",
+							"fontWeight": "500",
 							"src": [
-                                "file:./fonts/ReemKufiFun-VariableFont_wght.ttf"
+                                "file:./fonts/ReemKufi-Regular.ttf"
 							]
 						}
 					],
