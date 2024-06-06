@@ -265,7 +265,7 @@ footer .footer_block {
 // Donation and payment process
 
 #wcdp-donation-amount {
-    width: calc(100% - 1ch - 40px);
+    width: calc(100% - 1ch - 40px) !important;
 }
 
 .wcdp_options>li>label {
