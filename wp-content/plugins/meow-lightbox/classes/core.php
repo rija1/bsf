@@ -99,7 +99,7 @@ class Meow_MWL_Core {
 		}
 		$this->isEnqueued = true;
 		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		$this->log( '🟢 Scripts sent.' );
+		$this->log( '🟢 Lightbox Scripts sent.' );
 		$this->enqueue_scripts();
 	}
 

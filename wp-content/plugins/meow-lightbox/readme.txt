@@ -4,7 +4,7 @@ Tags: lightbox, responsive, exif, media, gps, map, photography, photo, gutenberg
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 5.1.8
+Stable tag: 5.1.9
 
 Responsive Lightbox designed for photography which can also displays EXIF data. This lightbox is highly optimized and designed to be very fast and elegant. You will love it!
 
@@ -56,6 +56,11 @@ Please have a look at [Meow Lightbox](https://meowapps.com/meow-lightbox/).
 
 == Changelog ==
 
+= 5.1.9 (2024/06/05) =
+* Update: Cleaner UI and removed useless dependencies.
+* Fix: Issue with the loading of the scripts.
+* ✨ If you have a moment, please write a little [review for the Meow Lightbox](https://wordpress.org/support/plugin/meow-lightbox/reviews/?rate=5#new-post). Thank you! 💕
+
 = 5.1.8 (2024/05/30) =
 * Add: "Selector Ahead" functionality.
 * Add: Better logs for debugging and performance.
@@ -70,7 +75,6 @@ Please have a look at [Meow Lightbox](https://meowapps.com/meow-lightbox/).
 * Update: Only load map scripts when images with GPS data are present and map option is enabled.
 * Fix: Corrected the selector issue when "Ahead" option is not used.
 * Fix: Improved zoom and close animations in the lightbox.
-* ✨ If you have a moment, please write a little [review for the Meow Lightbox](https://wordpress.org/support/plugin/meow-lightbox/reviews/?rate=5#new-post). Thank you! 💕
 
 = 5.1.6 (2024/04/27) =
 * Update: Pro scripts now load only on front-end, excluding admin pages.

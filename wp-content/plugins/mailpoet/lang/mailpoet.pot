@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the MailPoet plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 4.51.0\n"
+"Project-Id-Version: MailPoet 4.51.1\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
 "Last-Translator: MailPoet i18n (https://www.transifex.com/organization/wysija)\n"
 "Language-Team: MailPoet i18n <https://www.transifex.com/organization/wysija>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-27T15:13:24+00:00\n"
+"POT-Creation-Date: 2024-06-03T18:19:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.8.1\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: mailpoet\n"
 
@@ -545,7 +545,7 @@ msgstr ""
 #: lib/API/MP/v1/CustomFields.php:27
 #: lib/Automation/Integrations/WordPress/Subjects/UserSubject.php:63
 #: lib/Config/Menu.php:263
-#: lib/EmailEditor/Integrations/MailPoet/EmailEditor.php:47
+#: lib/EmailEditor/Integrations/MailPoet/EmailEditor.php:49
 #: lib/Form/Templates/Templates/InitialForm.php:22
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:60
 #: lib/Subscribers/ImportExport/PersonalDataExporters/SubscriberExporter.php:71
@@ -7001,6 +7001,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #. Author of the plugin
 #: views/woo_system_info.html:5
+#: mailpoet.php
 #: lib/Config/Capabilities.php:80
 #: lib/Config/Menu.php:195
 #: lib/Config/Menu.php:196
@@ -7062,10 +7063,12 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #. Author URI of the plugin
+#: mailpoet.php
 msgid "https://www.mailpoet.com"
 msgstr ""
 
 #. Description of the plugin
+#: mailpoet.php
 #: lib/WooCommerce/MultichannelMarketing/MPMarketingChannel.php:58
 msgid "Create and send newsletters, post notifications and welcome emails from your WordPress."
 msgstr ""
@@ -9009,7 +9012,7 @@ msgstr ""
 
 #: lib/Config/Menu.php:225
 #: lib/Config/Menu.php:226
-#: lib/EmailEditor/Integrations/MailPoet/EmailEditor.php:46
+#: lib/EmailEditor/Integrations/MailPoet/EmailEditor.php:48
 #: assets/dist/js/automation_analytics.js:9
 msgid "Emails"
 msgstr ""
@@ -15715,7 +15718,6 @@ msgid "Post Notification"
 msgstr ""
 
 #: assets/dist/js/commons.js:9
-#: assets/dist/js/email-editor/email_editor.js:15
 #: assets/dist/js/email-editor/email_editor.js:16
 msgid "Template"
 msgstr ""
@@ -15884,10 +15886,6 @@ msgstr ""
 
 #: assets/dist/js/email-editor/email_editor.js:15
 msgid "Select a background color for email clients that do not support background images."
-msgstr ""
-
-#: assets/dist/js/email-editor/email_editor.js:15
-msgid "Block"
 msgstr ""
 
 #: assets/dist/js/email-editor/email_editor.js:15

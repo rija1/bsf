@@ -4,7 +4,7 @@ Tags: gallery, masonry, image, block, lightroom
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 5.1.5
+Stable tag: 5.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,12 +50,21 @@ Languages: English.
 
 == Changelog ==
 
+= 5.1.6 (2024/06/05) =
+* Add: Hero Mode for Carousel with Latest Posts.
+* Add: Re-order feature for Gallery Manager.
+* Fix: "Edit" modal functionality in current gallery mode.
+* Fix: JS/Picture WebP Rewriting compatibility.
+* Fix: Maintained Left to Right layout on Masonry resize.
+* Update: Integrated latest NekoUI and common libraries.
+* Update: And a few more things here and there.
+* Note: Meow needs some love! If you have a moment, please write a little [review for the Meow Gallery](https://wordpress.org/support/plugin/meow-gallery/reviews/?rate=5#new-post). Thank you! 💕
+
 = 5.1.5 (2024/05/10) =
 * Fix: Addressed XSS injection vulnerability via shortcode and updated readme documentation.
 * Add: Implemented carousel infinite scroll with lazy loading.
 * Update: Enabled Lightbox rendering for lazy-loaded carousel media.
 * Update: Prepared gallery rendering within Gutenberg iframe.
-* Note: Meow needs some love! If you have a moment, please write a little [review for the Meow Gallery](https://wordpress.org/support/plugin/meow-gallery/reviews/?rate=5#new-post). Thank you! 💕
 
 = 5.1.3 (2024/04/06) =
 * Fix: Order by used in shortcode.

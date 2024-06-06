@@ -640,13 +640,14 @@ class Meow_MGL_Core {
 				'attributes' => $this->get_attributes( $id, $image, $layout ),
 			];
 
-			if( !empty( $posts_ids ) ) {
+			if( !empty( $posts_ids ) && isset( $atts['hero'] ) && $atts['hero'] ) {
 
 				$post_id = $posts_ids[$index];
 				$post = get_post( $post_id );
 
 				$mergedArray['featured_post_id'] = $post_id;
 				$mergedArray['featured_post_title'] = $post->post_title;
+				$mergedArray['featured_post_excerpt'] = $post->post_excerpt;
 				$mergedArray['featured_post_url'] = get_permalink( $post_id );
 
 			}

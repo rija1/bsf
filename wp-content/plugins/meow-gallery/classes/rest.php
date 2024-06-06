@@ -161,6 +161,7 @@ class Meow_MGL_Rest
 			$posts = $params['posts'];
 			$latest_posts = $params['latest_posts'];
 			$is_post_mode = $params['is_post_mode'];
+			$is_hero_mode = $params['is_hero_mode'];
 
 
 			if ( !$name ) {
@@ -175,6 +176,10 @@ class Meow_MGL_Rest
 				throw new Exception( __( 'Please select at least one post.', MGL_DOMAIN ) );
 			}
 
+			if( $is_hero_mode && !$is_post_mode ) {
+				throw new Exception( __( 'Hero mode is only available for post mode.', MGL_DOMAIN ) );
+			}
+
 			if ( !$id || $id == '' ) {
 				$id = $this->core->generate_uniqid(10);
 			}
@@ -187,6 +192,7 @@ class Meow_MGL_Rest
 				'layout' => $layout,
 				'medias' => $medias,
 				'is_post_mode' => $is_post_mode,
+				'hero' => $is_hero_mode,
 				'posts' => $posts,
 				'latest_posts' => $latest_posts,
 				'updated' =>  time(),
