@@ -8,6 +8,7 @@ Text Domain:  twentytwentyfour
 */
 /* Body  */
 body {
+  font-display: fallback;
   color: #2c3333;
   font-family: "Quicksand";
   position: relative;
