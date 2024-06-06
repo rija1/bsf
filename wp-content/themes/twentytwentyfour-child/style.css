@@ -31,7 +31,9 @@ a {
 }
 
 .home_cover_cta {
-  max-width: 682px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   position: absolute;
   bottom: 50px;
   left: 0;
