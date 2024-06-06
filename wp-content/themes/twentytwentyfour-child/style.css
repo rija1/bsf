@@ -123,10 +123,6 @@ footer .footer_block {
   padding: 6px;
 }
 
-.bsf_logo_title_block {
-  max-width: 305px;
-}
-
 #wcdp-donation-amount {
   width: calc(100% - 1ch - 40px) !important;
 }
