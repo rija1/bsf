@@ -293,6 +293,7 @@ footer .footer_block {
     // background: #eee;
     position: absolute;
     top: -100px;
+    height: fit-content;
 
     // border-bottom: 4px solid $colour_yellow;
     @media (max-width: 900px) {

@@ -150,6 +150,9 @@ footer .footer_block {
 .page_title {
   position: absolute;
   top: -100px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 @media (max-width: 900px) {
