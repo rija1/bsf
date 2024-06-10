@@ -47,6 +47,12 @@ a {
     padding: 0;
 }
 
+.wp-block-cover {
+    @media (max-width: 600px) {
+        min-height: 60vh !important;
+    }
+}
+
 // Home Cover Slogan
 .home_cover_cta {
     // width: auto;
@@ -58,6 +64,9 @@ a {
     margin: 0 auto;
     @media (min-width: 600px) {
         border-radius: 0;
+    }
+    @media (max-width: 600px) {
+        bottom: 0px;
     }
 }
 

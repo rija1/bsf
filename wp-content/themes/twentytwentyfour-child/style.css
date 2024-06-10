@@ -30,6 +30,12 @@ a {
   padding: 0;
 }
 
+@media (max-width: 600px) {
+  .wp-block-cover {
+    min-height: 60vh !important;
+  }
+}
+
 .home_cover_cta {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -44,6 +50,12 @@ a {
 @media (min-width: 600px) {
   .home_cover_cta {
     border-radius: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .home_cover_cta {
+    bottom: 0px;
   }
 }
 
