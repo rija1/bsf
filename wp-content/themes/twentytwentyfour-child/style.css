@@ -55,6 +55,7 @@ a {
 
 @media (max-width: 600px) {
   .home_cover_cta {
+    width: 100%;
     bottom: 0px;
   }
 }
