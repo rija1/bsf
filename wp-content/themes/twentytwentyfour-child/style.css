@@ -111,15 +111,15 @@ header nav .wp-block-navigation
 }
 
 header {
-  background: linear-gradient(45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0), linear-gradient(-45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(-45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0) #fafafa;
-  background-size: 12vw 12vw;
-  background-position: 0 0, 6vw 6vw;
+  background-image: repeating-linear-gradient(45deg, #f7f7f7 0, #f7f7f7 1.5px, transparent 0, transparent 50%);
+  background-size: 17px 17px;
+  background-color: #ffffff;
 }
 
 footer .footer_block {
-  background: linear-gradient(45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0), linear-gradient(-45deg, #0000 calc(25% / 3), #ffffff 0 calc(50% / 3), #0000 0 calc(250% / 3), #ffffff 0 calc(275% / 3), #0000 0), linear-gradient(-45deg, #ffffff calc(25% / 3), #0000 0 calc(50% / 3), #ffffff 0 25%, #0000 0 75%, #ffffff 0 calc(250% / 3), #0000 0 calc(275% / 3), #ffffff 0) #fafafa;
-  background-size: 12vw 12vw;
-  background-position: 0 0, 6vw 6vw;
+  background-image: repeating-linear-gradient(45deg, #f7f7f7 0, #f7f7f7 1.5px, transparent 0, transparent 50%);
+  background-size: 17px 17px;
+  background-color: #ffffff;
 }
 
 .wp-container-core-post-content-is-layout-1.wp-container-core-post-content-is-layout-1
@@ -146,7 +146,7 @@ footer .footer_block {
 .wcdp_options > li > label {
   background-color: #fff5dc;
   font-size: 1.8rem;
-  font-family: 'Domine';
+  font-family: "Domine";
 }
 
 .wc-donation-platform .button {
