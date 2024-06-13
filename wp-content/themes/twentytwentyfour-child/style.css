@@ -74,14 +74,11 @@ header .bsf-site-title {
   word-spacing: 3px;
 }
 
-header .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
-  background-color: #d8613c;
-}
-
 header .wp-block-navigation__responsive-container.is-menu-open
 .wp-block-navigation__responsive-container-content
 .wp-block-navigation__container {
   gap: 15px;
+  background-color: red;
 }
 
 header nav {
@@ -129,6 +126,40 @@ footer .footer_block {
 
 .page div.wpforms-container-full button[type="submit"]:not(:hover):not(:active).contact_form_submit {
   background: #137088;
+}
+
+.st_reveal {
+  opacity: 0;
+  -webkit-animation: fadeIn 1.3s ease-out forwards;
+          animation: fadeIn 1.3s ease-out forwards;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(-50px);
+            transform: translateX(-50px);
+    /* Adjust distance as needed */
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(-50px);
+            transform: translateX(-50px);
+    /* Adjust distance as needed */
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
 }
 
 .page_content {
