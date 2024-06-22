@@ -95,7 +95,6 @@ header {
     }
 
     .wp-block-navigation .wp-block-navigation-item {
-
     }
 
     .wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
@@ -191,8 +190,6 @@ footer .footer_block {
     // background-color: $colour_lightyellow;
 }
 
-
-
 .wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open.wp-block-navigation__responsive-container-open {
     padding: 6px;
 }
@@ -266,8 +263,6 @@ footer .footer_block {
     }
 }
 
-// KSLC     object-position: 0 44%;
-
 // Background position of pages featured img
 // Thank you page
 .page-id-283 .page_featured_img_title_group img {
@@ -276,41 +271,83 @@ footer .footer_block {
 
 // KSL Congo
 .page-id-343 .page_featured_img_title_group img {
-    object-position: 0 55%;
+    object-position: 0 44%;
 }
 
 // Shree School
 .page-id-343 .page_featured_img_title_group img {
-    object-position: 34% 0;
+    object-position: 0 34%;
 }
 // About Us
 .page-id-73 .page_featured_img_title_group img {
-    object-position: 63% 0;
+    object-position: 0 63%;
 }
 
 // Donation
 .page-id-61 .page_featured_img_title_group img {
-    object-position: 39% 0; 
+    object-position: 0 39%;
 }
 
 // What we do page
 .page-id-74 .page_featured_img_title_group img {
-    object-position: 39% 0;
+    object-position: 0 39%;
 }
 
-// Contact us
 .page-id-77 .page_featured_img_title_group img {
-    object-position: 59% 0;
-}
-
-// Cookie Policy Page
-.page-id-480 .page_featured_img_title_group img {
-    object-position: 100% 0;
+    object-position: 0 40%;
 }
 
 // News Page
 .page-id-548 .page_featured_img_title_group img {
-    object-position: 76% 0;
+    object-position: 0 38%;
+}
+
+// MOBILE - Background position of pages featured img
+
+// Thank you page
+@media (min-width: 600px) {
+    .page-id-283 .page_featured_img_title_group img {
+        object-position: 0 63%;
+    }
+
+    // KSL Congo
+    .page-id-343 .page_featured_img_title_group img {
+        object-position: 0 55%;
+    }
+
+    // Shree School
+    .page-id-343 .page_featured_img_title_group img {
+        object-position: 34% 0;
+    }
+    // About Us
+    .page-id-73 .page_featured_img_title_group img {
+        object-position: 63% 0;
+    }
+
+    // Donation
+    .page-id-61 .page_featured_img_title_group img {
+        object-position: 39% 0;
+    }
+
+    // What we do page
+    .page-id-74 .page_featured_img_title_group img {
+        object-position: 39% 0;
+    }
+
+    // Contact us
+    .page-id-77 .page_featured_img_title_group img {
+        object-position: 59% 0;
+    }
+
+    // Cookie Policy Page
+    .page-id-480 .page_featured_img_title_group img {
+        object-position: 100% 0;
+    }
+
+    // News Page
+    .page-id-548 .page_featured_img_title_group img {
+        object-position: 76% 0;
+    }
 }
 
 @media (min-width: 600px) {
