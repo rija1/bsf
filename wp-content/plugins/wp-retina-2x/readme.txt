@@ -5,9 +5,9 @@ Donate link: https://meowapps.com/donation/
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 6.5.7
+Stable tag: 6.5.9
 
-Optimize and manage your images with Perfect Images. Easily replace or regenerate existing images in bulk, set custom sizes, improve performance, create retina versions, and more. Achieve perfect images for your site with ease.
+Optimize your images effortlessly. Replace, regenerate, resize, improve, transform, and achieve perfect images for your site.
 
 == Description ==
 
@@ -50,7 +50,13 @@ The Pro version adds support for Retina for full-size, support for lazy-loading 
 
 == Changelog ==
 
-= 6.5.7 (2024/06/24) =
+= 6.5.9 (2024/06/22) =
+* Fix: Minor issues and code cleanup.
+* Update: Enabled WebP delivery for PNG images.
+* Fix: Converted Palette images before WebP creation to prevent errors.
+* Fix: Corrected sort functionality for Post Title.
+
+= 6.5.7 (2024/05/24) =
 * Fix: Clear logs functionality.
 * Fix: Addressed warnings and meta sizes.
 * Add: AVIF support and Optimizer check for AVIF.

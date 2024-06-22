@@ -55,14 +55,14 @@ class Meow_WR2X_Engine {
 		if ( is_wp_error( $saved ) ) {
 			$error = $saved->get_error_message();
 			trigger_error( "Retina: Could not create/resize image " . $file_path . " to " . $newfile . ": " . $error , E_USER_WARNING );
-			error_log( "Retina: Could not create/resize image " . $file_path . " to " . $newfile . ":" . $error );
+			$this->core->log( "Retina: Could not create/resize image " . $file_path . " to " . $newfile . ":" . $error );
 			return null;
 		}
 		if ( rename( $saved['path'], $newfile ) )
 			$cropped_img_path = $newfile;
 		else {
 			trigger_error( "Retina: Could not move " . $saved['path'] . " to " . $newfile . "." , E_USER_WARNING );
-			error_log( "Retina: Could not move " . $saved['path'] . " to " . $newfile . "." );
+			$this->core->log( "Retina: Could not move " . $saved['path'] . " to " . $newfile . "." );
 			return null;
 		}
 		$new_img_size = getimagesize( $cropped_img_path );
@@ -321,6 +321,16 @@ class Meow_WR2X_Engine {
 
 
 				if ( isset( $meta['sizes'][$name]['width'], $meta['sizes'][$name]['height'] ) ) {
+					$image = imagecreatefromstring( file_get_contents( $originalfile ) );
+					if ( imagecolorstotal( $image ) > 0 ) {
+						$this->core->log( "⚠️ Converting palette image to true color for WebP conversion." );
+						// The image is a palette image, convert it to a true color image
+						$newImage = imagecreatetruecolor( imagesx( $image ), imagesy( $image ) );
+						imagecopy( $newImage, $image, 0, 0, 0, 0, imagesx( $image ), imagesy( $image  ));
+						imagedestroy( $image );
+						imagepng( $newImage, $originalfile );
+						imagedestroy( $newImage );
+					}
 					$this->resize( $originalfile, $meta['sizes'][$name]['width'],
 								$meta['sizes'][$name]['height'], $crop, $webp_file, $customCrop );
 				} else {

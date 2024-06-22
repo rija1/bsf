@@ -66,10 +66,14 @@ class Meow_MWL_Core {
 				$this->renderingMode = 'rewrite';
 
 				// This doesn't work well with the conditional loading of the scripts, so we need to load it anyway.
-				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 				if( !$this->isEnqueued )
 				{
 					$this->log( '⚠️ The scripts were enqueued manually because the OB mode is enabled.' );
+					add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+					if ($this->map !== null) {
+						$this->map->lightbox_added();
+					}
 				}
 				
 			}
@@ -202,7 +206,11 @@ class Meow_MWL_Core {
 			$info = get_transient( $transient_name );
 
 			if ( is_array( $info ) && $info['data']['gps'] != 'N/A' && $this->get_option( 'map', false ) ) {
-				$this->map->lightbox_added();
+				if ($this->map !== null) {
+						$this->map->lightbox_added();
+					} else {
+						$this->log( '❌ The pro version is not installed, but the map option is enabled.' );
+					}
 			}
 
 			if ( $info ) {
@@ -218,7 +226,7 @@ class Meow_MWL_Core {
 		$p = get_post( $id );
 		$meta = wp_get_attachment_metadata( $id );
 
-		if ( empty( $meta ) || empty( $p ) ) {
+		if ( empty( $meta ) || empty( $p )  ) {
 			$message = "No meta was found for this ID.";
 		}
 
@@ -230,6 +238,11 @@ class Meow_MWL_Core {
 		}
 
 		// Check for special metadata (gps, lens)
+		
+		if ( !is_array( $meta['image_meta'] ) ) {
+			$meta['image_meta'] = array();
+		}
+
 		$gps = array_key_exists( 'geo_coordinates', $meta['image_meta'] ) ? $meta['image_meta']['geo_coordinates'] : null;
 		if ( !isset( $gps ) && $this->get_option( 'map', false ) ) {
 			$gps = Meow_MWL_Exif::get_gps_data( $id, $meta );
@@ -237,7 +250,11 @@ class Meow_MWL_Core {
 
 		// Only load the map scripts if we need them
 		if ( !empty( $gps ) && $this->get_option( 'map', false ) ) {
-			$this->map->lightbox_added();
+			if ($this->map !== null) {
+				$this->map->lightbox_added();
+			} else {
+				$this->log( '❌ The pro version is not installed, but the map option is enabled.' );
+			}
 		}
 
 

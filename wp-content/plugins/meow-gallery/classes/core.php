@@ -311,8 +311,12 @@ class Meow_MGL_Core {
 
 			foreach ( $gallery_images as $image ) {
 				if ( !empty( $image['link_href'] ) ) {
+					// If there is a link, we will get the alt from the image id so we have a proper aria-label
+					$aria = get_post_meta( $image['id'], '_wp_attachment_image_alt', true );
+
 					$custom_link_classes = apply_filters( 'mgl_custom_link_classes', '', $image );
-					$html .= '<a class="' . $custom_link_classes . '" href="' . $image['link_href'] . '" target="' . $image['link_target'] . '" rel="' . $image['link_rel'] . '">';
+					$html .= '<a class="' . $custom_link_classes . '" href="' . $image['link_href'] . '" target="' . $image['link_target'] . '" rel="' . $image['link_rel'] . 
+					'" aria-label="' . $aria . '">';
 					$html .= $image['img_html'];
 					$html .= '</a>';
 				}

@@ -30,8 +30,8 @@ class Meow_WR2X_Core {
 		$wr2x_engine = $this->engine;
 
 		$this->set_defaults();
-		$this->init();
-		//add_action( 'plugins_loaded', array( $this, 'init' ) );
+		//$this->init();
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		include( trailingslashit( WR2X_PATH ) . 'classes/api.php' );
 		if ( class_exists( 'MeowPro_WR2X_Core' ) ) {
 			new MeowPro_WR2X_Core( $this, $this->engine );
@@ -50,7 +50,7 @@ class Meow_WR2X_Core {
 		add_filter( 'generate_rewrite_rules', array( 'Meow_WR2X_Admin', 'generate_rewrite_rules' ) );
 		add_filter( 'retina_validate_src', array( $this, 'validate_src' ) );
 		add_filter( 'wp_calculate_image_srcset', array( $this, 'calculate_image_srcset' ), 1000, 5 );
-		add_filter( 'wp_calculate_image_srcset', array( $this, 'replace_jpg_with_webp_in_srcset' ), 1000, 5 );
+		add_filter( 'wp_calculate_image_srcset', array( $this, 'replace_with_webp_in_srcset' ), 1000, 5 );
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
 		if ( $options['image_replace'] ) {
@@ -511,9 +511,11 @@ class Meow_WR2X_Core {
 		return $retinized_srcset;
 	}
 
-	function replace_jpg_with_webp_in_srcset( $sources, $size, $image_src, $image_meta, $attachment_id ) {
-		if ( $this->get_option( 'disable_responsive' ) )
+	function replace_with_webp_in_srcset( $sources, $size, $image_src, $image_meta, $attachment_id ) {
+		if ( $this->get_option( 'disable_responsive' ) ){
 			return null;
+		}
+			
 		if ( empty( $sources ) || $this->get_option( 'webp_method' ) !== 'Responsive' ) {
 			return $sources;
 		}
@@ -530,8 +532,15 @@ class Meow_WR2X_Core {
 			return ( $needle_len === 0 || 0 === substr_compare( $haystack, $needle, - $needle_len ) );
 		};
 
+		$image_extensions = array('jpg', 'jpeg', 'png');
+		$image_extensions = apply_filters('wr2x_replace_ext_in_srcset', $image_extensions);
+
+		$image_extensions_regex = implode('|', array_map(function($ext) {
+			return '\.' . $ext . '$';
+		}, $image_extensions));
+
 		foreach ($sources as &$source) {
-			if ( preg_match('/\.jpg$|\.jpeg$/', $source['url']) ) {
+			if ( preg_match( '/' . $image_extensions_regex . '/', $source['url'] )  ) {
 				$filename = null;
 				foreach ( $sizes as $key => $size_filename ) {
 					if ( $str_ends_with( $source['url'], $size_filename ) ) {
@@ -547,6 +556,7 @@ class Meow_WR2X_Core {
 				$source['url'] = $webp_url;
 			}
 		}
+
 		return $sources;
 	}
 
@@ -921,7 +931,7 @@ class Meow_WR2X_Core {
 				$result .= '<li class="meow-bk-gray" title="' . $this->format_title( $i, $size ) . '">'
 					. self::size_shortname( $i ) . '</li>';
 			else {
-				error_log( "Retina: This status is not recognized: " . $status );
+				$this->log( "Retina: This status is not recognized: " . $status );
 			}
 		}
 		$result .= '</ul>';
@@ -1060,11 +1070,9 @@ class Meow_WR2X_Core {
 		if ( empty( $pathinfo ) || !isset( $pathinfo['dirname'] ) ) {
 			if ( empty( $file ) ) {
 				$this->log( "An empty filename was given to \$this->get_retina()." );
-				error_log( "An empty filename was given to \$this->get_retina()." );
 			}
 			else {
 				$this->log( "Pathinfo is null for " . $file . "." );
-				error_log( "Pathinfo is null for " . $file . "." );
 			}
 			return null;
 		}
@@ -1082,11 +1090,9 @@ class Meow_WR2X_Core {
 		if ( empty( $pathinfo ) || !isset( $pathinfo['dirname'] ) ) {
 			if ( empty( $file ) ) {
 				$this->log( "An empty filename was given to \$this->get_webp()." );
-				error_log( "An empty filename was given to \$this->get_webp()." );
 			}
 			else {
 				$this->log( "Pathinfo is null for " . $file . "." );
-				error_log( "Pathinfo is null for " . $file . "." );
 			}
 			return null;
 		}
@@ -1106,11 +1112,9 @@ class Meow_WR2X_Core {
 		if ( empty( $pathinfo ) || !isset( $pathinfo['dirname'] ) ) {
 			if ( empty( $file ) ) {
 				$this->log( "An empty filename was given to \$this->get_webp_retina()." );
-				error_log( "An empty filename was given to \$this->get_webp_retina()." );
 			}
 			else {
 				$this->log( "Pathinfo is null for " . $file . "." );
-				error_log( "Pathinfo is null for " . $file . "." );
 			}
 			return null;
 		}
@@ -1980,13 +1984,12 @@ class Meow_WR2X_Core {
 		foreach ( $plugin_options as $option => $default ) {
 			// The option already exists
 			if ( array_key_exists( $option, $options ) ) {
-				continue;
-			}else{
-				error_log( '[PERFECT IMAGES] ⚙️ Option does not exist: ' . $option . '. Adding it.' );
+					continue;
 			}
+			//$this->log( '⚙️ Option does not exist: ' . $option . '. Adding it.' );
 			// The option does not exist, so we need to add it.
 			// Let's use the old value if any, or the default value.
-			$options[$option] = get_option( 'wr2x_' . $option, $default );
+			$options[ $option ] = get_option( 'wr2x_' . $option, $default );
 			delete_option( 'wr2x_' . $option );
 			$hasChanges = true;
 		}
