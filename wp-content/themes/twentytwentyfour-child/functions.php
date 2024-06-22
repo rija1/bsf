@@ -15,7 +15,7 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 function my_theme_scripts()
 {
     wp_enqueue_script('bsf', get_stylesheet_directory_uri() . '/js/bsf.js');
-    wp_enqueue_script('bsf', get_stylesheet_directory_uri() . '/js/chart.js');
+    wp_enqueue_script('chartjs', get_stylesheet_directory_uri() . '/js/chart.js');
 }
 add_action('wp_enqueue_scripts', 'my_theme_scripts');
 
