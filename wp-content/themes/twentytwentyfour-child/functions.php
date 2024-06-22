@@ -75,3 +75,16 @@ function website_remove($fields)
    unset($fields['url']);
    return $fields;
 }
+
+add_filter( 'comment_form_default_fields', 'wc_comment_form_change_cookies' );
+function wc_comment_form_change_cookies( $fields ) {
+	$commenter = wp_get_current_commenter();
+
+	$consent   = empty( $commenter['comment_author_email'] ) ? '' : ' checked="checked"';
+
+	$fields['cookies'] = '<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"' . $consent . ' />' .
+					 '<label for="wp-comment-cookies-consent">'.__('Save my name and email in this browser for the next time I comment.
+
+', 'textdomain').'</label></p>';
+	return $fields;
+}
