@@ -201,6 +201,10 @@ footer .footer_block {
 
 // Donation and payment process
 
+.woocommerce-checkout-review-order-table .cart_item {
+    display: none;
+}
+
 .wcdp-variation-heading abbr {
     display: none;
 }
