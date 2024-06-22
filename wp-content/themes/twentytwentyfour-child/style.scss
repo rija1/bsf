@@ -269,8 +269,8 @@ footer .footer_block {
     object-position: 0 63%;
 }
 
-// KSL Congo
-.page-id-335 .page_featured_img_title_group img {
+// KSL Congo - Donate
+.page-id-335 .page_featured_img_title_group img, .page-id-61 .page_featured_img_title_group img {
     object-position: 0 44%;
 }
 
@@ -310,7 +310,7 @@ footer .footer_block {
 // MOBILE - Background position of pages featured img
 
 // Thank you page
-@media (min-width: 600px) {
+@media (max-width: 600px) {
     .page-id-283 .page_featured_img_title_group img {
         object-position: 0 63%;
     }

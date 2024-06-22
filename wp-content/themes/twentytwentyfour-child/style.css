@@ -237,7 +237,7 @@ footer .footer_block {
      object-position: 0 63%;
 }
 
-.page-id-335 .page_featured_img_title_group img {
+.page-id-335 .page_featured_img_title_group img, .page-id-61 .page_featured_img_title_group img {
   -o-object-position: 0 44%;
      object-position: 0 44%;
 }
@@ -277,7 +277,7 @@ footer .footer_block {
      object-position: 0 38%;
 }
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
   .page-id-283 .page_featured_img_title_group img {
     -o-object-position: 0 63%;
        object-position: 0 63%;
