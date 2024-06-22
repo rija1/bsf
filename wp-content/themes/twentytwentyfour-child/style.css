@@ -255,6 +255,11 @@ footer .footer_block {
      object-position: 59% 0;
 }
 
+.page-id-480 .page_featured_img_title_group img {
+  -o-object-position: 100% 0;
+     object-position: 100% 0;
+}
+
 .page-id-548 .page_featured_img_title_group img {
   -o-object-position: 76% 0;
      object-position: 76% 0;
