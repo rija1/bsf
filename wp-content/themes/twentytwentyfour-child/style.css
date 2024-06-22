@@ -213,6 +213,7 @@ footer .footer_block {
   .page_title {
     position: unset;
     max-width: auto;
+    margin-bottom: 15px;
   }
   .page_title h1.has-background {
     border-top-left-radius: none !important;
@@ -250,13 +251,13 @@ footer .footer_block {
 }
 
 .page-id-77 .page_featured_img_title_group img {
-  -o-object-position: 40% 0;
-     object-position: 40% 0;
+  -o-object-position: 60% 0;
+     object-position: 60% 0;
 }
 
 .page-id-548 .page_featured_img_title_group img {
-  -o-object-position: 38% 0;
-     object-position: 38% 0;
+  -o-object-position: 76% 0;
+     object-position: 76% 0;
 }
 
 @media (min-width: 600px) {

@@ -247,6 +247,7 @@ footer .footer_block {
     @media (max-width: 900px) {
         position: unset;
         max-width: auto;
+        margin-bottom: 15px;
         h1.has-background {
             border-top-left-radius: none !important;
         }
@@ -287,12 +288,12 @@ footer .footer_block {
 
 // Contact us
 .page-id-77 .page_featured_img_title_group img {
-    object-position: 40% 0;
+    object-position: 60% 0;
 }
 
 // News Page
 .page-id-548 .page_featured_img_title_group img {
-    object-position: 38% 0;
+    object-position: 76% 0;
 }
 
 @media (min-width: 600px) {
