@@ -201,6 +201,10 @@ footer .footer_block {
 
 // Donation and payment process
 
+.wcdp-variation-heading abbr {
+    display: none;
+}
+
 #wcdp-donation-amount {
     width: calc(100% - 1ch - 40px) !important;
 }
