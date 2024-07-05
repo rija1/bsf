@@ -4,7 +4,7 @@ Tags: lightbox, responsive, exif, media, gps, map, photography, photo, gutenberg
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 5.2.0
+Stable tag: 5.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,24 +12,23 @@ Beautiful Lightbox designed for photography, displaying EXIF data. Highly optimi
 
 == Description ==
 
-Responsive Lightbox designed for photography which can also displays EXIF data. This lightbox is highly optimized and designed to be very fast and elegant. You will love it! Learn more about it here: [Meow Lightbox](https://meowapps.com/meow-lightbox/).
-
-=== KEY FEATURES ===
+Responsive Lightbox designed for photography which can also displays EXIF data. This lightbox is highly optimized and designed to be very fast and elegant. You will love it! Here are the main features:
 
 - Responsive Layout. Looks great on mobile, tablets and bigger screens.
 - Responsive Images. Image resolution itself will adapt to the screen and device.
 - Display Image / EXIF information. Shutter speed, aperture, camera, lens.
 
-== DEMOS ==
-If you want to see how it performs, have a look at those examples.
+What about checking a few examples? Have a look at those:
+- With a Gallery: [Nara Dreamland](https://haikyo.org/nara-dreamland/)
+- Single Photos: [Best Abandoned Places in Japan](https://offbeatjapan.org/best-abandoned-places-2014/)
 
-- With a gallery: [Nara Dreamland](https://haikyo.org/nara-dreamland/)
-- With single photos: [Best Abandoned Places in Japan](https://offbeatjapan.org/best-abandoned-places-2014/)
+By default, the selector is set for the classes '.entry-content, .gallery, .mgl-gallery'. If you need the Lightbox to be active for more selectors, you will need to update the settings. The plugin will apply the lightbox for images contained by the selector.
 
-=== GALLERY ===
 We believe that choice of the gallery system depends on you. We however recommend you to use the [Meow Gallery](https://wordpress.org/plugins/meow-gallery/).
 
-=== PRO ===
+For more information, please check the [official page](https://meowapps.com/meow-lightbox/).
+
+=== Pro Version ===
 Getting the Pro version will support us and the development of the plugin, and also add those features:
 
 - Deep-Linking: allow sharing an URL that will open the Lightbox directly on a specific image.
@@ -37,9 +36,6 @@ Getting the Pro version will support us and the development of the plugin, and a
 - Social Sharing: share the image on social networks.
 - Animation: the Lightbox can be animated when opening and closing.
 - Google Maps: if GPS is available in your image, a map will be available.
-
-=== IMPORTANT ===
-By default, the selector is set for the classes '.entry-content, .gallery, .mgl-gallery'. If you need the Lightbox to be active for more selectors, you will need to update the settings. The plugin will apply the lightbox for images contained by the selector. For more information, please check the [official page](https://meowapps.com/meow-lightbox/).
 
 Languages: English.
 
@@ -57,6 +53,11 @@ Replace all the files. Nothing else to do.
 Please have a look at [Meow Lightbox](https://meowapps.com/meow-lightbox/).
 
 == Changelog ==
+
+= 5.2.1 (2024/06/28) =
+* Update: Optimized the loading and libs loading.
+* Fix: Many minor issues.
+* Fix: Download link was not using the original image.
 
 = 5.2.0 (2024/06/15) =
 * Fix: Avoid loading scripts when not needed.

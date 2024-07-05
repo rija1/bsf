@@ -50,7 +50,10 @@ class Meow_WR2X_Core {
 		add_filter( 'generate_rewrite_rules', array( 'Meow_WR2X_Admin', 'generate_rewrite_rules' ) );
 		add_filter( 'retina_validate_src', array( $this, 'validate_src' ) );
 		add_filter( 'wp_calculate_image_srcset', array( $this, 'calculate_image_srcset' ), 1000, 5 );
+
 		add_filter( 'wp_calculate_image_srcset', array( $this, 'replace_with_webp_in_srcset' ), 1000, 5 );
+		add_filter( 'wp_get_attachment_image_src', array( $this,'replace_with_webp_in_src' ), 1000, 4 );
+
 		add_action( 'after_setup_theme', array( $this, 'add_image_sizes' ) );
 
 		if ( $options['image_replace'] ) {
@@ -438,7 +441,7 @@ class Meow_WR2X_Core {
 			$nodes_count++;
 			$img_pathinfo = $this->get_pathinfo_from_image_src( $tag->getAttribute('src') );
 			$filepath = trailingslashit( $this->get_upload_root() ) . $img_pathinfo;
-			$system_retina = $this->get_retina( $filepath );
+			$system_retina = $this->get_retina( $filepath ) ;
 			if ( !empty( $system_retina ) ) {
 				$retina_pathinfo = $this->cdn_this( ltrim( str_replace( $this->get_upload_root(), "", $system_retina ), '/' ) );
 				$buffer = str_replace( $img_pathinfo, $retina_pathinfo, $buffer );
@@ -508,7 +511,35 @@ class Meow_WR2X_Core {
 			}
 		}
 		$this->log( "WP's srcset: " . $count . " retina files added out of " . $total . " image sizes" );
+
+		
 		return $retinized_srcset;
+	}
+
+	function replace_with_webp_in_src( $image, $attachment_id, $size, $icon ) {
+		if ( $this->get_option( 'disable_responsive' ) ){
+			return null;
+		}
+		if ( $this->get_option( 'webp_method' ) !== 'Responsive' ) {
+			return $image;
+		}
+
+		if ( !is_array( $image ) || empty( $image ) ) {
+			return $image;
+		}
+
+		$upload_dir = wp_upload_dir();
+		$pathinfo = pathinfo( $image[0] );
+		$filename = $pathinfo['basename'];
+		$webp_filename = $filename . $this->webp_avif_extension();
+		
+		$webp_path = trailingslashit( $upload_dir['path'] ) . $webp_filename;
+
+		if ( file_exists( $webp_path ) ) {
+			$image[0] =  trailingslashit( $pathinfo['dirname'] ) . $webp_filename;
+		}
+
+		return $image;
 	}
 
 	function replace_with_webp_in_srcset( $sources, $size, $image_src, $image_meta, $attachment_id ) {
@@ -1078,8 +1109,9 @@ class Meow_WR2X_Core {
 		}
 		$retina_file = trailingslashit( $pathinfo['dirname'] ) . $pathinfo['filename'] .
 			$this->retina_extension() . ( isset( $pathinfo['extension'] ) ? $pathinfo['extension'] : "" );
-		if ( file_exists( $retina_file ) )
+		if ( file_exists( $retina_file ) ){
 			return $retina_file;
+		}
 		$this->log( "Retina file at '{$retina_file}' does not exist." );
 		return null;
 	}
@@ -1123,8 +1155,9 @@ class Meow_WR2X_Core {
 			. $this->retina_extension()
 			. ( isset( $pathinfo['extension'] ) ? $pathinfo['extension'] : "" )
 			. $this->webp_avif_extension();
-		if ( file_exists( $webp_retina_file ) )
+		if ( file_exists( $webp_retina_file ) ){
 			return $webp_retina_file;
+		}
 		$this->log( "WebP Retina file at '{$webp_retina_file}' does not exist." );
 		return null;
 	}
@@ -1163,6 +1196,7 @@ class Meow_WR2X_Core {
 			return $this->get_retina_from_remote_url( $url );
 		$this->log( "Retina PATH: " . $system_retina, true);
 		$retina_url = $this->rewrite_url_to_retina( $url );
+		$retina_url = $this->rewrite_retina_to_optimized( $retina_url );
 		$this->log( "Retina URL: " . $retina_url, true);
 		return $retina_url;
 	}
@@ -1183,6 +1217,27 @@ class Meow_WR2X_Core {
 	function rewrite_url_to_retina( $url ) {
 		$whereisdot = strrpos( $url, '.' );
 		$url = substr( $url, 0, $whereisdot ) . $this->retina_extension() . substr( $url, $whereisdot + 1 );
+
+		return $url;
+	}
+
+	function rewrite_retina_to_optimized( $url ) {
+		if ( $this->get_option( 'disable_responsive' ) ){
+			return $url;
+		}
+		if ( $this->get_option( 'webp_method' ) !== 'Responsive' ) {
+			return $url;
+		}
+
+		$opt_url = $url . $this->webp_avif_extension();
+		//check if the file exists
+		$opt_path = $this->from_url_to_system( $opt_url );
+		if ( $opt_path ) {
+			$this->log( "🟢 Optimized URL for Retina: " . $opt_url );
+			return $opt_url;
+		}
+
+		//if the file doesn't exist, return the original URL
 		return $url;
 	}
 

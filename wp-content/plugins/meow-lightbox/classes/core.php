@@ -362,6 +362,14 @@ class Meow_MWL_Core {
 			$filters = new Meow_MWL_Filters();
 		}
 
+		// Prepare the download link based on the big image option
+		$big_image = $this->get_option( 'wordpress_big_image', false );
+		if ( $big_image && function_exists( 'wp_get_original_image_url' ) ) {
+			$dl = wp_get_original_image_url( $id );
+		} else {
+			$dl = wp_get_attachment_url( $id );
+		}
+
 		$info = array(
 			'success' => true,
 			'file' => $file,
@@ -371,7 +379,7 @@ class Meow_MWL_Core {
 				'width' => isset($meta['width']) ? $meta['width'] : null, 
 				'height' => isset($meta['height']) ? $meta['height'] : null 
 			),
-			'download_link' => apply_filters( 'mwl_download_link', wp_get_attachment_url( $id ), $id, $meta ),
+			'download_link' => apply_filters( 'mwl_download_link', $dl, $id, $meta ),
 			'data' => array(
 				'id' => (int)$id,
 				'title' => apply_filters( 'mwl_img_title', $title, $id, $meta ),

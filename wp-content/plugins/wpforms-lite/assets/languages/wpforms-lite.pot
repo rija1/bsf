@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WPForms Lite 1.8.9.2\n"
+"Project-Id-Version: WPForms Lite 1.8.9.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpforms-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-18T09:08:35+00:00\n"
+"POT-Creation-Date: 2024-07-02T16:17:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: wpforms-lite\n"
@@ -3049,27 +3049,27 @@ msgstr ""
 
 #: includes/emails/class-emails.php:597
 #: src/Admin/Education/Fields.php:101
-#: src/Emails/Notifications.php:722
+#: src/Emails/Notifications.php:751
 #: src/Integrations/Gutenberg/FormSelector.php:641
 msgid "Page Break"
 msgstr ""
 
 #: includes/emails/class-emails.php:605
-#: src/Emails/Notifications.php:732
+#: src/Emails/Notifications.php:761
 msgid "HTML / Code Block"
 msgstr ""
 
 #: includes/emails/class-emails.php:613
 #: includes/integrations.php:44
 #: src/Admin/Education/Fields.php:125
-#: src/Emails/Notifications.php:742
+#: src/Emails/Notifications.php:771
 msgid "Content"
 msgstr ""
 
 #: includes/emails/class-emails.php:639
 #: includes/emails/class-emails.php:685
-#: src/Emails/Notifications.php:497
-#: src/Emails/Notifications.php:643
+#: src/Emails/Notifications.php:503
+#: src/Emails/Notifications.php:655
 #: src/SmartTags/SmartTag/FieldHtmlId.php:38
 msgid "(empty)"
 msgstr ""
@@ -3183,7 +3183,7 @@ msgstr ""
 #: includes/fields/class-base.php:1557
 #: includes/fields/class-base.php:1714
 #: includes/fields/class-select.php:309
-#: src/Emails/Notifications.php:1037
+#: src/Emails/Notifications.php:1066
 #: src/Forms/Fields/PaymentSelect/Field.php:296
 msgid "Modern"
 msgstr ""
@@ -3191,7 +3191,7 @@ msgstr ""
 #: includes/fields/class-base.php:1558
 #: includes/fields/class-base.php:1715
 #: includes/fields/class-select.php:308
-#: src/Emails/Notifications.php:1027
+#: src/Emails/Notifications.php:1056
 #: src/Forms/Fields/PaymentSelect/Field.php:295
 msgid "Classic"
 msgstr ""
@@ -5291,7 +5291,7 @@ msgid "Thai Baht"
 msgstr ""
 
 #. translators: %1$s - payment amount; %2$d - payment quantity.
-#: includes/functions/payments.php:639
+#: includes/functions/payments.php:673
 msgid "%1$s &times; %2$d"
 msgstr ""
 
@@ -8810,23 +8810,23 @@ msgid "You cannot send emails with WPForms\\Emails\\Mailer until init/admin_init
 msgstr ""
 
 #. translators: %1$d - field ID.
-#: src/Emails/Notifications.php:906
+#: src/Emails/Notifications.php:935
 msgid "Field ID #%1$s"
 msgstr ""
 
-#: src/Emails/Notifications.php:1032
+#: src/Emails/Notifications.php:1061
 msgid "Compact"
 msgstr ""
 
-#: src/Emails/Notifications.php:1042
+#: src/Emails/Notifications.php:1071
 msgid "Elegant"
 msgstr ""
 
-#: src/Emails/Notifications.php:1047
+#: src/Emails/Notifications.php:1076
 msgid "Tech"
 msgstr ""
 
-#: src/Emails/Notifications.php:1052
+#: src/Emails/Notifications.php:1081
 msgid "Plain Text"
 msgstr ""
 
@@ -8851,7 +8851,7 @@ msgstr ""
 msgid "Your Weekly WPForms Summary for %s"
 msgstr ""
 
-#: src/Forms/Akismet.php:317
+#: src/Forms/Akismet.php:318
 msgid "Anti-spam verification failed, please try again later."
 msgstr ""
 

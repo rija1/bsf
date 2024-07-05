@@ -457,14 +457,16 @@ class Notifications extends Mailer {
 			 * Filter the field message before it is added to the email message.
 			 *
 			 * @since 1.8.9
+			 * @since 1.8.9.3 The $notifications parameter was added.
 			 *
-			 * @param string $field_message     Field message.
-			 * @param array  $field             Field data.
-			 * @param bool   $show_empty_fields Whether to display empty fields in the email.
-			 * @param array  $form_data         Form data.
-			 * @param array  $fields            List of submitted fields.
+			 * @param string        $field_message     Field message.
+			 * @param array         $field             Field data.
+			 * @param bool          $show_empty_fields Whether to display empty fields in the email.
+			 * @param array         $form_data         Form data.
+			 * @param array         $fields            List of submitted fields.
+			 * @param Notifications $notifications     Notifications instance.
 			 */
-			$message .= apply_filters( 'wpforms_emails_notifications_field_message_plain', $field_message, $field, $show_empty_fields, $this->form_data, $this->fields );
+			$message .= apply_filters( 'wpforms_emails_notifications_field_message_plain', $field_message, $field, $show_empty_fields, $this->form_data, $this->fields, $this );
 		}
 
 		// Trim the message and return.
@@ -490,6 +492,10 @@ class Notifications extends Mailer {
 		$message = '';
 
 		if ( ! $show_empty_fields && ( ! isset( $field['value'] ) || (string) $field['value'] === '' ) ) {
+			return $message;
+		}
+
+		if ( $this->is_calculated_field_hidden( $field_id ) ) {
 			return $message;
 		}
 
@@ -594,15 +600,17 @@ class Notifications extends Mailer {
 			 * Filter the field message before it is added to the email message.
 			 *
 			 * @since 1.8.9
+			 * @since 1.8.9.3 The $notifications parameter was added.
 			 *
-			 * @param string $field_message     Field message.
-			 * @param array  $field             Field data.
-			 * @param bool   $show_empty_fields Whether to display empty fields in the email.
-			 * @param array  $other_fields      List of field types.
-			 * @param array  $form_data         Form data.
-			 * @param array  $fields            List of submitted fields.
+			 * @param string        $field_message     Field message.
+			 * @param array         $field             Field data.
+			 * @param bool          $show_empty_fields Whether to display empty fields in the email.
+			 * @param array         $other_fields      List of field types.
+			 * @param array         $form_data         Form data.
+			 * @param array         $fields            List of submitted fields.
+			 * @param Notifications $notifications     Notifications instance.
 			 */
-			$message .= apply_filters( 'wpforms_emails_notifications_field_message_html', $field_message, $field, $show_empty_fields, $other_fields, $this->form_data, $this->fields );
+			$message .= apply_filters( 'wpforms_emails_notifications_field_message_html', $field_message, $field, $show_empty_fields, $other_fields, $this->form_data, $this->fields, $this );
 		}
 
 		return $message;
@@ -636,6 +644,10 @@ class Notifications extends Mailer {
 		} else {
 			// Handle fields that are not empty in $this->fields.
 			if ( ! $show_empty_fields && ( ! isset( $this->fields[ $field_id ]['value'] ) || (string) $this->fields[ $field_id ]['value'] === '' ) ) {
+				return '';
+			}
+
+			if ( $this->is_calculated_field_hidden( $field_id ) ) {
 				return '';
 			}
 
@@ -675,6 +687,23 @@ class Notifications extends Mailer {
 			[ $field_type, $field_name, $field_val ],
 			$this->field_template
 		);
+	}
+
+	/**
+	 * Check if a calculated field is hidden.
+	 *
+	 * @since 1.8.9.5
+	 *
+	 * @param int $field_id Field ID.
+	 *
+	 * @return bool
+	 */
+	private function is_calculated_field_hidden( $field_id ): bool {
+
+		return ! empty( $this->form_data['fields'][ $field_id ]['calculation_is_enabled'] ) &&
+			! empty( $this->form_data['fields'][ $field_id ]['calculation_code_php'] ) &&
+			isset( $this->fields[ $field_id ]['visible'] )
+			&& ! $this->fields[ $field_id ]['visible'];
 	}
 
 	/**

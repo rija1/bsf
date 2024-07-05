@@ -5,7 +5,7 @@ Donate link: https://meowapps.com/donation/
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 6.5.9
+Stable tag: 6.6.1
 
 Optimize your images effortlessly. Replace, regenerate, resize, improve, transform, and achieve perfect images for your site.
 
@@ -50,7 +50,11 @@ The Pro version adds support for Retina for full-size, support for lazy-loading 
 
 == Changelog ==
 
-= 6.5.9 (2024/06/22) =
+= 6.6.1 (2024/06/29) =
+* Update: Enhanced the way WebP and AVIF images are handled.
+* Update: Code was cleaned up and optimized for better performance.
+
+= 6.6.0 (2024/06/23) =
 * Fix: Minor issues and code cleanup.
 * Update: Enabled WebP delivery for PNG images.
 * Fix: Converted Palette images before WebP creation to prevent errors.
