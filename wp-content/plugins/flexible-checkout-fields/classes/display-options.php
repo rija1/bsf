@@ -358,6 +358,10 @@ class Flexible_Checkout_Fields_Disaplay_Options {
 		$cf_fields = $this->getCheckoutFields( [], $address_type, $order );
 
 		foreach ( $cf_fields as $field_key => $field ) {
+			if ( ! isset( $field['name'] ) ) {
+				continue;
+			}
+
 			$val = wpdesk_get_order_meta( $order, '_' . $field_key, true );
 			if ( empty( $val ) && isset( $fields[ $field_key ] ) ) {
 				$val = $fields[ $field_key ];

@@ -13,6 +13,6 @@ class NullResolver implements \FcfVendor\WPDesk\View\Resolver\Resolver
 {
     public function resolve($name, \FcfVendor\WPDesk\View\Renderer\Renderer $renderer = null)
     {
-        throw new \FcfVendor\WPDesk\View\Resolver\Exception\CanNotResolve("Null Cannot resolve");
+        throw new \FcfVendor\WPDesk\View\Resolver\Exception\CanNotResolve('Null Cannot resolve');
     }
 }

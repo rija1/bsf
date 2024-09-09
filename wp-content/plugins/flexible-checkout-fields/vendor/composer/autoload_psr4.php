@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'WPDesk\\FCF\\Free\\' => array($baseDir . '/src'),
-    'WPDesk\\Dashboard\\' => array($vendorDir . '/wpdesk/ltv-dashboard-widget/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/lib/Doctrine/Deprecations'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib/Doctrine/Common/Collections'),

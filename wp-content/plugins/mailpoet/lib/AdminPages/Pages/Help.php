@@ -18,30 +18,19 @@ use MailPoet\Newsletter\Url as NewsletterURL;
 use MailPoet\Router\Endpoints\CronDaemon;
 use MailPoet\Services\Bridge;
 use MailPoet\SystemReport\SystemReportCollector;
+use MailPoet\Util\DataInconsistency\DataInconsistencyController;
 use MailPoet\WP\DateTime;
 use MailPoet\WP\Functions as WPFunctions;
 
 class Help {
-  /** @var PageRenderer */
-  private $pageRenderer;
-
-  /** @var CronHelper */
-  private $cronHelper;
-
-  /** @var SystemReportCollector */
-  private $systemReportCollector;
-
-  /** @var Bridge $bridge */
-  private $bridge;
-
-  /*** @var ScheduledTasksRepository */
-  private $scheduledTasksRepository;
-
-  /*** @var SendingQueuesRepository */
-  private $sendingQueuesRepository;
-
-  /*** @var NewsletterURL */
-  private $newsletterUrl;
+  private PageRenderer $pageRenderer;
+  private CronHelper $cronHelper;
+  private SystemReportCollector $systemReportCollector;
+  private Bridge $bridge;
+  private ScheduledTasksRepository $scheduledTasksRepository;
+  private SendingQueuesRepository $sendingQueuesRepository;
+  private DataInconsistencyController $dataInconsistencyController;
+  private NewsletterURL $newsletterUrl;
 
   public function __construct(
     PageRenderer $pageRenderer,
@@ -50,6 +39,7 @@ class Help {
     Bridge $bridge,
     ScheduledTasksRepository $scheduledTasksRepository,
     SendingQueuesRepository $sendingQueuesRepository,
+    DataInconsistencyController $dataInconsistencyController,
     NewsletterURL $newsletterUrl
   ) {
     $this->pageRenderer = $pageRenderer;
@@ -58,6 +48,7 @@ class Help {
     $this->bridge = $bridge;
     $this->scheduledTasksRepository = $scheduledTasksRepository;
     $this->sendingQueuesRepository = $sendingQueuesRepository;
+    $this->dataInconsistencyController = $dataInconsistencyController;
     $this->newsletterUrl = $newsletterUrl;
   }
 
@@ -102,6 +93,7 @@ class Help {
         'systemInfoData' => $systemInfoData,
         'systemStatusData' => $systemStatusData,
         'actionSchedulerData' => $this->getActionSchedulerData(),
+        'dataInconsistencies' => $this->dataInconsistencyController->getInconsistentDataStatus(),
       ]
     );
   }
@@ -138,31 +130,40 @@ class Help {
   }
 
   public function buildTaskData(ScheduledTaskEntity $task): array {
-    $queue = $newsletter = null;
+    $queue = $newsletter = $subscriber = null;
     if ($task->getType() === SendingQueue::TASK_TYPE) {
       $queue = $this->sendingQueuesRepository->findOneBy(['task' => $task]);
       $newsletter = $queue ? $queue->getNewsletter() : null;
+      $subscribers = $task->getSubscribers();
+      // We only show subscriber's email for 1:1 emails (e.g. automations) and not bulk campaigns
+      if ($subscribers->count() === 1) {
+        $subscriber = $subscribers->first() ? $subscribers->first()->getSubscriber() : null;
+      }
     }
     return [
       'id' => $task->getId(),
       'type' => $task->getType(),
       'priority' => $task->getPriority(),
-      'updated_at' => $task->getUpdatedAt()->format(DateTime::DEFAULT_DATE_TIME_FORMAT),
-      'scheduled_at' => $task->getScheduledAt() ?
+      'updatedAt' => $task->getUpdatedAt()->format(DateTime::DEFAULT_DATE_TIME_FORMAT),
+      'scheduledAt' => $task->getScheduledAt() ?
         $task->getScheduledAt()->format(DateTime::DEFAULT_DATE_TIME_FORMAT)
+        : null,
+      'cancelledAt' => $task->getCancelledAt() ?
+        $task->getCancelledAt()->format(DateTime::DEFAULT_DATE_TIME_FORMAT)
         : null,
       'status' => $task->getStatus(),
       'newsletter' => $queue && $newsletter ? [
-        'newsletter_id' => $newsletter->getId(),
-        'queue_id' => $queue->getId(),
+        'newsletterId' => $newsletter->getId(),
+        'queueId' => $queue->getId(),
         'subject' => $queue->getNewsletterRenderedSubject() ?: $newsletter->getSubject(),
-        'preview_url' => $this->newsletterUrl->getViewInBrowserUrl($newsletter, null, $queue),
+        'previewUrl' => $this->newsletterUrl->getViewInBrowserUrl($newsletter, null, $queue),
       ] : [
-        'newsletter_id' => null,
-        'queue_id' => null,
+        'newsletterId' => null,
+        'queueId' => null,
         'subject' => null,
-        'preview_url' => null,
+        'previewUrl' => null,
       ],
+      'subscriberEmail' => $subscriber ? $subscriber->getEmail() : null,
     ];
   }
 }

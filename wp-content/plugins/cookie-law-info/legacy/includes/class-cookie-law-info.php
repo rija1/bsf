@@ -73,7 +73,7 @@ class Cookie_Law_Info {
 		if ( defined( 'CLI_VERSION' ) ) {
 			$this->version = CLI_VERSION;
 		} else {
-			$this->version = '3.2.4';
+			$this->version = '3.2.6';
 		}
 		$this->plugin_name = 'cookie-law-info';
 
@@ -147,6 +147,8 @@ class Cookie_Law_Info {
 		 * The class responsible for adding compatibility to third party plugins
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'third-party/class-cookie-law-info-third-party.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cookie-law-info-review-request.php';
 
 		$this->loader = new Cookie_Law_Info_Loader();
 

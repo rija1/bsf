@@ -91,6 +91,9 @@ final class DashboardWidget
     }
     public function hooks()
     {
+        if (\apply_filters('wpdesk/ltvdashboard/disable', \false) === \true) {
+            return;
+        }
         if (\apply_filters(self::MUTEX_HOOK, \false) === \false) {
             \add_filter(self::MUTEX_HOOK, '__return_true');
             \add_action('wp_dashboard_setup', [$this, 'add_widget']);

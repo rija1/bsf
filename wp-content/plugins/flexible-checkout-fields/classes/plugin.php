@@ -177,7 +177,7 @@ class Flexible_Checkout_Fields_Plugin extends \FcfVendor\WPDesk\PluginBuilder\Pl
 			10
 		);
 
-		add_filter( 'flexible_chekout_fields_fields', [ $this, 'getCheckoutFields' ], 10, 2 );
+		add_filter( 'flexible_checkout_fields_section_fields', [ $this, 'getCheckoutFields' ], 10, 2 );
 
 		add_action( 'woocommerce_default_address_fields', [ $this, 'woocommerce_default_address_fields' ], 9999 );
 		add_filter( 'woocommerce_get_country_locale', [ $this, 'woocommerce_get_country_locale' ], 9999 );
@@ -373,7 +373,22 @@ class Flexible_Checkout_Fields_Plugin extends \FcfVendor\WPDesk\PluginBuilder\Pl
 	}
 
 	public function get_fields() {
-		return apply_filters( 'flexible_checkout_fields_fields', $this->fields );
+		/**
+		 * This filter modifies the available checkout field types.
+		 *
+		 * @since 4.1.12
+		 *
+		 * @param array $fields available field types.
+		 */
+		$fields = apply_filters( 'flexible_checkout_fields_field_types', $this->fields );
+
+		// old filter.
+		if ( has_filter( 'flexible_checkout_fields_fields' ) ) {
+			$fields = apply_filters( 'flexible_checkout_fields_fields', $fields );
+			_deprecated_hook( 'flexible_checkout_fields_fields', '4.1.12', 'flexible_checkout_fields_field_types', 'This filter is deprecated. Please use the new filter "flexible_checkout_fields_field_types" instead.' );
+		}
+
+		return $fields;
 	}
 
 

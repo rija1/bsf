@@ -1,11 +1,11 @@
 === Perfect Images (Manage Image Sizes, Thumbnails, Replace, Retina) ===
 Contributors: TigrouMeow
-Tags: retina, images, replace, size, thumbnail, regenerate, sizes, high-dpi
-Donate link: https://meowapps.com/donation/
+Tags: retina, images, replace, thumbnail, regenerate
+Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 6.6.1
+Stable tag: 6.6.3
 
 Optimize your images effortlessly. Replace, regenerate, resize, improve, transform, and achieve perfect images for your site.
 
@@ -49,6 +49,13 @@ The Pro version adds support for Retina for full-size, support for lazy-loading 
 3. Check if it works! - if it doesn't, read the FAQ, the tutorial, and check the forums.
 
 == Changelog ==
+
+= 6.6.3 (2024/08/01) =
+* Fix: Make sure image is created prior to palette conversion.
+* Fix: Disable WebP when Optimized Images is disabled.
+
+= 6.6.2 (2024/07/07) =
+* Fix: Issue with Responsive Image.
 
 = 6.6.1 (2024/06/29) =
 * Update: Enhanced the way WebP and AVIF images are handled.

@@ -130,16 +130,16 @@ if ( ! function_exists( 'wps_sfw_susbcription_calculate_time' ) ) {
 		$wps_next_date = 0;
 		switch ( $wps_interval ) {
 			case 'day':
-				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, intval( $wps_interval_count ) );
+				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, $wps_interval_count  );
 				break;
 			case 'week':
-				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, intval( $wps_interval_count ) * 7 );
+				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, $wps_interval_count * 7 );
 				break;
 			case 'month':
-				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, 0, intval( $wps_interval_count ) );
+				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, 0,  $wps_interval_count  );
 				break;
 			case 'year':
-				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, 0, 0, intval( $wps_interval_count ) );
+				$wps_next_date = wps_sfw_get_timestamp( $wps_curr_time, 0, 0, $wps_interval_count );
 				break;
 			default:
 		}
@@ -160,12 +160,16 @@ if ( ! function_exists( 'wps_sfw_get_timestamp' ) ) {
 	 * @param int $wps_years wps_years.
 	 */
 	function wps_sfw_get_timestamp( $wps_curr_time, $wps_days = 0, $wps_months = 0, $wps_years = 0 ) {
-
-		$wps_curr_time = strtotime( '+' . $wps_days . ' days', $wps_curr_time );
-		$wps_curr_time = strtotime( '+' . $wps_months . ' month', $wps_curr_time );
-		$wps_curr_time = strtotime( '+' . $wps_years . ' year', $wps_curr_time );
-		return $wps_curr_time;
-	}
+		
+        if ( $wps_days ) {
+            $wps_curr_time = strtotime( '+' . (int) $wps_days . ' days', $wps_curr_time );
+        } elseif( $wps_months ) {
+            $wps_curr_time = strtotime( '+' . (int) $wps_months . ' month', $wps_curr_time );
+        } elseif( $wps_years ) {
+            $wps_curr_time = strtotime( '+' . (int) $wps_years . ' year', $wps_curr_time );
+        }
+        return $wps_curr_time;
+    }
 }
 
 if ( ! function_exists( 'wps_sfw_check_valid_subscription' ) ) {
@@ -506,7 +510,7 @@ if ( ! function_exists( 'wps_sfw_get_time_interval' ) ) {
 	 * @since    1.0.0
 	 */
 	function wps_sfw_get_time_interval( $wps_sfw_subscription_number, $wps_sfw_subscription_interval ) {
-
+		$wps_sfw_subscription_number = (int) $wps_sfw_subscription_number;
 		$wps_price_html = '';
 		switch ( $wps_sfw_subscription_interval ) {
 			case 'day':
@@ -539,7 +543,7 @@ if ( ! function_exists( 'wps_sfw_get_time_interval_for_price' ) ) {
 	 * @since    1.0.0
 	 */
 	function wps_sfw_get_time_interval_for_price( $wps_sfw_subscription_number, $wps_sfw_subscription_interval ) {
-		$wps_number = $wps_sfw_subscription_number;
+		$wps_number = (int) $wps_sfw_subscription_number;
 		if ( 1 == $wps_sfw_subscription_number ) {
 			$wps_sfw_subscription_number = '';
 		}
@@ -797,14 +801,6 @@ if ( ! function_exists( 'wps_sfw_get_subscription_supported_payment_method' ) ) 
 					'slug' => 'woocommerce-gateway-stripe',
 					'is_activated' => ! empty( is_plugin_active( 'woocommerce-gateway-stripe/woocommerce-gateway-stripe.php' ) ) ? true : false,
 				),
-				array(
-					'id' => 'ppec_paypal',
-					'name' => __( 'WooCommerce PayPal Checkout Payment Gateway', 'subscriptions-for-woocommerce' ),
-					'url' => 'https://wordpress.org/plugins/woocommerce-gateway-paypal-express-checkout/',
-					'slug' => 'woocommerce-gateway-paypal-express-checkout',
-					'is_activated' => ! empty( is_plugin_active( 'woocommerce-gateway-paypal-express-checkout/woocommerce-gateway-paypal-express-checkout.php' ) ) ? true : false,
-				),
-
 			);
 
 		$gateway = apply_filters( 'wps_sfw_supported_data_payment_for_configuration', $gateway );
@@ -876,7 +872,7 @@ if ( ! function_exists( 'wps_sfw_is_woocommerce_tax_enabled' ) ) {
 		return false; // Taxes are not enabled or WooCommerce is not active.
 	}
 }
-if ( ! function_exists( 'wps_sfw_is_woocommerce_tax_enabled' ) ) {
+if ( ! function_exists( 'wps_sfw_order_has_subscription' ) ) {
 	/**
 	 * Check if order contain subscrption product.
 	 *
@@ -895,7 +891,7 @@ if ( ! function_exists( 'wps_sfw_is_woocommerce_tax_enabled' ) ) {
 				$product_id = $item->get_variation_id();
 			}
 			$product = wc_get_product( $product_id );
-			if ( wps_sfw_check_product_is_subscription( $cart_item['data'] ) ) {
+			if ( wps_sfw_check_product_is_subscription( $product ) ) {
 				$wps_has_subscription = true;
 				break;
 			}

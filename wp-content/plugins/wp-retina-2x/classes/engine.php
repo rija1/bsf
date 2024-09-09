@@ -322,6 +322,12 @@ class Meow_WR2X_Engine {
 
 				if ( isset( $meta['sizes'][$name]['width'], $meta['sizes'][$name]['height'] ) ) {
 					$image = imagecreatefromstring( file_get_contents( $originalfile ) );
+
+					if ( $image === false ) {
+						$this->core->log( "[ERROR] Could not create image from file '{$originalfile}'. The file may not be a valid image or the format may not be supported." );
+						return $meta;
+					}
+					
 					if ( imagecolorstotal( $image ) > 0 ) {
 						$this->core->log( "⚠️ Converting palette image to true color for WebP conversion." );
 						// The image is a palette image, convert it to a true color image

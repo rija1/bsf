@@ -3,15 +3,15 @@ Contributors: flinnn
 Tags: donation, fundraising, charity, woocommerce donation, recurring donation
 Donate link: https://wcdp.jonh.eu/documentation/support/contact/
 Requires at least: 5.8
-Tested up to: 6.4
-Stable tag: 1.3.1
+Tested up to: 6.5
+Stable tag: 1.3.2
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-== Description ==
+100% free donation system for your fundraising that supports recurring donations and more
 
-=== 100% free donation system for your fundraising that supports recurring donations and more ===
+== Description ==
 
 [🚀 Demos](https://wcdp.jonh.eu/demos/demo-style-1/) | [📚 Docs](https://wcdp.jonh.eu/documentation/) | [🏁 Getting Started](https://wcdp.jonh.eu/documentation/getting-started/first-steps/)
 
@@ -30,11 +30,11 @@ Unlock the potential of WooCommerce for your charity or fundraising efforts:
 * 🏆 **Donation Leaderboard**: Showcase top donors with a [donor wall](https://wcdp.jonh.eu/documentation/usage/donation-leaderboard/), recognizing and motivating generous contributions.
 * 🆓 **100% Free & Open Source**: No platform fees or subscriptions, ensuring accessibility for charities of all sizes!
 
-= 🌟 The Ultimate Fundraising Solution =
+= 🌟 The Ultimate WooCommerce Donation Solution =
 
-Harness the power of WooCommerce for online fundraising, crowdfunding, and donor management. This fundraising & donation plugin is a free alternative to tools like Patreon, Donorbox, GoFundMe or GiveWP. **There are no platform fees or subscriptions.**
+Harness the power of WooCommerce for online fundraising, crowdfunding, and donor management. This WooCommerce donation plugin is a free alternative to tools like Patreon, Donorbox, GoFundMe or GiveWP.
 
-> **100% free**, **open source** and **no platform fees**. There are **no paid extensions** for Donation Platform for WooCommerce.
+> **Free**, **open source** and **no platform fees**. There are **no paid extensions** for Donation Platform for WooCommerce.
 
 == 🎯 Essential Fundraising Features 🎯 ==
 
@@ -51,7 +51,7 @@ Harness the power of WooCommerce for online fundraising, crowdfunding, and donor
 * 🔄 **Unlimited Integrations**: Seamlessly integrate with CRM, Marketing & Analytics tools for comprehensive insights.
 * 🆓 **Free & Open Source**: A no-fee solution for charities, ensuring every penny counts towards the cause.
 
-> **Note**: Donation Platform for WooCommerce modifies WooCommerce for donation purposes. While it doesn't change WooCommerce's core functionality, it alters user frontend text. To use it parallelly with a regular store, enable compatibility mode or use a separate WordPress installation.
+> **Note**: Donation Platform for WooCommerce modifies WooCommerce for donation purposes. While it doesn't change WooCommerce's core functionality, it alters user frontend text. To use WooCommerce donations in parallel with a regular store, enable compatibility mode or use a separate WordPress installation.
 
 === Links ===
 
@@ -76,7 +76,7 @@ Harness the power of WooCommerce for online fundraising, crowdfunding, and donor
 
 == 🌟 Even More Free Features 🌟 ==
 
-Donation Platform for WooCommerce: Fundraising & Donation Management is a powerful and versatile fundraising solution for your charity.
+Donation Platform for WooCommerce is a powerful and versatile fundraising solution for your charity.
 A large part of the fundraising features arise through the use of WooCommerce, which allows your charity to benefit directly from the incredibly diverse ecosystem around it.
 Thanks to its extensive features, the Fundraising & Donation Platform is suitable for charities, non-profit organizations, political fundraisers, individuals and more.
 
@@ -116,7 +116,7 @@ Thanks to its extensive features, the Fundraising & Donation Platform is suitabl
 
 === Donation Platform for WooCommerce: Fundraising & Donation Management: Motivation ===
 
-Why does the world need this donation & fundraising plugin for WooCommerce?
+Why does the world need this WooCommerce donation plugin?
 Hands down, WooCommerce is the most mature eCommerce solution. It is supported by all other major systems (CRM, Analytics, Marketing, Accounting and more) and offers numerous possibilities to customize the behavior to your needs.
 
 So it doesn't make sense to reprogram all the features already implemented by WooCommerce for a donation and fundraising platform again and worse. Instead, you just customize the look and in some places the behavior of WooCommerce and you get a comprehensive fundraising, crowdfunding, crowdsourcing and donation solution for your charity.
@@ -158,19 +158,48 @@ To set up recurring donations, please also install Subscriptions for WooCommerce
 
 WooCommerce PDF Invoices & Packing Slips is a free and open source WordPress plugin you can use to send out your tax-deductible receipts & thank you certificates. Please follow this guide to set up donation receipts: [Set up donation receipts](https://wcdp.jonh.eu/documentation/integrations/donation-receipts-with-woocommerce-pdf-invoices-packing-slips/)
 
-= Why can’t I run a donation platform and a webshop with WooCommerce in parallel? =
+= How can I run a normal shop in parallel with Donation Platform for WooCommerce? =
 
-In fact, Donation Platform for WooCommerce does not change the core functionality of WooCommerce, so you can continue to sell products normally. However, the wording in the user frontend has been adjusted. For example, the order summary is now called “Your Donation” instead of “Your Order”, the title of the order history and the texts of the emails have also been adjusted accordingly.
-If this is not a problem for you, you can continue to sell normal products. Otherwise, my recommendation would be that you use a WordPress multisite or a separate WordPress installation for the donation page. Or you can use the free Loco Translate plugin to customize the texts.
+If you want to disable the wording changes applied by Donation Platform for WooCommerce you can enable to compatibility mode in the plugin's settings.
 
 == Changelog ==
 Active development of Donation Platform for WooCommerce: Fundraising & Donation Management is handled [on GitHub](https://github.com/jonas-hoebenreich/wc-donation-platform/).
 
-= 1.3.1 2024-01-28 =
+= 1.3.2 =
+new: add [wcdp_order_counter] shortcode that allows you to display the number of orders to a product
+new: add sample language to Privacy Policy Guide page
+tweak: improved invalid nonce handling
+tweak: mark link as rel="nofollow" for improved SEO
+tweak: use net revenue (excl. shipping etc.) to calculate donation revenue in progress bar
+tweak: update supported WP version to 6.5
+tweak: update supported WC version to 9.0.2
+tweak: add error message to AJAX donation form / progress bar render
+tweak: add blueprint.json for WordPress playground
+tweak: decrease priority of filename filter
+tweak: resolve js errors by using optional chaining operator
+tweak: update templates
+tweak: resolve WordPress.WP.I18n.MissingTranslatorsComment warnings
+tweak: improve review CTA
+tweak: add newsletter subscription notice
+fix: layout issue of progress bar shortcode style 1
+fix: remove dependencies from js/css files to improve compatibility with some themes
+fix: make sure single product pages are not overwritten by theme
+fix: checkout filter now returns the original value
+fix: improved compatibility with rankmath SEO plugin on Product Pages
+fix: fix Thank you certificate not sending
+fix: remove strict type declarations
+fix: wcdp_checkout_donation_calculation being called too early
+fix: leaderboard "Show more" button no longer triggers the donation form
+fix: replace deprecated function
+fix: skip orders in Leaderboard that are not of type WC_ORDER
+fix: unexpected price change for shipping fee leads to errors
+fix: fix js error on booking success page
+fix: improve error messages
+
+= 1.3.1 2024-01-30 2024-01-30 =
 new: new progress bar styles
 new: use "current" in progress & leaderboard shortcode to use current page id
 new: donation product is added to the checkout on page load, improving compatibility with WooCommerce Gutenberg Checkout Block
-tweak: add to cart before checkout is loaded
 tweak: compatibility with v3.7.6 of PDF Invoices & Packing Slips for WooCommerce
 tweak: set supported WP version to 6.4
 tweak: set supported WooCommerce version to 8.5.2

@@ -7,14 +7,27 @@ if ( !class_exists( 'MeowCommon_Ratings' ) ) {
 		public $mainfile; 	// plugin main file (media-file-renamer.php)
 		public $domain; 		// domain used for translation (media-file-renamer)
 		public $prefix;			// used for many things (filters, options, etc)
+		public $ignored_domains = [ 'mwai-*' ];
 
 		public function __construct( $prefix, $mainfile, $domain ) {
 			$this->mainfile = $mainfile;
 			$this->domain = $domain;
 			$this->prefix = $prefix;
 
-      register_activation_hook( $mainfile, array( $this, 'show_meowapps_create_rating_date' ) );
+			if ( array_search( $this->domain, $this->ignored_domains ) !== false ) {
+				return;
+			}
+			foreach ( $this->ignored_domains as $ignored_domain ) {
+				if ( strpos( $ignored_domain, '*' ) !== false ) {
+					$ignored_domain = str_replace( '*', '', $ignored_domain );
+					if ( strpos( $this->domain, $ignored_domain ) !== false ) {
+						return;
+					}
+				}
+			}
 
+			// Add the hooks
+      register_activation_hook( $mainfile, array( $this, 'show_meowapps_create_rating_date' ) );
       if ( is_admin() ) {
         $rating_date = $this->create_rating_date();
         if ( time() > $rating_date ) {

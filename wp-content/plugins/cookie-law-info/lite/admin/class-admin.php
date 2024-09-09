@@ -141,6 +141,7 @@ class Admin {
 	public function get_default_modules() {
 		$modules = array(
 			'settings',
+			'gcm',
 			'languages',
 			'dashboard',
 			'banners',
@@ -307,6 +308,15 @@ class Admin {
 			'ckyConfig',
 			apply_filters(
 				'cky_admin_scripts_config',
+				array(),
+				$global_script
+			)
+		);
+		wp_localize_script(
+			$global_script,
+			'ckyGcmConfig',
+			apply_filters(
+				'cky_admin_scripts_gcm_config',
 				array(),
 				$global_script
 			)

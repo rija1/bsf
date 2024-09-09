@@ -20,15 +20,22 @@ class WCDP_Feedback
     public function __construct()
     {
         //add feedback survey (css, js & html) to product page
-        add_action('wcdp_before_product_settings', array($this, 'wcdp_add_feedback_survey'));
+        //add_action('wcdp_before_product_settings', array($this, 'wcdp_add_feedback_survey'));
 
         //add deactivation survey (css, js & html) to plugin.php page
         add_action('admin_footer', array($this, 'get_source_data_callback'));
 
         //send survey response to WCDP server
         add_action('wp_ajax_wcdp_feedback_survey', array($this, 'send_survey_data'));
+
         //do not show survey again after dismiss for several days
-        add_action('wp_ajax_wcdp_feedback_survey_dismiss', array($this, 'send_survey_data_dismiss'));
+        //add_action('wp_ajax_wcdp_feedback_survey_dismiss', array($this, 'send_survey_data_dismiss'));
+
+        // Ask users for reviews
+        add_action( 'current_screen', array( $this, 'add_review_notice' ) );
+
+        // Ask user to subscribe to the newsletter
+        add_action( 'admin_notices', array( $this, 'add_newsletter_notice' ) );
 
         //options of the
         $this->deactivation_survey_options = array(
@@ -91,6 +98,90 @@ class WCDP_Feedback
                 'text' => '😍',
             ),
         );
+    }
+
+    /**
+     * Ask users for reviews on wordpress.org
+     *
+     * @return void
+     * @since 1.3.2
+     */
+    public function add_review_notice() {
+        $key = 'wcdp_review_notice';
+        if (!class_exists('WC_Admin_Notices') || rand(0, 3) !== 0 || !$this->should_show_newsletter_notice() || (int) get_user_meta( get_current_user_id(), 'dismissed_wcdp_newsletter_notice_notice', true) !== 1 || (int) get_user_meta( get_current_user_id(), 'dismissed_' . $key . '_notice', true) === 1) return;
+        $html = '<h3><a href="https://wordpress.org/support/plugin/wc-donation-platform/reviews/?filter=5#new-post" target="_blank">' . esc_html__('If you like Donation Platform for WooCommerce and want to support the further growth and development of the plugin, please consider a 5-star rating on wordpress.org.', 'wc-donation-platform') . '</a></h3>';
+        WC_Admin_Notices::add_custom_notice($key, $html);
+    }
+
+    /**
+     * Ask users to subscribe to the Newsletter
+     *
+     * @return void
+     * @since 1.3.2
+     */
+    public function add_newsletter_notice() {
+        $key = 'wcdp_newsletter_notice';
+        if (!class_exists('WC_Admin_Notices') || !$this->should_show_newsletter_notice() || (int) get_user_meta( get_current_user_id(), 'dismissed_' . $key . '_notice', true) === 1) return;
+        $current_user = wp_get_current_user();
+        if (!$current_user) return;
+
+        // Create the notice content
+        echo '<div id="message" class="updated woocommerce-message">
+                <a class="woocommerce-message-close notice-dismiss" href="' . esc_url( wp_nonce_url( add_query_arg( 'wc-hide-notice', $key ), 'woocommerce_hide_notices_nonce', '_wc_notice_nonce' ) ) . '">' . esc_html__( 'Dismiss', 'woocommerce' ) . '</a>
+                <h2>' . esc_html__('Subscribe to the Donation Platform for WooCommerce Newsletter', 'wc-donation-platform') . '</h2>
+                <style>
+                    .form-container {
+                        max-width: 500px;
+                        margin-bottom: 18px;
+                    }
+                    .form-group {
+                        margin-bottom: 15px;
+                    }
+                    .form-label {
+                        display: block;
+                        text-align: left;
+                    }
+                    .form-input {
+                        width: 100%;
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                    }
+                    .form-submit {
+                        width: 100%;
+                    }
+                </style>
+                <form method="post" action="https://listmonk.jonh.eu/subscription/form" class="form-container" target="_blank">
+                    <input type="hidden" name="nonce">
+                    <div class="form-group">
+                        <label for="email" class="form-label">' . esc_html__('Email', 'wc-donation-platform') . '</label>
+                        <input type="email" id="email" name="email" required="" class="form-input" value="' . esc_attr($current_user->user_email) . '">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">' . esc_html__('Name (optional)', 'wc-donation-platform') . '</label>
+                        <input type="text" id="name" name="name" class="form-input" value="' . esc_attr($current_user->display_name) . '">
+                    </div>
+                    <p style="display:none;">
+                        <input id="6f21f" type="checkbox" name="l" checked="" value="6f21f9d3-12e2-4da8-9f05-feb3fb62adfc">
+                        <label for="6f21f">Donation Platform for WooCommerce</label>
+                    </p>
+                    <input type="submit" value="' . esc_attr__('Subscribe to the Donation Platform for WooCommerce Newsletter', 'wc-donation-platform') . '" class="form-submit button-primary">
+                </form>
+              </div>';
+    }
+
+    /**
+     * Check if it should show the Newsletter Subscription / Review notice
+     *
+     * @return bool
+     * @since 1.3.2
+     */
+    private function should_show_newsletter_notice(): bool
+    {
+        if (!current_user_can( 'edit_shop_orders' )) return false;
+        return (isset($_GET['page']) && $_GET['page'] === 'wc-orders' && isset($_GET['action']) && $_GET['action'] === 'edit')
+            || (isset($_GET['tab']) && $_GET['tab'] === 'wc-donation-platform')
+            && !isset($_GET['wc-hide-notice']);
     }
 
     /**

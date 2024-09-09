@@ -8,6 +8,9 @@ use FcfVendor\WPDesk\PluginBuilder\Plugin\Hookable;
  */
 class PluginActionLinks implements \FcfVendor\WPDesk\PluginBuilder\Plugin\Hookable
 {
+    const PLUGIN_ACTIONS = 'plugin_actions';
+    const PLUGIN_META = 'plugin_meta';
+    const WPDESK_OPT_LINK_LOCATION = 'wpdesk_opt_link_location-';
     /**
      * @var string
      */
@@ -34,11 +37,49 @@ class PluginActionLinks implements \FcfVendor\WPDesk\PluginBuilder\Plugin\Hookab
     public function hooks()
     {
         \add_filter('plugin_action_links_' . $this->plugin_file, [$this, 'append_plugin_action_links']);
+        \add_filter('plugin_row_meta', [$this, 'append_plugin_action_links_to_row_meta'], 10, 2);
     }
     /**
      * @param array $links .
      */
     public function append_plugin_action_links($links)
+    {
+        if ($this->opt_link_location() === self::PLUGIN_META) {
+            return $links;
+        }
+        return $this->append_opt_link($links);
+    }
+    /**
+     * @param array $plugin_meta
+     * @param string $plugin_file
+     * @param array $plugin_data
+     * @param string $status
+     *
+     * @return array
+     */
+    public function append_plugin_action_links_to_row_meta($plugin_meta, $plugin_file)
+    {
+        if ($this->opt_link_location() !== self::PLUGIN_META) {
+            return $plugin_meta;
+        }
+        if ($plugin_file === $this->plugin_file) {
+            return $this->append_opt_link($plugin_meta);
+        }
+        return $plugin_meta;
+    }
+    /**
+     * @return string
+     */
+    private function opt_link_location() : string
+    {
+        return (string) \apply_filters(self::WPDESK_OPT_LINK_LOCATION . $this->plugin_file, self::PLUGIN_ACTIONS);
+    }
+    /**
+     * @param array $links
+     *
+     * @return array
+     */
+    private function append_opt_link($links)
     {
         if (!$this->tracker_enabled() || \apply_filters('wpdesk_tracker_do_not_ask', \false) || !\is_array($links)) {
             return $links;

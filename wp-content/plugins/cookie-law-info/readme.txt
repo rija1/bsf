@@ -3,9 +3,9 @@ Contributors: webtoffee, cookieyesdev
 Donate link: https://www.cookieyes.com/ 
 Tags: GDPR, CCPA, cookie notice, DSGVO, cookie consent, cookie banner, eu cookie law, cookieyes, eprivacy, gdpr consent
 Requires at least: 5.0.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 5.6
-Stable tag: 3.2.4
+Stable tag: 3.2.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -154,6 +154,8 @@ Yes, you can export a log of all user cookie consent and preferences related to 
 = Can the plugin help me generate a GDPR-compliant cookie policy? =
 Yes, we provide an easy wizard to customize and generate a GDPR-compliant cookie policy based on your scanned site cookies.
 
+= Does CookieYes integrate with WP Consent API? =
+Yes, CookieYes integrates with [WP Consent API](https://wordpress.org/plugins/wp-consent-api). This allows for efficient sharing of user consent data with other compatible plugins, enhancing privacy compliance and streamlining cookie consent management on your WordPress site.
 
 == Installation ==
 
@@ -203,6 +205,17 @@ Every time we update the plugin, you will see a notification on the installed pl
 9. Privacy policy generator and cookie policy generator
 
 == Changelog ==
+
+= 3.2.6 =
+
+[Compatibility] – Tested OK with WordPress version 6.6
+[Add] - WP Consent API integration.
+[Add] - Option to enable/disable the close button on US state laws banner.
+
+= 3.2.5 =
+
+[Add] - Google Consent Mode implementation via UI.
+[Fix] - Minor bug fixes.
 
 = 3.2.4 =
 
@@ -706,6 +719,8 @@ Tested OK with WordPress version 6.2
 
 == Upgrade Notice ==
 
-= 3.2.4 =
+= 3.2.6 =
 
-[Fix] - Minor bug fixes.
+[Compatibility] – Tested OK with WordPress version 6.6
+[Add] - WP Consent API integration.
+[Add] - Option to enable/disable the close button on US state laws banner.

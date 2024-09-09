@@ -96,17 +96,17 @@ class WCDP_Hooks
      * @param string $default_path
      * @return string
      */
-    public function wcdp_modify_template(string $template = '', string $template_name = '', array $args = array(), string $template_path = '', string $default_path = ''): string
+    public function wcdp_modify_template($template = '', $template_name = '', $args = array(), $template_path = '', $default_path = ''): string
     {
         //Return if the template has been overwritten in yourtheme/woocommerce/XXX
-        if ($template[strlen($template) - strlen($template_name) - 2] === 'e') {
+        if (!str_starts_with($template_name, 'single-product') && [strlen($template) - strlen($template_name) - 2] === 'e') {
             return $template;
         }
 
         $path = WCDP_DIR . 'includes/wc-templates/';
+        $donable = WCDP_Form::is_donable(get_queried_object_id());
 
         switch ($template_name) {
-
             case 'checkout/review-order.php':
             case 'checkout/form-login.php':
             case 'checkout/thankyou.php':
@@ -115,6 +115,7 @@ class WCDP_Hooks
             case 'checkout/order-receipt.php':
             case 'checkout/payment.php':
             case 'checkout/form-billing.php':
+            case 'checkout/order-received.php':
 
             case 'myaccount/dashboard.php':
             case 'myaccount/view-order.php':
@@ -167,7 +168,7 @@ class WCDP_Hooks
 
             case 'single-product/price.php':
             case 'single-product/add-to-cart/variation-add-to-cart-button.php' :
-                if (WCDP_Form::is_donable(get_queried_object_id())) {
+                if ($donable) {
                     $template = $path . $template_name;
                 }
                 break;
@@ -175,7 +176,7 @@ class WCDP_Hooks
             case 'single-product/add-to-cart/simple.php' :
             case 'single-product/add-to-cart/variable.php' :
             case 'single-product/add-to-cart/grouped.php' :
-                if (WCDP_Form::is_donable(get_queried_object_id())) {
+                if ($donable) {
                     $template = $path . 'single-product/add-to-cart/product.php';
                 }
                 break;
@@ -193,8 +194,8 @@ class WCDP_Hooks
      */
     public function wcdp_set_is_checkout($is_checkout): bool
     {
-        if ($is_checkout) {
-            return true;
+        if (is_product() || $is_checkout) {
+            return $is_checkout;
         }
         if (defined('WCDP_FORM')) {
             return WCDP_FORM;
@@ -313,11 +314,14 @@ class WCDP_Hooks
      * This function is hooked to 'woocommerce_new_order_item'.
      *
      * @param int $item_id The ID of the newly added order item.
-     * @param $item_data The order item/fee data.
+     * @param $item_data - the order item/fee data.
      * @param int $order_id The WooCommerce order id.
      */
     public function wcdp_modify_item_price_after_creation(int $item_id, $item_data, int $order_id)
     {
+        if (!$item_data instanceof WC_Order_Item_Product) {
+            return;
+        }
         $new_price = $item_data->get_meta("wcdp_donation_amount");
 
         if ($new_price !== null && WCDP_Form::check_donation_amount($new_price, (int)$item_data['product_id'])) {

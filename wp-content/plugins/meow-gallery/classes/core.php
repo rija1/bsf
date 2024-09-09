@@ -24,15 +24,6 @@ class Meow_MGL_Core {
 
 		// Initializes the classes needed
 		MeowCommon_Helpers::is_rest() && new Meow_MGL_Rest( $this );
-		is_admin() && new Meow_MGL_Admin( $this );
-
-		// TODO: Remove after December 20th
-		// Jordy decided to rename meow_gallery_shortcodes into mgl_shortcodes
-		$shortcodes = get_option( 'meow_gallery_shortcodes', array() );
-		if ( !empty( $shortcodes ) ) {
-			update_option( 'mgl_shortcodes', $shortcodes );
-			delete_option( 'meow_gallery_shortcodes' );
-		}
 
 		// The gallery build process should only be enabled if the request is non-asynchronous
 		if ( !MeowCommon_Helpers::is_asynchronous_request()  ) {
@@ -44,6 +35,13 @@ class Meow_MGL_Core {
 
 		// Load the Pro version *after* loading the Run class due to the JS file was gatherd into one file.
 		class_exists( 'MeowPro_MGL_Core' ) && new MeowPro_MGL_Core( $this );
+
+		// Initialize the Admin if needed
+		add_action( 'init', array( $this, 'init' ) );
+	}
+
+	function init() {
+		is_admin() && new Meow_MGL_Admin( $this );
 	}
 
 	public function can_access_settings() {
@@ -83,7 +81,7 @@ class Meow_MGL_Core {
 	}
 
 	function gallery( $atts, $isPreview = false ) {
-		$atts = apply_filters( 'shortcode_atts_gallery', $atts, null, $atts );
+		$atts = apply_filters( 'shortcode_atts_gallery', $atts, null, $atts, 'gallery' );
 
 		// Sanitize the atts to avoid XSS
 		$atts = array_map( function( $x ) { 
@@ -219,14 +217,22 @@ class Meow_MGL_Core {
 
 		// Layout
 		
-		if ( isset( $atts['layout'] ) && $atts['layout'] != 'default' )
+		if ( isset( $atts['layout'] ) && $atts['layout'] != 'default' ) {
 			$layout = $atts['layout'];
-		else if ( isset( $atts['mgl-layout'] ) && $atts['mgl-layout'] != 'default' )
+		}
+		else if ( isset( $atts['mgl-layout'] ) && $atts['mgl-layout'] != 'default' ) {
 			$layout = $atts['mgl-layout'];
+			$atts['layout'] = $layout;
+		} else {
+			$layout = $this->get_option( 'layout', 'tiles' );
+			$atts['layout'] = $layout;
+		}
+
 		
-		if ( $layout === 'none' || $layout === '' ){
+		if ( $layout === 'none' || $layout === '' ) {
 			$layout = $this->get_option( 'layout', 'tiles' );
 		}
+
 
 		$layoutClass = 'Meow_MGL_Builders_' . ucfirst( $layout );
 		if ( !class_exists( $layoutClass ) ) {
@@ -613,8 +619,8 @@ class Meow_MGL_Core {
 		$ids = apply_filters( 'mgl_sort', $cleanIds, $images, $layout, $atts );
 
 		if ($layout === 'map') {
-			return $this->get_map_images($ids, $images);
-	}
+			return $this->get_map_images( $ids, $images, $atts );
+		}
 
 		$result = [];
 		foreach ($ids as $index => $id) {
@@ -756,6 +762,7 @@ class Meow_MGL_Core {
 			'rel' => $rel,
 		];
 
+
 		return apply_filters( 'mgl_link_attributes', $link_attr, (int)$id, $data );
 	}
 
@@ -785,9 +792,12 @@ class Meow_MGL_Core {
 		return $attributes;
 	}
 
-	private function get_map_images( $ids, $images ) {
-		$map_images = array_map( function ( $id ) use ( $images ) {
+	private function get_map_images( $ids, $images, $atts = [] ) {
+		$map_images = array_map( function ( $id ) use ( $images, $atts ) {
+
 			$image = $images[$id];
+			$link_attr = $this->get_link_attributes( $id, $atts['link'] ?? null, $image );
+
 			$geo_coordinates = MeowPro_MGL_Exif::get_gps_data( $id, $image['meta'] );
 			if ( empty( $geo_coordinates ) ) {
 				return null;
@@ -812,7 +822,8 @@ class Meow_MGL_Core {
 					'data' => [
 						'caption' => $image['meta']['image_meta']['caption'],
 						'gps' => $geo_coordinates,
-					]
+					],
+					'link' => $link_attr,
 				]
 			);
 		}, $ids );
