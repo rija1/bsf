@@ -52,7 +52,7 @@ class PrepareWordpressForCodeception extends \FcfVendor\WPDesk\Composer\Codecept
         $dbpassword = $configuration->getDbpassword();
         $url = $configuration->getWptestsIp();
         $apache_document_root = $configuration->getApacheDocumentRoot();
-        $this->executeWpCliAndOutput('core download --force', $output, $apache_document_root);
+        $this->executeWpCliAndOutput('core download --force --skip-content', $output, $apache_document_root);
         $this->executeWpCliAndOutput("core config --dbhost={$dbhost} --dbname={$dbname} --dbuser={$dbuser} --dbpass={$dbpassword}", $output, $apache_document_root);
         $this->executeWpCliAndOutput("core install --url={$url} --title=Woo-tests --admin_user=admin --admin_password=admin --admin_email=tests@wpdesk.dev --skip-email", $output, $apache_document_root);
         \copy('./vendor/wpdesk/wp-codeception/wordpress/htaccess', $apache_document_root . '/.htaccess');

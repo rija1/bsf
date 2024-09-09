@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) exit;
 
 // phpcs:disable Generic.Files.InlineHTML.Found
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-// phpcs:disable WordPressDotOrg.sniffs.OutputEscaping.UnescapedOutputParameter
 /**
  * Template file to render the current 'wp_template', specifcally for emails.
  */

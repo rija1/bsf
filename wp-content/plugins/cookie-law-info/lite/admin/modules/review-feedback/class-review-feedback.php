@@ -42,7 +42,7 @@ class Review_Feedback extends Modules {
 	 *
 	 * @var string
 	 */
-	protected $review_url = 'https://wordpress.org/support/plugin/cookie-law-info/reviews/#new-post';
+	protected $review_url = 'https://wordpress.org/support/plugin/cookie-law-info/reviews/?filter=5#new-post';
 
 	/**
 	 * Constructor.
@@ -50,6 +50,7 @@ class Review_Feedback extends Modules {
 	public function init() {
 		add_action( 'admin_notices', array( $this, 'add_notice' ) );
 		add_action( 'admin_print_footer_scripts', array( $this, 'add_script' ) );
+		add_filter( 'admin_footer_text', array( $this, 'add_footer_review_link' ) );
 	}
 
 	/**
@@ -222,5 +223,40 @@ class Review_Feedback extends Modules {
 				})(jQuery)
 			</script>
 			<?php
+	}
+
+	function add_footer_review_link($footer_text) {
+		$notices = Notice::get_instance()->get_dismissed();
+	
+		if ( isset( $notices['review_notice'] ) && ( $notices['review_notice'] === false ) ) {
+			return $footer_text;
+		}
+		
+		// Check if we are on the plugin page
+		$screen = get_current_screen();
+		if ($screen->id == 'toplevel_page_cookie-law-info') {
+			$link_text = esc_html__( 'Give us a 5-star rating!', 'cookie-law-info' );
+			$link1 = sprintf(
+				'<a class="cky-button-review" href="%1$s" target="_blank" title="%2$s">&#9733;&#9733;&#9733;&#9733;&#9733;</a>',
+				$this->review_url,
+				$link_text
+			);
+			$link2 = sprintf(
+				'<a class="cky-button-review" href="%1$s" target="_blank" title="%2$s">WordPress.org</a>',
+				$this->review_url,
+				$link_text
+			);
+
+			return sprintf(
+				esc_html__(
+					'Please rate %1$s %2$s on %3$s to help us spread the word. Thank you from the team CookieYes!',
+					'cookie-law-info'
+				),
+				sprintf( '<strong>%1$s</strong>', 'CookieYes' ),
+				wp_kses_post( $link1 ),
+				wp_kses_post( $link2 )
+			);
+		}
+		return $footer_text;
 	}
 }

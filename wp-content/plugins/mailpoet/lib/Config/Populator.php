@@ -16,6 +16,7 @@ use MailPoet\Cron\Workers\StatsNotifications\Worker;
 use MailPoet\Cron\Workers\SubscriberLinkTokens;
 use MailPoet\Cron\Workers\SubscribersLastEngagement;
 use MailPoet\Cron\Workers\UnsubscribeTokens;
+use MailPoet\Doctrine\WPDB\Connection;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\NewsletterOptionFieldEntity;
 use MailPoet\Entities\ScheduledTaskEntity;
@@ -309,6 +310,7 @@ class Populator {
       $this->settings->set('woocommerce.optin_on_checkout', [
         'enabled' => empty($settingsDbVersion), // enable on new installs only
         'message' => $currentLabelText,
+        'position' => Hooks::DEFAULT_OPTIN_POSITION,
       ]);
     } elseif (isset($woocommerceOptinOnCheckout['message']) && $woocommerceOptinOnCheckout['message'] === $legacyLabelText) {
       $this->settings->set('woocommerce.optin_on_checkout.message', $currentLabelText);
@@ -565,18 +567,21 @@ class Populator {
   }
 
   private function rowExists(string $tableName, array $columns): bool {
-    global $wpdb;
-
-    $conditions = array_map(function($key, $value) {
-      return esc_sql($key) . "='" . esc_sql($value) . "'";
-    }, array_keys($columns), $columns);
-
-    $table = esc_sql($tableName);
-    // $conditions is escaped
-    // phpcs:ignore WordPressDotOrg.sniffs.DirectDB.UnescapedDBParameter
-    return $wpdb->get_var(
-      "SELECT COUNT(*) FROM $table WHERE " . implode(' AND ', $conditions)
-    ) > 0;
+    $qb = $this->entityManager->getConnection()->createQueryBuilder();
+    $qb->select('COUNT(*)')
+      ->from($tableName, 't')
+      ->where(
+        $qb->expr()->and(
+          ...array_map(
+            function ($column, $value) use ($qb) {
+              return $qb->expr()->eq('t.' . $column, $qb->createNamedParameter($value));
+            },
+            array_keys($columns),
+            $columns
+          )
+        )
+      );
+    return $qb->executeQuery()->fetchOne() > 0;
   }
 
   private function insertRow($table, $row) {
@@ -599,24 +604,41 @@ class Populator {
   }
 
   private function removeDuplicates($table, $row, $where) {
-    global $wpdb;
+    $qb = $this->entityManager->getConnection()->createQueryBuilder();
+    $conditions = $qb->expr()->and(
+      $qb->expr()->eq(1, 1),
+      ...array_map(
+        function ($field) use ($qb) {
+          return $qb->expr()->eq('t1.' . $field, 't2.' . $field);
+        },
+        array_keys($where)
+      ),
+      ...array_map(
+        function ($field, $value) use ($qb) {
+          return $qb->expr()->eq('t1.' . $field, $qb->createNamedParameter($value));
+        },
+        array_keys($where),
+        $where
+      )
+    );
 
-    $conditions = ['1=1'];
-    $values = [];
-    foreach ($where as $field => $value) {
-      $conditions[] = "`t1`.`" . esc_sql($field) . "` = `t2`.`" . esc_sql($field) . "`";
-      $conditions[] = "`t1`.`" . esc_sql($field) . "` = %s";
-      $values[] = $value;
+    // SQLite doesn't support JOIN in DELETE queries, we need to use a subquery.
+    if (Connection::isSQLite()) {
+      $subquery = $qb->select('t1.id')
+        ->from($table, 't1')
+        ->join('t1', $table, 't2', 't1.id < t2.id')
+        ->where($conditions);
+
+      $qb = $this->entityManager->getConnection()->createQueryBuilder();
+      return $qb->delete($table)
+        ->where($qb->expr()->in('id', $subquery->getSQL()))
+        ->setParameters($subquery->getParameters())
+        ->executeStatement();
     }
 
-    $conditions = implode(' AND ', $conditions);
-
-    $table = esc_sql($table);
-    return $wpdb->query(
-      $wpdb->prepare(
-        "DELETE t1 FROM $table t1, $table t2 WHERE t1.id < t2.id AND $conditions",
-        $values
-      )
+    return $this->entityManager->getConnection()->executeStatement(
+      "DELETE t1 FROM `$table` t1, `$table` t2 WHERE t1.id < t2.id AND $conditions",
+      $qb->getParameters()
     );
   }
 
@@ -624,24 +646,30 @@ class Populator {
     $statisticsFormTable = $this->entityManager->getClassMetadata(StatisticsFormEntity::class)->getTableName();
     $subscriberTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
 
+    // Temporarily skip the queries in WP Playground.
+    // UPDATE with JOIN is not yet supported by the SQLite integration.
+    if (Connection::isSQLite()) {
+      return;
+    }
+
     $this->entityManager->getConnection()->executeStatement(
       ' UPDATE LOW_PRIORITY `' . $subscriberTable . '` subscriber ' .
       ' JOIN `' . $statisticsFormTable . '` stats ON stats.subscriber_id=subscriber.id ' .
-      ' SET `source` = "' . Source::FORM . '"' .
-      ' WHERE `source` = "' . Source::UNKNOWN . '"'
+      " SET `source` = '" . Source::FORM . "'" .
+      " WHERE `source` = '" . Source::UNKNOWN . "'"
     );
 
     $this->entityManager->getConnection()->executeStatement(
       'UPDATE LOW_PRIORITY `' . $subscriberTable . '`' .
-      ' SET `source` = "' . Source::WORDPRESS_USER . '"' .
-      ' WHERE `source` = "' . Source::UNKNOWN . '"' .
+      " SET `source` = '" . Source::WORDPRESS_USER . "'" .
+      " WHERE `source` = '" . Source::UNKNOWN . "'" .
       ' AND `wp_user_id` IS NOT NULL'
     );
 
     $this->entityManager->getConnection()->executeStatement(
       'UPDATE LOW_PRIORITY `' . $subscriberTable . '`' .
-      ' SET `source` = "' . Source::WOOCOMMERCE_USER . '"' .
-      ' WHERE `source` = "' . Source::UNKNOWN . '"' .
+      " SET `source` = '" . Source::WOOCOMMERCE_USER . "'" .
+      " WHERE `source` = '" . Source::UNKNOWN . "'" .
       ' AND `is_woocommerce_user` = 1'
     );
   }
@@ -649,7 +677,7 @@ class Populator {
   private function scheduleInitialInactiveSubscribersCheck() {
     $this->scheduleTask(
       InactiveSubscribers::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))->addHour()
+      Carbon::now()->millisecond(0)->addHour()
     );
   }
 
@@ -659,7 +687,7 @@ class Populator {
     }
     $this->scheduleTask(
       AuthorizedSendingEmailsCheck::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+      Carbon::now()->millisecond(0)
     );
   }
 
@@ -667,7 +695,7 @@ class Populator {
     if (!$this->settings->get('last_announcement_date')) {
       $this->scheduleTask(
         Beamer::TASK_TYPE,
-        Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+        Carbon::now()->millisecond(0)
       );
     }
   }
@@ -675,19 +703,19 @@ class Populator {
   private function scheduleUnsubscribeTokens() {
     $this->scheduleTask(
       UnsubscribeTokens::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+      Carbon::now()->millisecond(0)
     );
   }
 
   private function scheduleSubscriberLinkTokens() {
     $this->scheduleTask(
       SubscriberLinkTokens::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+      Carbon::now()->millisecond(0)
     );
   }
 
   private function scheduleMixpanel() {
-    $this->scheduleTask(Mixpanel::TASK_TYPE, Carbon::createFromTimestamp($this->wp->currentTime('timestamp')));
+    $this->scheduleTask(Mixpanel::TASK_TYPE, Carbon::now()->millisecond(0));
   }
 
   private function scheduleTask($type, $datetime, $priority = null) {
@@ -725,14 +753,14 @@ class Populator {
     }
     $this->scheduleTask(
       SubscribersLastEngagement::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+      Carbon::now()->millisecond(0)
     );
   }
 
   private function scheduleNewsletterTemplateThumbnails() {
     $this->scheduleTask(
       NewsletterTemplateThumbnails::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp')),
+      Carbon::now()->millisecond(0),
       ScheduledTaskEntity::PRIORITY_LOW
     );
   }
@@ -748,7 +776,7 @@ class Populator {
     }
     $this->scheduleTask(
       BackfillEngagementData::TASK_TYPE,
-      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+      Carbon::now()->millisecond(0)
     );
   }
 }

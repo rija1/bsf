@@ -308,6 +308,7 @@ class Upgrade extends Modules {
 		$config['config']['notice']['styles']['border-color']                     = $border_color;
 		$config['config']['notice']['elements']['title']['styles']['color']       = $color;
 		$config['config']['notice']['elements']['description']['styles']['color'] = $color;
+		$config['config']['notice']['elements']['closeButton']['status'] = has_shortcode( $settings['notify_message'], 'cookie_close' );
 
 		$config['config']['preferenceCenter']['styles']['background-color'] = $background_color;
 		$config['config']['preferenceCenter']['styles']['border-color']     = $border_color;

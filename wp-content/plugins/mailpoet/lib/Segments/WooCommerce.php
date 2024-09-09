@@ -19,7 +19,9 @@ use MailPoet\WooCommerce\Helper as WCHelper;
 use MailPoet\WooCommerce\Subscription;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
 use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ParameterType;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class WooCommerce {
@@ -224,13 +226,16 @@ class WooCommerce {
       return;
     }
     global $wpdb;
-    $mailpoetEmailColumn = $wpdb->get_row(
-      "SHOW FULL COLUMNS FROM " . MP_SUBSCRIBERS_TABLE . " WHERE Field = 'email'"
-    );
+
+    $mailpoetEmailColumn = $wpdb->get_row($wpdb->prepare(
+      "SHOW FULL COLUMNS FROM %i WHERE Field = 'email'",
+      $this->subscribersRepository->getTableName()
+    ));
     $this->mailpoetEmailCollation = $mailpoetEmailColumn->Collation; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
-    $wpPostmetaValueColumn = $wpdb->get_row(
-      "SHOW FULL COLUMNS FROM " . $wpdb->postmeta . " WHERE Field = 'meta_value'"
-    );
+    $wpPostmetaValueColumn = $wpdb->get_row($wpdb->prepare(
+      "SHOW FULL COLUMNS FROM %i WHERE Field = 'meta_value'",
+      $wpdb->postmeta
+    ));
     $this->wpPostmetaValueCollation = $wpPostmetaValueColumn->Collation; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
   }
 
@@ -289,8 +294,8 @@ class WooCommerce {
       'highestOrderId' => $lastProcessedOrderId + $batchSize,
     ];
     $parametersType = [
-      'lowestOrderId' => \PDO::PARAM_INT,
-      'highestOrderId' => \PDO::PARAM_INT,
+      'lowestOrderId' => ParameterType::INTEGER,
+      'highestOrderId' => ParameterType::INTEGER,
     ];
 
     if ($this->woocommerceHelper->isWooCommerceCustomOrdersTableEnabled()) {
@@ -329,7 +334,7 @@ class WooCommerce {
   private function insertSubscribers(array $emails, string $status = SubscriberEntity::STATUS_SUBSCRIBED): int {
     $subscribersTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
     $subscribersValues = [];
-    $now = (Carbon::createFromTimestamp($this->wp->currentTime('timestamp')))->format('Y-m-d H:i:s');
+    $now = Carbon::now()->format('Y-m-d H:i:s');
     $source = Source::WOOCOMMERCE_USER;
     foreach ($emails as $email) {
       /** @var string $email */
@@ -345,7 +350,7 @@ class WooCommerce {
       UPDATE ' . $subscribersTable . ' mps
       SET mps.is_woocommerce_user = 1
       WHERE mps.email IN (:emails)
-    ', ['emails' => $emails], ['emails' => Connection::PARAM_STR_ARRAY]);
+    ', ['emails' => $emails], ['emails' => ArrayParameterType::STRING]);
 
     // Save timestamp about new subscribers before insert
     $this->subscriberChangesNotifier->subscribersBatchCreate();
@@ -377,7 +382,7 @@ class WooCommerce {
         FROM {$addressesTableName}
         WHERE order_id IN (:orderIds) and address_type = 'billing'",
         ['orderIds' => array_values($orders)],
-        ['orderIds' => Connection::PARAM_INT_ARRAY]
+        ['orderIds' => ArrayParameterType::INTEGER]
       )->fetchAllAssociative();
 
       // format data in the same format that is used when querying wp_postmeta (see below).
@@ -404,7 +409,7 @@ class WooCommerce {
         WHERE meta_key IN ('_billing_first_name', '_billing_last_name') AND post_id IN (:postIds)
       ",
         ['metaKeys' => $metaKeys, 'postIds' => array_values($orders)],
-        ['metaKeys' => Connection::PARAM_STR_ARRAY, 'postIds' => Connection::PARAM_INT_ARRAY]
+        ['metaKeys' => ArrayParameterType::STRING, 'postIds' => ArrayParameterType::INTEGER]
       )->fetchAllAssociative();
     }
 
@@ -443,7 +448,7 @@ class WooCommerce {
       WHERE is_woocommerce_user = 1
     ",
       ['segmentId' => $wcSegment->getId()],
-      ['segmentId' => \PDO::PARAM_INT]
+      ['segmentId' => ParameterType::INTEGER]
     );
   }
 
@@ -459,7 +464,7 @@ class WooCommerce {
       WHERE mpss.segment_id = :segmentId AND (mps.is_woocommerce_user = 0 OR mps.email = '' OR mps.email IS NULL)
     ",
       ['segmentId' => $wcSegment->getId()],
-      ['segmentId' => \PDO::PARAM_INT]
+      ['segmentId' => ParameterType::INTEGER]
     );
   }
 
@@ -477,7 +482,7 @@ class WooCommerce {
         AND mps.is_woocommerce_user = 1
     ",
       ['statusUnsubscribed' => SubscriberEntity::STATUS_UNSUBSCRIBED],
-      ['statusUnsubscribed' => \PDO::PARAM_STR]
+      ['statusUnsubscribed' => ParameterType::INTEGER]
     );
     // SET global status unsubscribed to all woocommerce users who have only 1 segment and it is woocommerce segment and they are not subscribed
     // You can't specify target table 'mps' for update in FROM clause
@@ -495,7 +500,7 @@ class WooCommerce {
       )
     ",
       ['statusUnsubscribed' => SubscriberEntity::STATUS_UNSUBSCRIBED, 'segmentId' => $wcSegment->getId()],
-      ['statusUnsubscribed' => \PDO::PARAM_STR, 'segmentId' => \PDO::PARAM_INT]
+      ['statusUnsubscribed' => ParameterType::STRING, 'segmentId' => ParameterType::INTEGER]
     );
   }
 
@@ -622,7 +627,7 @@ class WooCommerce {
         AND mps.is_woocommerce_user = 1
     ",
       ['status' => $status, 'segmentId' => $wcSegment->getId()],
-      ['status' => \PDO::PARAM_STR, 'segmentId' => \PDO::PARAM_INT]
+      ['status' => ParameterType::STRING, 'segmentId' => ParameterType::INTEGER]
     );
   }
 }

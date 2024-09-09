@@ -4,7 +4,7 @@ Tags: backup, transfer, copy, move, clone
 Requires at least: 3.3
 Tested up to: 6.6
 Requires PHP: 5.3
-Stable tag: 7.84
+Stable tag: 7.86
 License: GPLv2 or later
 
 Backup, transfer, copy, and move a site with 1-click. Quick, easy, and reliable.
@@ -24,7 +24,7 @@ Follow these three simple steps, and your site will be live at its new location 
 
 One feature that makes All-in-One WP Migration widely loved (to the tune of over 6,000 5-star user reviews) is that the technical requirements for installing the plugin are simple.
 
-If you have WordPress version between 3.3 and 6.5.5 and PHP version between 5.3 and 8.3, you are good to go. All-in-One WP Migration also supports all versions of MySQL, MariaDB and SQLite.
+If you have WordPress version between 3.3 and 6.6.1 and PHP version between 5.3 and 8.4, you are good to go. All-in-One WP Migration also supports all versions of MySQL, MariaDB and SQLite.
 
 **Features Spotlight:**
 
@@ -71,6 +71,7 @@ The plugin comes preinstalled on all Bitnami WordPress sites running on AWS, Goo
 * Government Reliability: Following a directive to improve digital accessibility, a government agency used our plugin to migrate their content to a new, compliant platform without impacting public access to critical information.
 
 = Contact us =
+* [Report a security vulnerability](https://patchstack.com/database/vdp/all-in-one-wp-migration)
 * [Get free help from us here](https://servmask.com/help)
 * [Report a bug or request a feature](https://servmask.com/help)
 * [Find out more about us](https://servmask.com)
@@ -97,6 +98,16 @@ All-in-One WP Migration is in full compliance with General Data Protection Regul
 See our [GDPR Compliant Privacy Policy here](https://www.iubenda.com/privacy-policy/946881).
 
 == Changelog ==
+= 7.86 =
+**Fixed**
+
+* Resolved an issue with PHP 8.4 compatibility and restoring backup files via WP-CLI
+
+= 7.85 =
+**Added**
+
+* PHP 8.4 compatibility
+
 = 7.84 =
 **Added**
 

@@ -144,7 +144,7 @@ class FilterHandler extends \FcfVendor\Monolog\Handler\Handler implements \FcfVe
      *
      * @phpstan-param Record $record
      */
-    public function getHandler(array $record = null)
+    public function getHandler(?array $record = null)
     {
         if (!$this->handler instanceof \FcfVendor\Monolog\Handler\HandlerInterface) {
             $this->handler = ($this->handler)($record, $this);

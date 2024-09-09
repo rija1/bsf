@@ -2,9 +2,9 @@
 Contributors: TigrouMeow
 Tags: gallery, masonry, image, block, lightroom
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 5.1.7
+Stable tag: 5.1.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,12 +50,20 @@ Languages: English.
 
 == Changelog ==
 
+= 5.1.9 (2024/08/25) =
+* Fix: Fixed link attributes for maps.
+* Fix: Removed error logs.
+* Note: Meow needs some love! If you have a moment, please write a little [review for the Meow Gallery](https://wordpress.org/support/plugin/meow-gallery/reviews/?rate=5#new-post). Thank you! 💕
+
+= 5.1.8 (2024/08/01) =
+* Fix: Make sure data-attr have a layout.
+* Fix: Minor issues.
+
 = 5.1.7 (2024/06/15) =
 * Update: Code cleaning, libs optimization, etc.
 * Fix: Carousel Hero height for non-horizontal images.
 * Fix: Resolved issues with the Gallery Manager modal.
 * Update: Use Image Alt as Aria Label if there is link attachment by default.
-* Note: Meow needs some love! If you have a moment, please write a little [review for the Meow Gallery](https://wordpress.org/support/plugin/meow-gallery/reviews/?rate=5#new-post). Thank you! 💕
 
 = 5.1.6 (2024/06/05) =
 * Add: Hero Mode for Carousel with Latest Posts.

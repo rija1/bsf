@@ -106,7 +106,7 @@ class WCDP_Leaderboard
             } else {
                 $orders = $this->get_orders_db_id($product_id, $orderby, $limit);
             }
-            set_transient($cache_key, json_encode($orders), apply_filters("wcdp_cache_expiration", 6 * HOUR_IN_SECONDS));
+            set_transient($cache_key, wp_json_encode($orders), apply_filters("wcdp_cache_expiration", 6 * HOUR_IN_SECONDS));
 
             // Save the cache key in a separate option for later deletion.
             $cache_keys_option = get_option('wcdp_transient_cache_keys', array());
@@ -141,6 +141,7 @@ class WCDP_Leaderboard
     /**
      * get an array with all WooCommerce orders
      * @param string $orderby date or total
+     * @param int $limit
      * @return array
      */
     private function get_orders_db(string $orderby, int $limit): array
@@ -149,6 +150,7 @@ class WCDP_Leaderboard
             'limit' => $limit,
             'status' => 'completed',
             'order' => 'DESC',
+            'type' => 'shop_order',
         );
         if ($orderby === 'date') {
             $args['orderby'] = 'date';
@@ -208,7 +210,8 @@ class WCDP_Leaderboard
                     {$wpdb->prefix}wc_orders o
                     INNER JOIN {$wpdb->prefix}wc_order_product_lookup l ON o.id = l.order_id
                 WHERE 
-                    o.status = 'wc-completed'
+                        o.status = 'wc-completed'
+                    AND o.type = 'shop_order'
                     AND l.product_id = %d
                 ORDER BY $orderby DESC
                 LIMIT %d;";
@@ -333,7 +336,7 @@ class WCDP_Leaderboard
         $output .= '</ul>';
 
         if (sizeof($orders) > $split && $split > 0) {
-            $output .= '<button class="button wcdp-button" type="button" id="' . $id . '-button">' . esc_html($button) . "</button>
+            $output .= '<button class="button wcdp-button wp-element-button" type="button" id="' . $id . '-button">' . esc_html($button) . "</button>
                         <script>
                           const " . $id . " = document.querySelector('#" . $id . "-button');
                           " . $id . ".addEventListener('click', () => {
@@ -490,7 +493,7 @@ class WCDP_Leaderboard
     private function get_human_time_diff(int $timestamp): string
     {
         $human_diff = '<span class="wcdp-emphasized">' . human_time_diff($timestamp) . '</span>';
-        //translators: %s: time difference e.g. 1 week ago or 3 months ago
+        // Translators: %s: time difference e.g. 1 week ago or 3 months ago
         return sprintf(esc_html__('%s ago', 'wc-donation-platform'), $human_diff);
     }
 
@@ -573,6 +576,7 @@ class WCDP_Leaderboard
         } else {
             $e .= __('No', 'wc-donation-platform');
         }
-        echo $e . '</p>';
+        $e .= '</p>';
+        echo wp_kses_post($e) ;
     }
 }

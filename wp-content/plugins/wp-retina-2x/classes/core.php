@@ -517,9 +517,6 @@ class Meow_WR2X_Core {
 	}
 
 	function replace_with_webp_in_src( $image, $attachment_id, $size, $icon ) {
-		if ( $this->get_option( 'disable_responsive' ) ){
-			return null;
-		}
 		if ( $this->get_option( 'webp_method' ) !== 'Responsive' ) {
 			return $image;
 		}
@@ -1323,6 +1320,12 @@ class Meow_WR2X_Core {
 		$options = $options ?? [];
 		$needs_update = false;
 
+		if ( $options == [] ) {
+			$options = $this->get_all_options();
+		}
+
+		$webp_enabled = $options['module_webp_enabled'];
+
 		global $_wp_additional_image_sizes;
 		foreach ( get_intermediate_image_sizes() as $s ) {
 
@@ -1348,20 +1351,29 @@ class Meow_WR2X_Core {
 				$needs_update = true;
 				$retina = false;
 			}
-			$webp = in_array( $s, $this->webp_sizes );
-			if ( !$enabled && $webp ) {
-				$this->webp_sizes = array_diff( $this->webp_sizes, array( $s ) );
-				$options['webp_sizes'] = $this->webp_sizes;
-				$needs_update = true;
-				$webp = false;
+
+			$webp = false;
+			$webp_retina = false;
+
+			if ( $webp_enabled ) {
+				$webp = in_array( $s, $this->webp_sizes );
+			
+				if ( !$enabled && $webp ) {
+					$this->webp_sizes = array_diff( $this->webp_sizes, array( $s ) );
+					$options['webp_sizes'] = $this->webp_sizes;
+					$needs_update = true;
+					$webp = false;
+				}
+				$webp_retina = in_array( $s, $this->webp_retina_sizes );
+				if ( (!$enabled || !$retina) && $webp_retina ) {
+					$this->webp_retina_sizes = array_diff( $this->webp_retina_sizes, array( $s ) );
+					$options['webp_retina_sizes'] = $this->webp_retina_sizes;
+					$needs_update = true;
+					$webp_retina = false;
+				}
 			}
-			$webp_retina = in_array( $s, $this->webp_retina_sizes );
-			if ( (!$enabled || !$retina) && $webp_retina ) {
-				$this->webp_retina_sizes = array_diff( $this->webp_retina_sizes, array( $s ) );
-				$options['webp_retina_sizes'] = $this->webp_retina_sizes;
-				$needs_update = true;
-				$webp_retina = false;
-			}
+
+			
 
 			$sizes[$s] = array( 
 				'width' => $width, 

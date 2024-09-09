@@ -4,13 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf71cf4507d15590533b13cf45ff90f93
+class ComposerStaticInitf7080d50c1c80100e10568fd90544cd4
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
             'WPDesk\\FCF\\Free\\' => 16,
-            'WPDesk\\Dashboard\\' => 17,
         ),
         'P' => 
         array (
@@ -27,10 +26,6 @@ class ComposerStaticInitf71cf4507d15590533b13cf45ff90f93
         'WPDesk\\FCF\\Free\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
-        ),
-        'WPDesk\\Dashboard\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/wpdesk/ltv-dashboard-widget/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -297,6 +292,7 @@ class ComposerStaticInitf71cf4507d15590533b13cf45ff90f93
         'FcfVendor\\WPDesk\\View\\Resolver\\NullResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/NullResolver.php',
         'FcfVendor\\WPDesk\\View\\Resolver\\Resolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/Resolver.php',
         'FcfVendor\\WPDesk\\View\\Resolver\\WPThemeResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/WPThemeResolver.php',
+        'FcfVendor\\WPDesk\\View\\Resolver\\WooTemplateResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/WooTemplateResolver.php',
         'FcfVendor\\WPDesk_Basic_Requirement_Checker' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker.php',
         'FcfVendor\\WPDesk_Basic_Requirement_Checker_Factory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker_Factory.php',
         'FcfVendor\\WPDesk_Basic_Requirement_Checker_With_Update_Disable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-basic-requirements/src/Basic_Requirement_Checker_With_Update_Disable.php',
@@ -363,7 +359,6 @@ class ComposerStaticInitf71cf4507d15590533b13cf45ff90f93
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
-        'WPDesk\\Dashboard\\DashboardWidget' => __DIR__ . '/..' . '/wpdesk/ltv-dashboard-widget/src/DashboardWidget.php',
         'WPDesk\\FCF\\Free\\Collections\\RouteParamBag' => __DIR__ . '/../..' . '/src/Collections/RouteParamBag.php',
         'WPDesk\\FCF\\Free\\Exception\\TemplateLoadingFailed' => __DIR__ . '/../..' . '/src/Exception/TemplateLoadingFailed.php',
         'WPDesk\\FCF\\Free\\Exception\\UnexpectedParamException' => __DIR__ . '/../..' . '/src/Exception/UnexpectedParamException.php',
@@ -407,6 +402,7 @@ class ComposerStaticInitf71cf4507d15590533b13cf45ff90f93
         'WPDesk\\FCF\\Free\\Field\\Type\\Wc\\WcStateType' => __DIR__ . '/../..' . '/src/Field/Type/Wc/WcStateType.php',
         'WPDesk\\FCF\\Free\\Field\\Types' => __DIR__ . '/../..' . '/src/Field/Types.php',
         'WPDesk\\FCF\\Free\\Form\\Assets' => __DIR__ . '/../..' . '/src/Form/Assets.php',
+        'WPDesk\\FCF\\Free\\Form\\FormModifier' => __DIR__ . '/../..' . '/src/Form/FormModifier.php',
         'WPDesk\\FCF\\Free\\Integration\\Field' => __DIR__ . '/../..' . '/src/Integration/Field.php',
         'WPDesk\\FCF\\Free\\Integration\\FieldInterface' => __DIR__ . '/../..' . '/src/Integration/FieldInterface.php',
         'WPDesk\\FCF\\Free\\Integration\\Fields' => __DIR__ . '/../..' . '/src/Integration/Fields.php',
@@ -538,9 +534,9 @@ class ComposerStaticInitf71cf4507d15590533b13cf45ff90f93
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf71cf4507d15590533b13cf45ff90f93::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf71cf4507d15590533b13cf45ff90f93::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf71cf4507d15590533b13cf45ff90f93::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf7080d50c1c80100e10568fd90544cd4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf7080d50c1c80100e10568fd90544cd4::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf7080d50c1c80100e10568fd90544cd4::$classMap;
 
         }, null, ClassLoader::class);
     }

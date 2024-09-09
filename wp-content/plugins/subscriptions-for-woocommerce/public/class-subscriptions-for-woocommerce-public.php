@@ -859,7 +859,7 @@ class Subscriptions_For_Woocommerce_Public {
 			return $available_gateways;
 		}
 		$wps_has_subscription = false;
-				
+
 		if ( ! empty( WC()->cart->cart_contents ) ) {
 			foreach ( WC()->cart->get_cart_contents() as $key => $values ) {
 
@@ -868,7 +868,7 @@ class Subscriptions_For_Woocommerce_Public {
 					break;
 				}
 			}
-	    }
+		}
 		if ( $wps_has_subscription ) {
 			if ( isset( $available_gateways ) && ! empty( $available_gateways ) && is_array( $available_gateways ) ) {
 				foreach ( $available_gateways as $key => $gateways ) {
@@ -1205,19 +1205,7 @@ class Subscriptions_For_Woocommerce_Public {
 						wps_sfw_update_meta_data( $order_id, 'wps_sfw_subscription_activated', 'yes' );
 					}
 				}
-				// Renewal order handling.
-				$renewal_order = wps_sfw_get_meta_data( $order_id, 'wps_sfw_renewal_order', true );
-				$subscription_id = wps_sfw_get_meta_data( $order_id, 'wps_sfw_subscription', true );
-				if ( $subscription_id && 'yes' == $renewal_order ) {
-					$current_time = apply_filters( 'wps_sfw_subs_curent_time', current_time( 'timestamp' ), $subscription_id );
-					$wps_susbcription_trial_end = wps_sfw_susbcription_trial_date( $subscription_id, $current_time );
-					$wps_next_payment_date = wps_sfw_next_payment_date( $subscription_id, $current_time, $wps_susbcription_trial_end );
-
-					$wps_next_payment_date = apply_filters( 'wps_sfw_next_payment_date', $wps_next_payment_date, $subscription_id );
-
-					wps_sfw_update_meta_data( $subscription_id, 'wps_next_payment_date', $wps_next_payment_date );
-				}
-			} elseif ( 'failed' == $new_status || 'pending' == $new_status ) {
+			} elseif ( 'failed' == $new_status || 'pending' == $new_status || 'wps_renewal' == $new_status ) {
 				// Renewal order handling.
 				$subscription_id = wps_sfw_get_meta_data( $order_id, 'wps_sfw_subscription', true );
 				$renewal_order = wps_sfw_get_meta_data( $order_id, 'wps_sfw_renewal_order', true );
@@ -1615,7 +1603,7 @@ class Subscriptions_For_Woocommerce_Public {
 		$wps_has_subscription = wps_sfw_is_cart_has_subscription_product();
 
 		if ( 'stripe' === $gateway_id && $wps_has_subscription && 'yes' === $experimental_feature ) {
-			$description .= '<i><span class="wps_sfw_experimental_feature_notice">' . esc_html__( 'Only the Card is supported for the recurring payment', 'subscriptions-for-woocommerce' ) . '</span><i><br>';
+			$description .= '<i><span class="wps_sfw_experimental_feature_notice">' . esc_html__( 'Only the Card is supported for the recurring payment', 'subscriptions-for-woocommerce' ) . '</span></i><br>';
 		}
 		return $description;
 	}
@@ -1664,20 +1652,6 @@ class Subscriptions_For_Woocommerce_Public {
 	}
 
 	/**
-	 * Change the failed order subject for recurring order
-	 *
-	 * @param string $subject .
-	 * @param object $order .
-	 * @return $subject .
-	 */
-	public function wps_sfw_customizing_failed_email_subject( $subject, $order ) {
-		if ( 'yes' === wps_sfw_get_meta_data( $order->get_id(), 'wps_sfw_renewal_order', true ) ) {
-			$subject = str_replace( 'Order', 'Recurring Order', $subject );
-		}
-		return $subject;
-	}
-
-	/**
 	 * Calculating correct recurring price.
 	 *
 	 * @param array() $cart_item .
@@ -1700,6 +1674,7 @@ class Subscriptions_For_Woocommerce_Public {
 			$line_subtotal = $cart_item['line_subtotal'];
 			$line_total    = $cart_item['line_total'];
 		}
+
 		// Substract the signup fee from the line item.
 		$wps_sfw_subscription_initial_signup_price = wps_sfw_get_meta_data( $product_id, 'wps_sfw_subscription_initial_signup_price', true );
 		if ( ! empty( $wps_sfw_subscription_initial_signup_price ) ) {
@@ -1707,14 +1682,39 @@ class Subscriptions_For_Woocommerce_Public {
 			$line_subtotal = $line_subtotal - $wps_sfw_subscription_initial_signup_price * $qty;
 			$line_total    = $line_total - $wps_sfw_subscription_initial_signup_price * $qty;
 		}
+
+		// Make sure you have correct line data if coupon applied on the cart.
+		$is_coupon_applied = false;
+		$is_initital_discount = false;
+		$is_recurring_coupon_applied = false;
+
+		$coupons = WC()->cart->get_applied_coupons();
+		if ( ! empty( $coupons ) ) {
+			foreach ( $coupons as $coupon_code ) {
+				$coupon        = new WC_Coupon( $coupon_code );
+				$discount_type = $coupon->get_discount_type();
+				$allow_dis_sub = array( 'recurring_product_percent_discount', 'recurring_product_discount' );
+				if ( ! in_array( $discount_type, $allow_dis_sub, true ) ) {
+					$is_coupon_applied = true;
+				}
+				if ( in_array( $discount_type, $allow_dis_sub, true ) ) {
+					$is_recurring_coupon_applied = true;
+				}
+				if ( 'initial_fee_percent_discount' == $discount_type || 'initial_fee_discount' == $discount_type ) {
+					$is_initital_discount = true;
+				}
+			}
+		}
+
 		// Get the item price from product object if free trial valid.
 		$wps_sfw_subscription_free_trial_number = wps_sfw_get_meta_data( $product_id, 'wps_sfw_subscription_free_trial_number', true );
-		if ( ! empty( $wps_sfw_subscription_free_trial_number ) ) {
+		if ( ! empty( $wps_sfw_subscription_free_trial_number ) && ! $is_recurring_coupon_applied ) {
 			$product = wc_get_product( $product_id );
 			$price = $product->get_price() * $cart_item['quantity'];
 			$line_subtotal = $price;
 			$line_total = $price;
 		}
+
 		// Manage the line item during the upgrade/downgrade process.
 		$line_total    = apply_filters( 'wps_sfw_manage_line_total_for_plan_switch', $line_total, $cart_item, $bool );
 		$line_subtotal = apply_filters( 'wps_sfw_manage_line_total_for_plan_switch', $line_subtotal, $cart_item, $bool );
@@ -1741,23 +1741,7 @@ class Subscriptions_For_Woocommerce_Public {
 				$line_tax     = WC_Tax::get_tax_total( WC_Tax::calc_exclusive_tax( $line_total, $line_tax_data ) );
 			}
 		}
-		// Make sure you have correct line data if coupon applied on the cart.
-		$is_coupon_applied = false;
-		$is_initital_discount = false;
-		$coupons = WC()->cart->get_applied_coupons();
-		if ( ! empty( $coupons ) ) {
-			foreach ( $coupons as $coupon_code ) {
-				$coupon        = new WC_Coupon( $coupon_code );
-				$discount_type = $coupon->get_discount_type();
-				$allow_dis_sub = array( 'recurring_product_percent_discount', 'recurring_product_discount' );
-				if ( ! in_array( $discount_type, $allow_dis_sub, true ) ) {
-					$is_coupon_applied = true;
-				}
-				if ( 'initial_fee_percent_discount' == $discount_type || 'initial_fee_discount' == $discount_type ) {
-					$is_initital_discount = true;
-				}
-			}
-		}
+
 		if ( $is_coupon_applied ) {
 			$line_total = $line_subtotal;
 			$line_tax = $line_subtotal_tax;
@@ -1938,6 +1922,9 @@ class Subscriptions_For_Woocommerce_Public {
 			$request_body = file_get_contents( 'php://input' );
 			$data = json_decode( $request_body );
 
+			$woocommerce_stripe_settings = get_option( 'woocommerce_stripe_settings' );
+			$upe_checkout_experience_enabled = isset( $woocommerce_stripe_settings['upe_checkout_experience_enabled'] ) ? $woocommerce_stripe_settings['upe_checkout_experience_enabled'] : '';
+
 			if ( ! empty( $data ) && isset( $data->payment_data ) && ! empty( $data->payment_data ) ) {
 
 				$payment_object = $data->payment_data;
@@ -1950,7 +1937,7 @@ class Subscriptions_For_Woocommerce_Public {
 					}
 				}
 
-				if ( 'no' == $save_payment_method ) {
+				if ( 'no' == $save_payment_method && 'disabled' != $upe_checkout_experience_enabled ) {
 
 					throw new Exception( esc_html__( 'Please check <strong>"Save payment information to my account for future purchases"</strong> to proceed further ', 'subscriptions-for-woocommerce' ) );
 				}
@@ -2060,5 +2047,55 @@ class Subscriptions_For_Woocommerce_Public {
 				wps_sfw_update_meta_data( $wps_subscription_id, 'wps_subscription_status', 'cancelled' );
 			}
 		}
+	}
+
+	/**
+	 * Add custom_failed_order_section
+	 *
+	 * @param mixed $order .
+	 * @param mixed $sent_to_admin .
+	 * @param mixed $plain_text .
+	 * @param mixed $email .
+	 * @return void
+	 */
+	public function wps_sfw_add_custom_failed_order_section( $order, $sent_to_admin, $plain_text, $email ) {
+
+		if ( 'failed_order' === $email->id && 'yes' === $order->get_meta( 'wps_sfw_renewal_order' ) ) {
+			$subscription_id = $order->get_meta( 'wps_sfw_subscription' );
+			/* translators: %s: subscription id */
+			$notice = sprintf( __( 'This renewal order belongs to Subscription #%s', 'subscriptions-for-woocommerce' ), $subscription_id );
+			?>
+			<h2><?php esc_attr_e( 'Important Information', 'subscriptions-for-woocommerce' ); ?></h2>
+			<p><?php echo esc_html( $notice ); ?></p>
+			<?php
+		}
+	}
+	/**
+	 * Add custom_woocommerce_email_subject_failed_order
+	 *
+	 * @param mixed $subject .
+	 * @param mixed $order .
+	 * @return mixed
+	 */
+	public function wps_sfw_custom_woocommerce_email_subject_failed_order( $subject, $order ) {
+		if ( 'yes' === $order->get_meta( 'wps_sfw_renewal_order' ) ) {
+			$subject = str_replace( 'Order', esc_attr__( 'Renewal Order', 'subscriptions-for-woocommerce' ), $subject );
+			return $subject;
+		}
+		return $subject;
+	}
+	/**
+	 * Add custom_woocommerce_email_heading_failed_order
+	 *
+	 * @param mixed $heading .
+	 * @param mixed $order .
+	 * @return mixed
+	 */
+	public function wps_sfw_custom_woocommerce_email_heading_failed_order( $heading, $order ) {
+		if ( 'yes' === $order->get_meta( 'wps_sfw_renewal_order' ) ) {
+			$heading = str_replace( 'Order', esc_attr__( 'Renewal Order', 'subscriptions-for-woocommerce' ), $heading );
+			return $heading;
+		}
+		return $heading;
 	}
 }

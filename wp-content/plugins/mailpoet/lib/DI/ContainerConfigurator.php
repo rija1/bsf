@@ -81,6 +81,7 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\API\JSON\v1\DynamicSegments::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\FeatureFlags::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\Forms::class)->setPublic(true);
+    $container->autowire(\MailPoet\API\JSON\v1\Help::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\ImportExport::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\Mailer::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\Tags::class)->setPublic(true);
@@ -240,7 +241,6 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\Config\AssetsLoader::class)->setPublic(true);
     $container->autowire(\MailPoet\Config\Populator::class)->setPublic(true);
     $container->autowire(\MailPoet\Config\Changelog::class)->setPublic(true);
-    $container->autowire(\MailPoet\Config\DatabaseInitializer::class);
     $container->autowire(\MailPoet\Config\Hooks::class)->setPublic(true);
     $container->autowire(\MailPoet\Config\HooksWooCommerce::class)->setPublic(true);
     $container->autowire(\MailPoet\Config\Initializer::class)->setPublic(true);
@@ -422,6 +422,7 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\Router\Endpoints\FormPreview::class)->setPublic(true);
     $container->autowire(\MailPoet\Router\Endpoints\Subscription::class)->setPublic(true);
     $container->autowire(\MailPoet\Router\Endpoints\ViewInBrowser::class)->setPublic(true);
+    $container->autowire(\MailPoet\Router\Endpoints\TemplateImage::class)->setPublic(true);
     $container->autowire(\MailPoet\Router\Endpoints\Track::class)->setPublic(true);
     // Statistics
     $container->autowire(\MailPoet\Statistics\Track\Clicks::class);
@@ -614,9 +615,12 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\Statistics\GATracking::class)->setPublic(true);
     // Newsletter templates
     $container->autowire(\MailPoet\NewsletterTemplates\NewsletterTemplatesRepository::class)->setPublic(true);
+    $container->autowire(\MailPoet\NewsletterTemplates\TemplateImageLoader::class)->setPublic(true);
     $container->autowire(\MailPoet\NewsletterTemplates\ThumbnailSaver::class)->setPublic(true);
     $container->autowire(\MailPoet\NewsletterTemplates\BrandStyles::class)->setPublic(true);
     // Util
+    $container->autowire(\MailPoet\Util\DataInconsistency\DataInconsistencyController::class)->setPublic(true);
+    $container->autowire(\MailPoet\Util\DataInconsistency\DataInconsistencyRepository::class)->setPublic(true);
     $container->autowire(\MailPoet\Util\Cookies::class)->setPublic(true);
     $container->autowire(\MailPoet\Util\DBCollationChecker::class);
     $container->autowire(\MailPoet\Util\FreeDomains::class);

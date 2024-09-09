@@ -27,7 +27,7 @@ function monsterinsights_admin_menu()
 {
 	$hook             = monsterinsights_get_menu_hook();
 	$menu_icon_inline = monsterinsights_get_inline_menu_icon();
-	$newIndicator     = sprintf(
+	$new_indicator     = sprintf(
 		'<span class="monsterinsights-menu-new-indicator">&nbsp;%s</span>',
 		__( 'NEW', 'google-analytics-for-wordpress' )
 	);
@@ -75,7 +75,11 @@ function monsterinsights_admin_menu()
 
 	$submenu_base = add_query_arg('page', 'monsterinsights_settings', admin_url('admin.php'));
 
+    //  Site Notes
 	add_submenu_page( $hook, __( 'Site Notes:', 'google-analytics-for-wordpress' ), __( 'Site Notes', 'google-analytics-for-wordpress' ), 'monsterinsights_save_settings', $submenu_base . '#/site-notes' );
+
+    //  AI Insights
+    add_submenu_page( $hook, __( 'AI Insights:', 'google-analytics-for-wordpress' ), sprintf(__( '%s AI Insights', 'google-analytics-for-wordpress' ), monsterinsights_get_ai_menu_icon()), 'monsterinsights_save_settings', 'admin.php?page=monsterinsights_reports#/ai-insights' );
 
 	// Add Popular Posts menu item.
 	add_submenu_page($hook, __('Popular Posts:', 'google-analytics-for-wordpress'), __('Popular Posts', 'google-analytics-for-wordpress'), 'monsterinsights_save_settings', $submenu_base . '#/popular-posts');
@@ -103,7 +107,7 @@ function monsterinsights_admin_menu()
 	add_submenu_page(
 		$hook,
 		__('UserFeedback:', 'google-analytics-for-wordpress'),
-		__('UserFeedback', 'google-analytics-for-wordpress') . $newIndicator,
+		__('UserFeedback', 'google-analytics-for-wordpress') . $new_indicator,
 		'manage_options',
 		$submenu_base . '#/userfeedback'
 	);
@@ -789,13 +793,22 @@ add_filter("am_notifications_display", 'monsterinsights_am_notice_optout', 10, 1
 function monsterinsights_admin_menu_inline_styles()
 {
 ?>
-	<style type="text/css">
+	<style>
 		#toplevel_page_monsterinsights_reports .wp-menu-image img,
 		#toplevel_page_monsterinsights_settings .wp-menu-image img,
 		#toplevel_page_monsterinsights_network .wp-menu-image img {
 			width: 18px;
 			height: auto;
 			padding-top: 7px;
+		}
+
+		#toplevel_page_monsterinsights_reports .wp-submenu li a {
+			display: flex;
+			align-items: center;
+		}
+
+		#toplevel_page_monsterinsights_reports .wp-submenu .monsterinsights-sidebar-icon {
+			padding-right: 6px;
 		}
 	</style>
 <?php

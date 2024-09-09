@@ -1,9 +1,9 @@
 === MailPoet - Newsletters, Email Marketing, and Automation ===
 Contributors: mailpoet, woocommerce, automattic
 Tags: email marketing, post notification, woocommerce emails, email automation, newsletter
-Requires at least: 6.4
-Tested up to: 6.5
-Stable tag: 4.54.0
+Requires at least: 6.5
+Tested up to: 6.6
+Stable tag: 5.1.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -33,6 +33,7 @@ Trusted by 700,000 WordPress websites since 2011.
 * Send automated welcome emails
 * Behavior and interest-based subscriber segmentation options
 * Pre-built and customizable email and subscription form templates
+* Multiple subscription form placements: below pages, fixed bar, popup, slide-in, shortcode, on exit intent
 * WooCommerce emails: abandoned cart, first purchase, specific product, product category
 * Customize WooCommerce transactional emails
 * Reliable email delivery with MailPoet Sending Service (available for free – plan required)
@@ -137,6 +138,7 @@ Please note:
 * Persian
 * Polish
 * Romanian
+* Ukrainian
 
 We welcome experienced translators to translate directly on [our Transifex project](https://www.transifex.com/wysija/mp3/). Please note that any translations submitted via the "Translating WordPress" website will not work.
 
@@ -228,17 +230,7 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 
 == Changelog ==
 
-= 4.54.0 - 2024-07-02 =
-* Updated: composer dependencies;
-* Updated: npm dependencies;
-* Improved: automation is now triggered when tag is added via form submission;
-* Improved: abandoned cart automation is triggered also for non-subscribed contacts;
-* Changed: when automation is reactivated, old runs won't be reactivated;
-* Fixed: misaligned icons in automation steps;
-* Fixed: error when creating a segment with "Subscriber date" condition;
-* Fixed: blurred automation step icons in Firefox;
-* Fixed: changing radio buttons when editing subscriber doesn't work;
-* Fixed: info tooltip for Archive shortcode in Settings doesn't show up;
-* Fixed: subscribers count tooltip is overlayed with Recalculate button.
+= 5.1.1 - 2024-09-04 =
+* Fixed: broken email rendering when ALC, Products, or WC content blocks are manually dragged into a column block (since 4.56.0). If you experience this issue, please readd these blocks or drag and drop the existing ones which should fix the issue.
 
 [See the changelog for all versions.](https://github.com/mailpoet/mailpoet/blob/trunk/mailpoet/CHANGELOG.md)

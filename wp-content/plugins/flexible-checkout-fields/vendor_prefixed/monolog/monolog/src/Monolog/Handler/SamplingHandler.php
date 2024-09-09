@@ -80,7 +80,7 @@ class SamplingHandler extends \FcfVendor\Monolog\Handler\AbstractHandler impleme
      *
      * @return HandlerInterface
      */
-    public function getHandler(array $record = null)
+    public function getHandler(?array $record = null)
     {
         if (!$this->handler instanceof \FcfVendor\Monolog\Handler\HandlerInterface) {
             $this->handler = ($this->handler)($record, $this);

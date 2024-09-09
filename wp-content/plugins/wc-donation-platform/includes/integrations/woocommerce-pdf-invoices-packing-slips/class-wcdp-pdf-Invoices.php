@@ -21,7 +21,7 @@ class WCDP_Pdf_Invoices
             add_filter('wpo_wcpdf_template_paths', 'WCDP_Pdf_Invoices::add_template', 10, 1);
 
             //Rename pdf file name
-            add_filter('wpo_wcpdf_filename', 'WCDP_Pdf_Invoices::filename', 10, 3);
+            add_filter('wpo_wcpdf_filename', 'WCDP_Pdf_Invoices::filename', 5, 3);
 
             //Rename pdf file name
             add_filter('wpo_wcpdf_document_classes', 'WCDP_Pdf_Invoices::add_document_type');
@@ -37,7 +37,7 @@ class WCDP_Pdf_Invoices
      * @param $template_paths
      * @return array
      */
-    public static function add_template($template_paths)
+    public static function add_template($template_paths): array
     {
         $template_paths['wcdp'] = WCDP_DIR . 'includes/integrations/woocommerce-pdf-invoices-packing-slips/templates/';
         return $template_paths;
@@ -45,12 +45,16 @@ class WCDP_Pdf_Invoices
 
     /**
      * @param $filename
+     * @param $type
+     * @param $order_ids
      * @return string
      */
     public static function filename($filename, $type, $order_ids): string
     {
-        $type = 'invoice' == $type ? 'receipt' : $type;
-        return sanitize_title(get_bloginfo('name'), 'wcdp') . '_' . $type . '_' . implode('-', $order_ids) . '.pdf';
+        if ($type !== 'invoice') {
+            return $filename;
+        }
+        return sanitize_title(get_bloginfo('name'), 'wcdp') . '_receipt_' . implode('-', $order_ids) . '.pdf';
     }
 
     /**

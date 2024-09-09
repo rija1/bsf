@@ -72,6 +72,7 @@ class Plugin extends AbstractPlugin implements HookableCollection {
 		$this->add_hookable( new Notice\NoticeIntegration( new Notice\FlexibleWishlistReview( $this ) ) );
 		$this->add_hookable( new Settings\Page() );
 		$this->add_hookable( new Form\Assets( $this->plugin_info ) );
+		$this->add_hookable( new Form\FormModifier() );
 		$this->add_hookable( new Field\FieldTranslator() );
 		$this->add_hookable( new Field\FieldTemplateLoader( $this->template_loader ) );
 

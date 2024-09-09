@@ -28,7 +28,6 @@ use MailPoet\Util\License\Features\CapabilitiesManager;
 use MailPoet\Util\License\Features\Subscribers as SubscribersFeature;
 use MailPoet\Util\License\License;
 use MailPoet\WooCommerce;
-use MailPoet\WP\DateTime;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoet\WP\Notice as WPNotice;
 use MailPoetVendor\Carbon\Carbon;
@@ -174,7 +173,6 @@ class PageRenderer {
       'track_wizard_loaded_via_woocommerce_marketing_dashboard' => (bool)$this->settings->get(WelcomeWizard::TRACK_LOADDED_VIA_WOOCOMMERCE_MARKETING_DASHBOARD_SETTING_NAME),
       'mail_function_enabled' => function_exists('mail') && is_callable('mail'),
       'admin_plugins_url' => WPFunctions::get()->adminUrl('plugins.php'),
-      'server_timezone_in_minutes' => (new DateTime())->getServerTimezoneInMinutes(),
 
       // Premium & plan upgrade info
       'current_wp_user_email' => $this->wp->wpGetCurrentUser()->user_email,
@@ -239,7 +237,7 @@ class PageRenderer {
       $this->wp->doAction('mailpoet_styles_admin_after');
 
       // We are in control of the template and the data can be considered safe at this point
-      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPressDotOrg.sniffs.OutputEscaping.UnescapedOutputParameter
+      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
       echo $this->renderer->render($template, $data + $defaults);
     } catch (\Exception $e) {
       $notice = new WPNotice(WPNotice::TYPE_ERROR, $e->getMessage());
